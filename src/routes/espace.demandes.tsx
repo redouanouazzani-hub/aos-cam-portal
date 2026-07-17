@@ -51,12 +51,6 @@ function DemandesLayout() {
   });
   const selectedId = detailMatch?.params.id ?? null;
 
-  // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
-  if (creditMatch) {
-    return <Outlet />;
-  }
-
-
   const [items, setItems] = useState<DemandeListItem[] | null>(null);
   const [filters, setFilters] = useState<DemandesFilters>({
     statut: "tous",
@@ -65,6 +59,7 @@ function DemandesLayout() {
   });
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 5;
+
 
   useEffect(() => {
     let alive = true;
