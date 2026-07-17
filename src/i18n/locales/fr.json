@@ -184,6 +184,13 @@
       "hint": "Essayez d'élargir vos filtres ou de modifier votre recherche.",
       "reset": "Réinitialiser les filtres"
     },
+    "pagination": {
+      "label": "Pagination des demandes",
+      "prev": "Précédent",
+      "next": "Suivant",
+      "range": "{{from}}–{{to}} sur {{total}}"
+    },
+
 
     "col": {
       "numero": "N° dossier",
