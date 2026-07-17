@@ -197,6 +197,9 @@
     "detail": {
       "back": "Retour à mes demandes",
       "open": "Ouvrir",
+      "title": "Détail de la demande",
+      "selectPrompt": "Sélectionnez une demande",
+      "selectHint": "Choisissez une demande dans la liste pour afficher son détail ici.",
       "notFound": "Demande introuvable.",
       "timeline": "Cycle de vie",
       "current": "En cours",
