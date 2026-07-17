@@ -174,5 +174,45 @@
       "submitting": "Envoi…",
       "success": "Signalement transmis. Référence n°{{id}}."
     }
+  },
+  "demandes": {
+    "title": "Mes demandes",
+    "subtitle": "Retrouvez toutes vos demandes et suivez leur instruction.",
+    "empty": "Aucune demande ne correspond à ces filtres.",
+    "col": {
+      "numero": "N° dossier",
+      "prestation": "Prestation",
+      "date": "Date de dépôt",
+      "statut": "Statut"
+    },
+    "filters": {
+      "search": "Rechercher",
+      "searchPlaceholder": "Intitulé ou n° de dossier…",
+      "statut": "Statut",
+      "statutTous": "Tous les statuts",
+      "sort": "Trier par date",
+      "recent": "Plus récent d'abord",
+      "ancien": "Plus ancien d'abord"
+    },
+    "detail": {
+      "back": "Retour à mes demandes",
+      "open": "Ouvrir",
+      "notFound": "Demande introuvable.",
+      "timeline": "Cycle de vie",
+      "current": "En cours",
+      "pending": "Étape à venir",
+      "pieces": "Pièces jointes",
+      "piecesEmpty": "Aucune pièce jointe.",
+      "filigrane": "Filigrane serveur appliqué",
+      "history": "Historique",
+      "historyEmpty": "Aucun événement.",
+      "complement": {
+        "title": "Complément demandé",
+        "description": "Joignez la pièce manquante puis renvoyez votre dossier.",
+        "submit": "Renvoyer le dossier",
+        "submitting": "Envoi…",
+        "success": "Complément transmis pour la demande n°{{id}}."
+      }
+    }
   }
 }
