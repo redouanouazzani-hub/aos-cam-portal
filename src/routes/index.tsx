@@ -12,11 +12,45 @@ function HomePage() {
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  const cards = [
-    { icon: HeartHandshake, title: "nav.missions", desc: "home.card.missionsDesc" },
-    { icon: Sparkles, title: "nav.conventions", desc: "home.card.conventionsDesc" },
-    { icon: Newspaper, title: "nav.news", desc: "home.card.newsDesc" },
-    { icon: FileText, title: "nav.faq", desc: "home.card.faqDesc" },
+  const cards: Array<{
+    icon: typeof HeartHandshake;
+    title: string;
+    desc: string;
+    to: "/missions" | "/conventions" | "/actualites" | "/faq";
+  }> = [
+    {
+      icon: HeartHandshake,
+      title: t("nav.missions"),
+      desc: t("home.card.missionsDesc", {
+        defaultValue:
+          "Logement, estivage, crédits, scolarité, voyages : découvrez le périmètre de nos actions.",
+      }),
+      to: "/missions",
+    },
+    {
+      icon: Sparkles,
+      title: t("nav.conventions"),
+      desc: t("home.card.conventionsDesc", {
+        defaultValue: "Les avantages négociés avec nos partenaires.",
+      }),
+      to: "/conventions",
+    },
+    {
+      icon: Newspaper,
+      title: t("nav.news"),
+      desc: t("home.card.newsDesc", {
+        defaultValue: "Communications et annonces de l'AOS-CMR.",
+      }),
+      to: "/actualites",
+    },
+    {
+      icon: FileText,
+      title: t("nav.faq"),
+      desc: t("home.card.faqDesc", {
+        defaultValue: "Questions fréquentes et coordonnées de contact.",
+      }),
+      to: "/faq",
+    },
   ];
 
   return (
