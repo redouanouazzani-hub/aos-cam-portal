@@ -46,6 +46,8 @@ function InstructionPage() {
   const [loading, setLoading] = useState(true);
   const [action, setAction] = useState<DispatchAction | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [blacklist, setBlacklist] = useState<BlacklistState | null>(null);
+
 
   useEffect(() => {
     let alive = true;
