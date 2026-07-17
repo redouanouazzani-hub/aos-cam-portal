@@ -40,6 +40,9 @@ export async function mockGetProfile(): Promise<ProfileResponse> {
 
 export async function mockUpdateContact(p: ContactPayload): Promise<ProfileResponse["declarative"]["contact"]> {
   await delay();
+  if (p.email?.includes("error")) {
+    throw new Error("Erreur réseau simulée");
+  }
   store.declarative.contact = { ...p };
   return { ...store.declarative.contact };
 }
