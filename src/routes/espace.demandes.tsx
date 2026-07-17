@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, FileText, Search, SearchX } from "lucide-react";
+import { ArrowLeft, ArrowRight, FileText, Search, SearchX } from "lucide-react";
 import { demandesService } from "@/services/demandes.service";
 import type {
   DemandeListItem,
@@ -53,6 +53,8 @@ function DemandesLayout() {
     sort: "recent",
     q: "",
   });
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 5;
 
   useEffect(() => {
     let alive = true;
@@ -64,6 +66,19 @@ function DemandesLayout() {
       alive = false;
     };
   }, [filters.statut, filters.sort, filters.q]);
+
+  // Reset to first page whenever filters/search/sort change
+  useEffect(() => {
+    setPage(1);
+  }, [filters.statut, filters.sort, filters.q]);
+
+  const totalItems = items?.length ?? 0;
+  const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pagedItems = items
+    ? items.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
+    : null;
+
 
   const dateLocale = isAr ? "ar-MA" : "fr-FR";
   const fmtDate = (iso: string) =>
@@ -214,50 +229,91 @@ function DemandesLayout() {
         })()
 
       ) : (
-        <ul className="space-y-3">
-          {items.map((d) => {
-            const label =
-              isAr && d.prestation_ar ? d.prestation_ar : d.prestation;
-            const isActive = selectedId === String(d.id);
-            return (
-              <li key={d.id}>
-                <Link
-                  to="/espace/demandes/$id"
-                  params={{ id: String(d.id) }}
-                  className={`block rounded-2xl bg-card p-4 transition hover:bg-secondary/40 ${
-                    isActive
-                      ? "ring-2 ring-primary/60"
-                      : "ring-1 ring-transparent"
-                  }`}
-                  style={{ boxShadow: "var(--shadow-soft)" }}
-                  aria-current={isActive ? "true" : undefined}
+        <>
+          <ul className="space-y-3">
+            {pagedItems!.map((d) => {
+              const label =
+                isAr && d.prestation_ar ? d.prestation_ar : d.prestation;
+              const isActive = selectedId === String(d.id);
+              return (
+                <li key={d.id}>
+                  <Link
+                    to="/espace/demandes/$id"
+                    params={{ id: String(d.id) }}
+                    className={`block rounded-2xl bg-card p-4 transition hover:bg-secondary/40 ${
+                      isActive
+                        ? "ring-2 ring-primary/60"
+                        : "ring-1 ring-transparent"
+                    }`}
+                    style={{ boxShadow: "var(--shadow-soft)" }}
+                    aria-current={isActive ? "true" : undefined}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="text-xs text-muted-foreground" dir="ltr">
+                          #{d.id}
+                        </div>
+                        <div className="mt-0.5 truncate text-sm font-medium text-foreground">
+                          {label}
+                        </div>
+                        <div className="mt-1 text-xs text-muted-foreground">
+                          {fmtDate(d.date)}
+                        </div>
+                      </div>
+                      <div className="flex shrink-0 flex-col items-end gap-2">
+                        <StatutBadge statut={d.statut} />
+                        <ArrowRight
+                          className="h-3.5 w-3.5 text-muted-foreground rtl:rotate-180"
+                          aria-hidden
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {totalPages > 1 && (
+            <nav
+              className="flex flex-wrap items-center justify-between gap-3 pt-2"
+              aria-label={t("demandes.pagination.label")}
+            >
+              <p className="text-xs text-muted-foreground">
+                {t("demandes.pagination.range", {
+                  from: (safePage - 1) * PAGE_SIZE + 1,
+                  to: Math.min(safePage * PAGE_SIZE, totalItems),
+                  total: totalItems,
+                })}
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={safePage <= 1}
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition hover:bg-secondary/60 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="text-xs text-muted-foreground" dir="ltr">
-                        #{d.id}
-                      </div>
-                      <div className="mt-0.5 truncate text-sm font-medium text-foreground">
-                        {label}
-                      </div>
-                      <div className="mt-1 text-xs text-muted-foreground">
-                        {fmtDate(d.date)}
-                      </div>
-                    </div>
-                    <div className="flex shrink-0 flex-col items-end gap-2">
-                      <StatutBadge statut={d.statut} />
-                      <ArrowRight
-                        className="h-3.5 w-3.5 text-muted-foreground rtl:rotate-180"
-                        aria-hidden
-                      />
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" aria-hidden />
+                  {t("demandes.pagination.prev")}
+                </button>
+                <span className="text-xs text-muted-foreground" dir="ltr">
+                  {safePage} / {totalPages}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={safePage >= totalPages}
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition hover:bg-secondary/60 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {t("demandes.pagination.next")}
+                  <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" aria-hidden />
+                </button>
+              </div>
+            </nav>
+          )}
+        </>
       )}
+
     </div>
   );
 
