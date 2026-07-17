@@ -104,6 +104,14 @@ function DemandesLayout() {
     [t],
   );
 
+  // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
+  // Must run after all hooks to keep hook order stable across renders.
+  if (creditMatch) {
+    return <Outlet />;
+  }
+
+
+
   const listPanel = (
     <div className="space-y-6">
       <header className="flex flex-wrap items-start justify-between gap-3">
