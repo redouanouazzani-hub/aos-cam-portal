@@ -111,6 +111,20 @@
     "error": "Identifiants invalides",
     "hint": "En mode démonstration : matricule 123456, code 0000 (adhérent) — matricule 999999, code 0000 (admin)."
   },
+  "adminLogin": {
+    "title": "Connexion back-office",
+    "subtitle": "Réservé aux gestionnaires et super-administrateurs.",
+    "spaceLabel": "Back-office administration",
+    "staffBadge": "Accès réservé au personnel",
+    "heroTitle": "Espace de gestion du portail des œuvres sociales",
+    "heroLead": "Traitement des dossiers, campagnes, comptes et audit. Vos actions sont journalisées.",
+    "matriculePlaceholder": "Ex. 555555",
+    "submit": "Accéder au back-office",
+    "notStaff": "Ce compte n'a pas les droits d'accès au back-office.",
+    "hint": "Démo : matricule 555555, code 0000 (gestionnaire) — matricule 999999, code 0000 (super-administrateur).",
+    "adherentSwitch": "Vous êtes adhérent ?",
+    "adherentLink": "Aller à l'espace adhérent"
+  },
   "footer": {
     "rights": "Tous droits réservés."
   },
