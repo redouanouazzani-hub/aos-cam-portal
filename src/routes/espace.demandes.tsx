@@ -30,7 +30,7 @@ import {
   SheetContent,
   SheetTitle,
 } from "@/components/ui/sheet";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+
 import { STATUT_ORDER, STATUT_STYLES } from "@/lib/statut-styles";
 
 export const Route = createFileRoute("/espace/demandes")({
