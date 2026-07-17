@@ -53,6 +53,8 @@ function DemandesLayout() {
     sort: "recent",
     q: "",
   });
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 5;
 
   useEffect(() => {
     let alive = true;
@@ -64,6 +66,19 @@ function DemandesLayout() {
       alive = false;
     };
   }, [filters.statut, filters.sort, filters.q]);
+
+  // Reset to first page whenever filters/search/sort change
+  useEffect(() => {
+    setPage(1);
+  }, [filters.statut, filters.sort, filters.q]);
+
+  const totalItems = items?.length ?? 0;
+  const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pagedItems = items
+    ? items.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
+    : null;
+
 
   const dateLocale = isAr ? "ar-MA" : "fr-FR";
   const fmtDate = (iso: string) =>
