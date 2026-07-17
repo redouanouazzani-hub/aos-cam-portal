@@ -194,8 +194,13 @@
     "subtitle": "Retrouvez toutes vos demandes et suivez leur instruction.",
     "empty": "Vous n'avez encore aucune demande.",
     "nouvelle": {
-      "cta": "Nouvelle demande"
+      "cta": "Nouvelle demande",
+      "credit": "Demande de crédit",
+      "creditDesc": "Classique, anglais, auto, logement.",
+      "scolarite": "Subvention de scolarité",
+      "scolariteDesc": "Certificat de scolarité par enfant éligible."
     },
+
     "emptyFiltered": {
       "title": "Aucune demande ne correspond à votre recherche.",
       "hint": "Essayez d'élargir vos filtres ou de modifier votre recherche.",
@@ -603,6 +608,52 @@
       },
       "cancel": "Annuler"
     }
+  },
+  "scolarite": {
+    "title": "Subvention de scolarité",
+    "subtitle": "Déclarez la scolarité de vos enfants éligibles pour la campagne en cours.",
+    "rule": "Seuls les enfants âgés de 5 ans et 6 mois minimum et 26 ans maximum à la date de rentrée sont éligibles. Cette règle est appliquée à titre indicatif ici et revérifiée côté serveur.",
+    "campagne": {
+      "ouverteTitle": "Campagne ouverte",
+      "fermeeTitle": "Campagne fermée",
+      "fermeeDesc": "La campagne de scolarité est fermée. Aucune nouvelle demande ne peut être déposée pour le moment.",
+      "rentree": "Date de rentrée : {{date}}"
+    },
+    "enfants": {
+      "title": "Enfants concernés",
+      "subtitle": "Cochez le ou les enfants pour lesquels vous souhaitez déposer une demande.",
+      "aucun": "Aucun enfant officiel n'est enregistré sur votre dossier RH.",
+      "ne": "Né(e) le {{date}}",
+      "age": "{{years}} ans à la rentrée",
+      "certificat": "Certificat de scolarité",
+      "certificatHint": "PDF ou image. Un filigrane serveur sera appliqué à réception.",
+      "televerser": "Téléverser le certificat",
+      "retirer": "Retirer le fichier",
+      "raison": {
+        "trop_jeune": "Moins de 5 ans et demi à la rentrée",
+        "trop_age": "Plus de 26 ans à la rentrée"
+      }
+    },
+    "recap": {
+      "title": "Récapitulatif",
+      "empty": "Sélectionnez au moins un enfant pour déposer votre demande.",
+      "certificatOk": "Certificat joint",
+      "certificatManquant": "Certificat manquant",
+      "warnMissing": "Un certificat est requis pour chaque enfant coché."
+    },
+    "submit": {
+      "cta": "Soumettre la demande",
+      "pending": "Envoi en cours…",
+      "success": "Demande de scolarité transmise (réf. {{ref}}).",
+      "error": "L'envoi a échoué. Veuillez réessayer."
+    },
+    "done": {
+      "title": "Demande transmise",
+      "ref": "Référence : {{ref}}",
+      "lead": "Vous serez notifié à chaque étape de l'instruction de votre dossier.",
+      "backList": "Retour à mes demandes"
+    }
   }
 }
+
 

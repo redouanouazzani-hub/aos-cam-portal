@@ -7,7 +7,17 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, ArrowRight, FileText, Plus, Search, SearchX } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  FileText,
+  GraduationCap,
+  Plus,
+  Search,
+  SearchX,
+  Wallet,
+} from "lucide-react";
 import { demandesService } from "@/services/demandes.service";
 import type {
   DemandeListItem,
@@ -30,12 +40,19 @@ import {
   SheetContent,
   SheetTitle,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { STATUT_ORDER, STATUT_STYLES } from "@/lib/statut-styles";
 
 export const Route = createFileRoute("/espace/demandes")({
   component: DemandesLayout,
 });
+
 
 function DemandesLayout() {
   const { t, i18n } = useTranslation();
@@ -49,6 +66,11 @@ function DemandesLayout() {
     from: "/espace/demandes/nouvelle/credit",
     shouldThrow: false,
   });
+  const scolariteMatch = useMatch({
+    from: "/espace/demandes/nouvelle/scolarite",
+    shouldThrow: false,
+  });
+
   const selectedId = detailMatch?.params.id ?? null;
 
   const [items, setItems] = useState<DemandeListItem[] | null>(null);
@@ -106,9 +128,10 @@ function DemandesLayout() {
 
   // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
   // Must run after all hooks to keep hook order stable across renders.
-  if (creditMatch) {
+  if (creditMatch || scolariteMatch) {
     return <Outlet />;
   }
+
 
 
 
@@ -121,14 +144,57 @@ function DemandesLayout() {
           </h1>
           <p className="text-sm text-muted-foreground">{t("demandes.subtitle")}</p>
         </div>
-        <Link
-          to="/espace/demandes/nouvelle/credit"
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90"
-          style={{ boxShadow: "var(--shadow-soft)" }}
-        >
-          <Plus className="h-4 w-4" aria-hidden />
-          {t("demandes.nouvelle.cta")}
-        </Link>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90"
+              style={{ boxShadow: "var(--shadow-soft)" }}
+            >
+              <Plus className="h-4 w-4" aria-hidden />
+              {t("demandes.nouvelle.cta")}
+              <ChevronDown className="h-4 w-4 opacity-80" aria-hidden />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align={isAr ? "start" : "end"}
+            className="w-64"
+          >
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/credit"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <Wallet className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.credit")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.creditDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/scolarite"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <GraduationCap className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.scolarite")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.scolariteDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
       </header>
 
 
