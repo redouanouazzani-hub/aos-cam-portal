@@ -417,6 +417,22 @@
         "ouverte": "Ouverte",
         "planifiee": "Planifiée",
         "cloturee": "Clôturée"
+      },
+      "statutAuto": {
+        "a_venir": "À venir",
+        "ouverte": "Ouverte",
+        "fermee": "Clôturée"
+      },
+      "estivage": { "title": "Estivage 2026" },
+      "scolarite": { "title": "Scolarité — rentrée 2026" },
+      "ouvertureLabel": "Ouverture : {{date}}",
+      "limiteLabel": "Date limite (modifiable par le super-admin)",
+      "saOnly": "Réservé au super-admin",
+      "serverNote": "Le statut est calculé automatiquement à partir des dates. Côté serveur, la date de référence est l'horloge Laravel, pas celle du navigateur. La modification de la date limite est réservée au super-admin et journalisée.",
+      "save": {
+        "cta": "Enregistrer",
+        "success": "Date limite mise à jour.",
+        "error": "Impossible d'enregistrer. Réessayez."
       }
     },
     "comptes": {
