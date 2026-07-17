@@ -144,14 +144,57 @@ function DemandesLayout() {
           </h1>
           <p className="text-sm text-muted-foreground">{t("demandes.subtitle")}</p>
         </div>
-        <Link
-          to="/espace/demandes/nouvelle/credit"
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90"
-          style={{ boxShadow: "var(--shadow-soft)" }}
-        >
-          <Plus className="h-4 w-4" aria-hidden />
-          {t("demandes.nouvelle.cta")}
-        </Link>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90"
+              style={{ boxShadow: "var(--shadow-soft)" }}
+            >
+              <Plus className="h-4 w-4" aria-hidden />
+              {t("demandes.nouvelle.cta")}
+              <ChevronDown className="h-4 w-4 opacity-80" aria-hidden />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align={isAr ? "start" : "end"}
+            className="w-64"
+          >
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/credit"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <Wallet className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.credit")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.creditDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/scolarite"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <GraduationCap className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.scolarite")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.scolariteDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
       </header>
 
 
