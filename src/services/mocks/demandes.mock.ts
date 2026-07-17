@@ -244,11 +244,16 @@ export async function mockGetDemandes(filters: DemandesFilters = {}): Promise<De
     );
   }
   const sort: "recent" | "ancien" = filters.sort ?? "recent";
-  items.sort((a, b) =>
-    sort === "recent"
-      ? b.date.localeCompare(a.date)
-      : a.date.localeCompare(b.date),
-  );
+  items.sort((a, b) => {
+    const cmp =
+      sort === "recent"
+        ? b.date.localeCompare(a.date)
+        : a.date.localeCompare(b.date);
+    if (cmp !== 0) return cmp;
+    // Secondary sort by n° dossier, in the same direction as the date
+    return sort === "recent" ? b.id - a.id : a.id - b.id;
+  });
+
   return items;
 }
 
