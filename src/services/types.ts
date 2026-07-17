@@ -349,4 +349,48 @@ export interface SoumettreCreditResponse {
   };
 }
 
+// -------- Scolarité (campagne à délai) --------
+
+export type CampagneStatut = "ouverte" | "fermee";
+
+export type ScolariteRaisonInegibilite = "trop_jeune" | "trop_age";
+
+export interface ScolariteEnfantEligible {
+  id: number;
+  nom: string;
+  prenom: string;
+  date_naissance: string;
+  sexe: "M" | "F";
+  ageAnnees: number;
+  eligible: boolean;
+  raison?: ScolariteRaisonInegibilite;
+}
+
+export interface ScolariteEligibiliteResponse {
+  campagne: {
+    statut: CampagneStatut;
+    dateRentree: string;
+    dateOuverture?: string;
+    dateFermeture?: string;
+  };
+  enfants: ScolariteEnfantEligible[];
+}
+
+export interface ScolaritePayloadEnfant {
+  enfantId: number;
+  certificatNom: string;
+}
+
+export interface ScolaritePayload {
+  dateRentree: string;
+  enfants: ScolaritePayloadEnfant[];
+}
+
+export interface ScolariteResponse {
+  id: number;
+  statut: "soumis";
+  reference: string;
+}
+
+
 
