@@ -328,5 +328,135 @@
       "ref": "Référence n°{{id}}",
       "backList": "Retour à mes demandes"
     }
+  },
+  "admin": {
+    "title": "Back-office",
+    "role": {
+      "gestionnaire": "Gestionnaire",
+      "superAdmin": "Super-Administrateur"
+    },
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "dossiers": "Dossiers à traiter",
+      "campagnes": "Campagnes",
+      "comptes": "Comptes & rôles",
+      "extraction": "Extraction précomptes",
+      "audit": "Audit"
+    },
+    "modules": {
+      "logement": "Logement",
+      "primes": "Primes",
+      "credits": "Crédits",
+      "estivage": "Estivage",
+      "scolarite": "Scolarité",
+      "voyages": "Voyages",
+      "medical": "Médical",
+      "loisirs": "Loisirs",
+      "inwi": "Inwi"
+    },
+    "access": {
+      "title": "Accès non autorisé à ce module",
+      "desc": "Vous ne disposez pas des droits nécessaires. Contactez le Super-Administrateur si vous pensez qu'il s'agit d'une erreur.",
+      "superAdminOnly": "Module réservé au Super-Administrateur.",
+      "back": "Retour au tableau de bord"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "subtitle": "Bienvenue {{name}} — voici votre activité.",
+      "mesModules": "Mes modules attribués",
+      "mesModulesDesc": "Vous pouvez instruire les dossiers relevant de ces activités.",
+      "aucunModule": "Aucun module attribué. Contactez le Super-Administrateur.",
+      "linkDossiers": "Consulter et instruire les dossiers en attente.",
+      "linkCampagnes": "Planifier et suivre les campagnes en cours.",
+      "kpi": {
+        "dossiersJour": "Dossiers du jour",
+        "enInstruction": "En instruction",
+        "validesMois": "Validés ce mois",
+        "campagnesActives": "Campagnes actives"
+      }
+    },
+    "dossiers": {
+      "title": "Dossiers à traiter",
+      "subtitle": "Sélectionnez une activité pour instruire les dossiers en attente.",
+      "attributionHint": "{{count}} module(s) vous sont attribués.",
+      "pending_one": "{{count}} dossier en attente",
+      "pending_other": "{{count}} dossiers en attente",
+      "pending": "{{count}} dossier(s) en attente",
+      "allowed": "Accessible",
+      "restricted": "Réservé au Super-Administrateur",
+      "restrictedTip": "Module non attribué à votre profil de gestionnaire.",
+      "open": "Ouvrir",
+      "locked": "Non attribué"
+    },
+    "campagnes": {
+      "title": "Campagnes",
+      "subtitle": "Planification et suivi des campagnes de prestations.",
+      "statut": {
+        "ouverte": "Ouverte",
+        "planifiee": "Planifiée",
+        "cloturee": "Clôturée"
+      }
+    },
+    "comptes": {
+      "title": "Comptes & rôles",
+      "subtitle": "Gestion des gestionnaires et de leurs modules attribués.",
+      "passationCta": "Passation / Remplacement",
+      "savedModules": "Modules mis à jour pour {{name}}.",
+      "saveError": "Impossible d'enregistrer. Réessayez.",
+      "matrice": {
+        "title": "Matrice des prérogatives",
+        "desc": "Récapitulatif des droits par rôle (§3.4).",
+        "prerogative": "Prérogative",
+        "attribues": "Modules attribués",
+        "attribuesTip": "Uniquement sur les activités attribuées au gestionnaire."
+      },
+      "modules": {
+        "title": "Attribution des modules par gestionnaire",
+        "desc": "Cochez les activités que chaque gestionnaire peut instruire.",
+        "gestionnaire": "Gestionnaire"
+      },
+      "prerogatives": {
+        "consulter_dossiers": "Consulter les dossiers",
+        "instruire_dossiers": "Instruire les dossiers",
+        "valider_dossiers": "Valider les dossiers",
+        "creer_campagnes": "Créer / clôturer les campagnes",
+        "gerer_comptes": "Gérer les comptes gestionnaires",
+        "assigner_modules": "Attribuer les modules",
+        "passation": "Passation / remplacement",
+        "extraction_precomptes": "Extraction des précomptes",
+        "consulter_audit": "Consulter l'audit",
+        "exporter_reporting": "Exporter le reporting"
+      }
+    },
+    "passation": {
+      "title": "Passation temporaire des droits",
+      "desc": "Transférez temporairement les modules d'un gestionnaire absent vers un remplaçant.",
+      "from": "Gestionnaire absent",
+      "to": "Gestionnaire remplaçant",
+      "modules": "Modules à transférer",
+      "noModules": "Ce gestionnaire n'a aucun module attribué.",
+      "duree": "Durée",
+      "d": { "7j": "7 jours", "15j": "15 jours", "30j": "30 jours", "90j": "90 jours" },
+      "cancel": "Annuler",
+      "submit": "Créer la passation",
+      "submitting": "Création…",
+      "success": "Passation créée (n°{{id}}).",
+      "error": "La passation a échoué."
+    },
+    "extraction": {
+      "title": "Extraction des précomptes",
+      "subtitle": "Générer le fichier mensuel destiné à la paie.",
+      "mois": "Mois de paie",
+      "format": "Format",
+      "cta": "Générer le fichier",
+      "generating": "Génération…",
+      "success": "Extraction {{mois}} générée ({{format}}).",
+      "hint": "Le fichier sera transmis au service paie via l'API Laravel."
+    },
+    "audit": {
+      "title": "Journal d'audit",
+      "subtitle": "Historique des actions sensibles (RBAC, validations, extractions).",
+      "col": { "date": "Date", "user": "Utilisateur", "action": "Action", "ref": "Référence" }
+    }
   }
 }
