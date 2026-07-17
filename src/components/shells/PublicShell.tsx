@@ -19,12 +19,13 @@ export function PublicShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <header className="border-b border-border bg-card">
+      <header className="sticky top-0 z-30 border-b border-border/60 bg-card/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
           <Link to="/" className="flex items-center gap-3">
             <div
               aria-hidden
-              className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-bold"
+              className="grid h-10 w-10 place-items-center rounded-xl text-white font-bold shadow-sm"
+              style={{ background: "var(--gradient-hero)" }}
             >
               A
             </div>
@@ -43,7 +44,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
                 activeProps={{ className: "bg-secondary text-foreground" }}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+                className="rounded-xl px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {t(l.key)}
               </Link>
@@ -54,7 +55,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
             <LanguageSwitcher />
             <Link
               to={user ? "/espace/dashboard" : "/login"}
-              className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {t("nav.login")}
             </Link>
@@ -64,7 +65,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-border bg-card">
+      <footer className="border-t border-border/60 bg-card/60">
         <div className="mx-auto max-w-7xl px-4 py-6 text-xs text-muted-foreground flex flex-wrap gap-2 justify-between">
           <span>© {new Date().getFullYear()} {t("app.name")}</span>
           <span>{t("footer.rights")}</span>
