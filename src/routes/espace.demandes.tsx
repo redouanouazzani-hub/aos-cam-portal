@@ -172,11 +172,47 @@ function DemandesLayout() {
           ))}
         </div>
       ) : items.length === 0 ? (
-        <Card className="rounded-2xl">
-          <CardContent className="p-8 text-center text-sm text-muted-foreground">
-            {t("demandes.empty")}
-          </CardContent>
-        </Card>
+        (() => {
+          const hasFilters =
+            (filters.q ?? "").trim() !== "" ||
+            (filters.statut && filters.statut !== "tous");
+          return (
+            <Card className="rounded-2xl">
+              <CardContent className="flex flex-col items-center gap-3 p-10 text-center">
+                <div
+                  className="grid h-12 w-12 place-items-center rounded-full"
+                  style={{ background: "color-mix(in oklab, var(--primary) 10%, transparent)" }}
+                >
+                  <SearchX className="h-6 w-6 text-primary" aria-hidden />
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-foreground">
+                    {hasFilters
+                      ? t("demandes.emptyFiltered.title")
+                      : t("demandes.empty")}
+                  </p>
+                  {hasFilters && (
+                    <p className="text-xs text-muted-foreground">
+                      {t("demandes.emptyFiltered.hint")}
+                    </p>
+                  )}
+                </div>
+                {hasFilters && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFilters((f) => ({ ...f, q: "", statut: "tous" }))
+                    }
+                    className="text-xs font-medium text-primary hover:underline"
+                  >
+                    {t("demandes.emptyFiltered.reset")}
+                  </button>
+                )}
+              </CardContent>
+            </Card>
+          );
+        })()
+
       ) : (
         <ul className="space-y-3">
           {items.map((d) => {
