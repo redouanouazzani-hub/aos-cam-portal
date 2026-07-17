@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
   ArrowRight,
-  Baby,
   ChevronDown,
   FileText,
   GraduationCap,
