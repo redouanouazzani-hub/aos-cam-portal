@@ -32,6 +32,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
 import { Route as AdminCampagnesRouteImport } from './routes/admin.campagnes'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
 
 const MissionsRoute = MissionsRouteImport.update({
   id: '/missions',
@@ -148,6 +149,11 @@ const AdminAuditRoute = AdminAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => AdminRoute,
 } as any)
+const EspaceDemandesIdRoute = EspaceDemandesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => EspaceDemandesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -167,12 +173,13 @@ export interface FileRoutesByFullPath {
   '/admin/reporting': typeof AdminReportingRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
-  '/espace/demandes': typeof EspaceDemandesRoute
+  '/espace/demandes': typeof EspaceDemandesRouteWithChildren
   '/espace/documents': typeof EspaceDocumentsRoute
   '/espace/notifications': typeof EspaceNotificationsRoute
   '/espace/profil': typeof EspaceProfilRoute
   '/admin/': typeof AdminIndexRoute
   '/espace/': typeof EspaceIndexRoute
+  '/espace/demandes/$id': typeof EspaceDemandesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -190,12 +197,13 @@ export interface FileRoutesByTo {
   '/admin/reporting': typeof AdminReportingRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
-  '/espace/demandes': typeof EspaceDemandesRoute
+  '/espace/demandes': typeof EspaceDemandesRouteWithChildren
   '/espace/documents': typeof EspaceDocumentsRoute
   '/espace/notifications': typeof EspaceNotificationsRoute
   '/espace/profil': typeof EspaceProfilRoute
   '/admin': typeof AdminIndexRoute
   '/espace': typeof EspaceIndexRoute
+  '/espace/demandes/$id': typeof EspaceDemandesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -216,12 +224,13 @@ export interface FileRoutesById {
   '/admin/reporting': typeof AdminReportingRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
-  '/espace/demandes': typeof EspaceDemandesRoute
+  '/espace/demandes': typeof EspaceDemandesRouteWithChildren
   '/espace/documents': typeof EspaceDocumentsRoute
   '/espace/notifications': typeof EspaceNotificationsRoute
   '/espace/profil': typeof EspaceProfilRoute
   '/admin/': typeof AdminIndexRoute
   '/espace/': typeof EspaceIndexRoute
+  '/espace/demandes/$id': typeof EspaceDemandesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -249,6 +258,7 @@ export interface FileRouteTypes {
     | '/espace/profil'
     | '/admin/'
     | '/espace/'
+    | '/espace/demandes/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/espace/profil'
     | '/admin'
     | '/espace'
+    | '/espace/demandes/$id'
   id:
     | '__root__'
     | '/'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/espace/profil'
     | '/admin/'
     | '/espace/'
+    | '/espace/demandes/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -474,6 +486,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAuditRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/espace/demandes/$id': {
+      id: '/espace/demandes/$id'
+      path: '/$id'
+      fullPath: '/espace/demandes/$id'
+      preLoaderRoute: typeof EspaceDemandesIdRouteImport
+      parentRoute: typeof EspaceDemandesRoute
+    }
   }
 }
 
@@ -499,10 +518,22 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface EspaceDemandesRouteChildren {
+  EspaceDemandesIdRoute: typeof EspaceDemandesIdRoute
+}
+
+const EspaceDemandesRouteChildren: EspaceDemandesRouteChildren = {
+  EspaceDemandesIdRoute: EspaceDemandesIdRoute,
+}
+
+const EspaceDemandesRouteWithChildren = EspaceDemandesRoute._addFileChildren(
+  EspaceDemandesRouteChildren,
+)
+
 interface EspaceRouteChildren {
   EspaceAyantsDroitRoute: typeof EspaceAyantsDroitRoute
   EspaceDashboardRoute: typeof EspaceDashboardRoute
-  EspaceDemandesRoute: typeof EspaceDemandesRoute
+  EspaceDemandesRoute: typeof EspaceDemandesRouteWithChildren
   EspaceDocumentsRoute: typeof EspaceDocumentsRoute
   EspaceNotificationsRoute: typeof EspaceNotificationsRoute
   EspaceProfilRoute: typeof EspaceProfilRoute
@@ -512,7 +543,7 @@ interface EspaceRouteChildren {
 const EspaceRouteChildren: EspaceRouteChildren = {
   EspaceAyantsDroitRoute: EspaceAyantsDroitRoute,
   EspaceDashboardRoute: EspaceDashboardRoute,
-  EspaceDemandesRoute: EspaceDemandesRoute,
+  EspaceDemandesRoute: EspaceDemandesRouteWithChildren,
   EspaceDocumentsRoute: EspaceDocumentsRoute,
   EspaceNotificationsRoute: EspaceNotificationsRoute,
   EspaceProfilRoute: EspaceProfilRoute,

@@ -96,7 +96,8 @@
       "complement_demande": "Complément demandé",
       "valide": "Validé",
       "refuse": "Refusé",
-      "cloture": "Clôturé"
+      "cloture": "Clôturé",
+      "archive": "Archivé"
     }
   },
   "login": {
