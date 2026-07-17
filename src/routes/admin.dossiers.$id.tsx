@@ -490,3 +490,809 @@ function ActionModal({
     </div>
   );
 }
+
+// ============================================================
+// POUVOIRS D'EXCEPTION (§4.7)
+// ------------------------------------------------------------
+// Section réservée au gestionnaire attribué. Chaque action est
+// journalisée côté serveur (login + timestamp + matricule + motif).
+// Le front n'est qu'une interface : la sécurité et la traçabilité
+// sont assurées PAR LARAVEL, jamais par le navigateur.
+// ============================================================
+
+type ExceptionKind =
+  | "delegation"
+  | "reouverture"
+  | "saisieAdmin"
+  | "blacklist"
+  | "leverBlacklist"
+  | "correction";
+
+function ExceptionsSection({
+  dossier,
+  blacklist,
+  onBlacklistChange,
+  onRefuseCorrected,
+}: {
+  dossier: DispatchDossier;
+  blacklist: BlacklistState | null;
+  onBlacklistChange: (s: BlacklistState | null) => void;
+  onRefuseCorrected: (id: number) => void;
+}) {
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language.startsWith("ar");
+  const { user } = useAuth();
+  const [open, setOpen] = useState<ExceptionKind | null>(null);
+
+  const dateLocale = isAr ? "ar-MA" : "fr-FR";
+  const fmtDateTime = (iso: string) =>
+    new Date(iso).toLocaleString(dateLocale, {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+  const isRefuse = dossier.statut === "refuse";
+  const isBlacklisted = !!blacklist?.actif;
+
+  return (
+    <section
+      className="rounded-2xl bg-card p-5 border border-amber-200"
+      style={{ boxShadow: "var(--shadow-soft)" }}
+    >
+      <div className="flex items-start gap-2">
+        <div className="grid h-9 w-9 place-items-center rounded-xl bg-amber-100 text-amber-700 shrink-0">
+          <ShieldAlert className="h-5 w-5" aria-hidden />
+        </div>
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold text-foreground">
+            {t("admin.exception.title")}
+          </h2>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {t("admin.exception.lead")}
+          </p>
+        </div>
+      </div>
+
+      {/* Correction après refus — mis en avant si applicable */}
+      {isRefuse && (
+        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+          <div className="flex items-start gap-2">
+            <Wrench className="h-4 w-4 text-emerald-700 shrink-0 mt-0.5" aria-hidden />
+            <div className="min-w-0">
+              <h3 className="text-sm font-semibold text-emerald-900">
+                {t("admin.exception.correction.title")}
+              </h3>
+              <p className="mt-1 text-xs text-emerald-900/80">
+                {t("admin.exception.correction.lead")}
+              </p>
+              <button
+                type="button"
+                onClick={() => setOpen("correction")}
+                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+              >
+                <CheckCircle2 className="h-4 w-4" aria-hidden />
+                {t("admin.exception.correction.submit")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Grille des leviers */}
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        <ExceptionButton
+          icon={<UserCog className="h-4 w-4" aria-hidden />}
+          label={t("admin.exception.delegation.button")}
+          onClick={() => setOpen("delegation")}
+        />
+        <ExceptionButton
+          icon={<CalendarClock className="h-4 w-4" aria-hidden />}
+          label={t("admin.exception.reouverture.button")}
+          onClick={() => setOpen("reouverture")}
+        />
+        <ExceptionButton
+          icon={<FileText className="h-4 w-4" aria-hidden />}
+          label={t("admin.exception.saisieAdmin.button")}
+          onClick={() => setOpen("saisieAdmin")}
+        />
+        {isBlacklisted ? (
+          <ExceptionButton
+            icon={<Ban className="h-4 w-4" aria-hidden />}
+            label={t("admin.exception.blacklist.buttonLift")}
+            onClick={() => setOpen("leverBlacklist")}
+            danger
+          />
+        ) : (
+          <ExceptionButton
+            icon={<Ban className="h-4 w-4" aria-hidden />}
+            label={t("admin.exception.blacklist.button")}
+            onClick={() => setOpen("blacklist")}
+            danger
+          />
+        )}
+      </div>
+
+      {/* État blacklist */}
+      <div className="mt-4 rounded-xl border border-border bg-background px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="text-xs font-medium text-foreground">
+            {t("admin.exception.blacklist.sectionTitle")}
+          </span>
+          {isBlacklisted ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 text-destructive px-2.5 py-0.5 text-[11px] font-semibold">
+              <Ban className="h-3 w-3" aria-hidden />
+              {t("admin.exception.blacklist.statusSuspended")}
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 text-emerald-800 px-2.5 py-0.5 text-[11px] font-semibold">
+              <CheckCircle2 className="h-3 w-3" aria-hidden />
+              {t("admin.exception.blacklist.statusActive")}
+            </span>
+          )}
+        </div>
+        {isBlacklisted && blacklist?.motif && (
+          <p className="mt-2 text-xs text-muted-foreground">
+            <span className="font-medium text-foreground">
+              {t("admin.exception.blacklist.reasonLabel")}{" "}
+            </span>
+            {blacklist.motif}
+            {blacklist.depuis && (
+              <>
+                <span className="mx-1.5">·</span>
+                <span dir="ltr">
+                  {t("admin.exception.blacklist.statusSuspendedSince", {
+                    date: fmtDateTime(blacklist.depuis),
+                  })}
+                </span>
+              </>
+            )}
+          </p>
+        )}
+      </div>
+
+      {/* Bandeau audit + rappel serveur */}
+      <div className="mt-4 flex items-start gap-2 rounded-xl bg-amber-50 border border-amber-200 p-3">
+        <AlertTriangle className="h-4 w-4 text-amber-700 shrink-0 mt-0.5" aria-hidden />
+        <div className="text-xs text-amber-900/90 space-y-1">
+          <p>{t("admin.exception.auditBanner")}</p>
+          <p className="text-amber-900/70">{t("admin.exception.serverEnforced")}</p>
+        </div>
+      </div>
+
+      {/* Modales */}
+      {open === "delegation" && (
+        <DelegationModal
+          dossier={dossier}
+          onCancel={() => setOpen(null)}
+          onDone={() => {
+            toast.success(
+              t("admin.exception.delegation.success", { name: dossier.adherentNom }),
+            );
+            setOpen(null);
+          }}
+        />
+      )}
+      {open === "reouverture" && (
+        <ReouvertureModal
+          defaultMatricule={dossier.adherentMatricule}
+          module={dossier.module}
+          gestionnaireId={user?.id ?? ""}
+          onCancel={() => setOpen(null)}
+          onDone={(matricule, fenetreJusqua) => {
+            toast.success(
+              t("admin.exception.reouverture.success", {
+                matricule,
+                date: fmtDateTime(fenetreJusqua),
+              }),
+            );
+            setOpen(null);
+          }}
+        />
+      )}
+      {open === "saisieAdmin" && (
+        <SaisieAdminModal
+          defaultMatricule={dossier.adherentMatricule}
+          module={dossier.module}
+          gestionnaireId={user?.id ?? ""}
+          onCancel={() => setOpen(null)}
+          onDone={(id) => {
+            toast.success(t("admin.exception.saisieAdmin.success", { id }));
+            setOpen(null);
+          }}
+        />
+      )}
+      {open === "blacklist" && (
+        <BlacklistModal
+          matricule={dossier.adherentMatricule}
+          name={dossier.adherentNom}
+          gestionnaireId={user?.id ?? ""}
+          onCancel={() => setOpen(null)}
+          onDone={(state) => {
+            onBlacklistChange(state);
+            toast.success(
+              t("admin.exception.blacklist.successBlock", { name: dossier.adherentNom }),
+            );
+            setOpen(null);
+          }}
+        />
+      )}
+      {open === "leverBlacklist" && (
+        <LeverBlacklistModal
+          matricule={dossier.adherentMatricule}
+          name={dossier.adherentNom}
+          onCancel={() => setOpen(null)}
+          onDone={(state) => {
+            onBlacklistChange(state);
+            toast.success(
+              t("admin.exception.blacklist.successLift", { name: dossier.adherentNom }),
+            );
+            setOpen(null);
+          }}
+        />
+      )}
+      {open === "correction" && (
+        <CorrectionModal
+          dossierId={dossier.id}
+          gestionnaireId={user?.id ?? ""}
+          onCancel={() => setOpen(null)}
+          onDone={(id) => {
+            onRefuseCorrected(id);
+            setOpen(null);
+          }}
+        />
+      )}
+    </section>
+  );
+}
+
+function ExceptionButton({
+  icon,
+  label,
+  onClick,
+  danger,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  onClick: () => void;
+  danger?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={
+        "inline-flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-medium text-start transition " +
+        (danger
+          ? "border-destructive/30 text-destructive hover:bg-destructive/5"
+          : "border-border text-foreground hover:bg-secondary")
+      }
+    >
+      <span className="shrink-0">{icon}</span>
+      <span className="min-w-0">{label}</span>
+    </button>
+  );
+}
+
+function ExceptionModalShell({
+  title,
+  description,
+  warning,
+  onCancel,
+  children,
+  submitLabel,
+  onSubmit,
+  submitting,
+  canSubmit,
+  submitClassName,
+}: {
+  title: string;
+  description?: string;
+  warning?: string;
+  onCancel: () => void;
+  children: React.ReactNode;
+  submitLabel: string;
+  onSubmit: () => void;
+  submitting: boolean;
+  canSubmit: boolean;
+  submitClassName?: string;
+}) {
+  const { t } = useTranslation();
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-black/50 p-4"
+      role="dialog"
+      aria-modal="true"
+      onClick={onCancel}
+    >
+      <div
+        className="w-full max-w-md rounded-3xl bg-card p-6"
+        style={{ boxShadow: "var(--shadow-lift)" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3 className="text-lg font-bold text-foreground">{title}</h3>
+        {description && (
+          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+        )}
+        {warning && (
+          <div className="mt-3 flex items-start gap-2 rounded-xl bg-amber-50 border border-amber-200 p-3">
+            <AlertTriangle className="h-4 w-4 text-amber-700 shrink-0 mt-0.5" aria-hidden />
+            <p className="text-xs text-amber-900">{warning}</p>
+          </div>
+        )}
+
+        <div className="mt-4 space-y-3">{children}</div>
+
+        <div className="mt-4 flex items-start gap-2 rounded-xl bg-primary/5 border border-primary/20 p-3">
+          <ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" aria-hidden />
+          <p className="text-xs text-muted-foreground">
+            {t("admin.exception.auditBanner")}
+          </p>
+        </div>
+
+        <div className="mt-6 flex justify-end gap-2">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="rounded-xl border border-border px-4 py-2 text-sm hover:bg-secondary"
+          >
+            {t("admin.exception.cancel")}
+          </button>
+          <button
+            type="button"
+            onClick={onSubmit}
+            disabled={!canSubmit}
+            className={
+              "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-60 " +
+              (submitClassName ?? "bg-primary hover:bg-primary-dark")
+            }
+          >
+            {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+            {submitLabel}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Field({
+  label,
+  children,
+  required,
+}: {
+  label: string;
+  children: React.ReactNode;
+  required?: boolean;
+}) {
+  return (
+    <label className="block">
+      <span className="block text-xs font-medium text-foreground">
+        {label}
+        {required && <span className="text-destructive"> *</span>}
+      </span>
+      <span className="mt-1.5 block">{children}</span>
+    </label>
+  );
+}
+
+const inputClass =
+  "block w-full rounded-xl border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring";
+
+function DelegationModal({
+  dossier,
+  onCancel,
+  onDone,
+}: {
+  dossier: DispatchDossier;
+  onCancel: () => void;
+  onDone: () => void;
+}) {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const [contenu, setContenu] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async () => {
+    if (!contenu.trim() || !user) return;
+    setSubmitting(true);
+    try {
+      await exceptionsService.delegationSaisie({
+        dossierId: dossier.id,
+        gestionnaireId: user.id,
+        contenu: contenu.trim(),
+      });
+      onDone();
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ExceptionModalShell
+      title={t("admin.exception.delegation.title")}
+      description={t("admin.exception.delegation.desc", {
+        name: dossier.adherentNom,
+        matricule: dossier.adherentMatricule,
+      })}
+      warning={t("admin.exception.delegation.warning", { name: dossier.adherentNom })}
+      onCancel={onCancel}
+      submitting={submitting}
+      canSubmit={!submitting && contenu.trim().length > 0}
+      onSubmit={submit}
+      submitLabel={t("admin.exception.delegation.submit")}
+    >
+      <Field label={t("admin.exception.delegation.contenu")} required>
+        <textarea
+          value={contenu}
+          onChange={(e) => setContenu(e.target.value)}
+          rows={4}
+          placeholder={t("admin.exception.delegation.placeholder") ?? ""}
+          className={inputClass + " resize-none"}
+        />
+      </Field>
+    </ExceptionModalShell>
+  );
+}
+
+function ReouvertureModal({
+  defaultMatricule,
+  module,
+  gestionnaireId,
+  onCancel,
+  onDone,
+}: {
+  defaultMatricule: string;
+  module: ModuleActivite;
+  gestionnaireId: string;
+  onCancel: () => void;
+  onDone: (matricule: string, fenetreJusqua: string) => void;
+}) {
+  const { t } = useTranslation();
+  const [matricule, setMatricule] = useState(defaultMatricule);
+  const [activite, setActivite] = useState(String(module));
+  const [duree, setDuree] = useState(24);
+  const [motif, setMotif] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const canSubmit =
+    !submitting &&
+    matricule.trim().length > 0 &&
+    activite.trim().length > 0 &&
+    duree > 0 &&
+    motif.trim().length > 0;
+
+  const submit = async () => {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      const res = await exceptionsService.reouvertureTardive({
+        matricule: matricule.trim(),
+        activiteId: activite.trim(),
+        dureeHeures: duree,
+        motif: motif.trim(),
+        gestionnaireId,
+      });
+      onDone(matricule.trim(), res.fenetreJusqua);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ExceptionModalShell
+      title={t("admin.exception.reouverture.title")}
+      description={t("admin.exception.reouverture.desc")}
+      onCancel={onCancel}
+      submitting={submitting}
+      canSubmit={canSubmit}
+      onSubmit={submit}
+      submitLabel={t("admin.exception.reouverture.submit")}
+    >
+      <Field label={t("admin.exception.reouverture.matricule")} required>
+        <input
+          dir="ltr"
+          value={matricule}
+          onChange={(e) => setMatricule(e.target.value)}
+          className={inputClass}
+        />
+      </Field>
+      <Field label={t("admin.exception.reouverture.activite")} required>
+        <input
+          value={activite}
+          onChange={(e) => setActivite(e.target.value)}
+          className={inputClass}
+        />
+      </Field>
+      <Field label={t("admin.exception.reouverture.duree")} required>
+        <input
+          dir="ltr"
+          type="number"
+          min={1}
+          value={duree}
+          onChange={(e) => setDuree(Number(e.target.value))}
+          className={inputClass}
+        />
+      </Field>
+      <Field label={t("admin.exception.reouverture.motif")} required>
+        <textarea
+          rows={3}
+          value={motif}
+          onChange={(e) => setMotif(e.target.value)}
+          className={inputClass + " resize-none"}
+        />
+      </Field>
+    </ExceptionModalShell>
+  );
+}
+
+function SaisieAdminModal({
+  defaultMatricule,
+  module,
+  gestionnaireId,
+  onCancel,
+  onDone,
+}: {
+  defaultMatricule: string;
+  module: ModuleActivite;
+  gestionnaireId: string;
+  onCancel: () => void;
+  onDone: (id: number) => void;
+}) {
+  const { t } = useTranslation();
+  const [matricule, setMatricule] = useState(defaultMatricule);
+  const [libelle, setLibelle] = useState("");
+  const [montant, setMontant] = useState<string>("");
+  const [motif, setMotif] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const canSubmit =
+    !submitting &&
+    matricule.trim().length > 0 &&
+    libelle.trim().length > 0 &&
+    motif.trim().length > 0;
+
+  const submit = async () => {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      const res = await exceptionsService.saisieAdministrative({
+        module: String(module),
+        matricule: matricule.trim(),
+        libelle: libelle.trim(),
+        montant: montant ? Number(montant) : undefined,
+        motif: motif.trim(),
+        gestionnaireId,
+      });
+      onDone(res.id);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ExceptionModalShell
+      title={t("admin.exception.saisieAdmin.title")}
+      description={t("admin.exception.saisieAdmin.desc")}
+      onCancel={onCancel}
+      submitting={submitting}
+      canSubmit={canSubmit}
+      onSubmit={submit}
+      submitLabel={t("admin.exception.saisieAdmin.submit")}
+    >
+      <Field label={t("admin.exception.saisieAdmin.module")}>
+        <input value={String(module)} readOnly className={inputClass + " bg-muted"} />
+      </Field>
+      <Field label={t("admin.exception.saisieAdmin.matricule")} required>
+        <input
+          dir="ltr"
+          value={matricule}
+          onChange={(e) => setMatricule(e.target.value)}
+          className={inputClass}
+        />
+      </Field>
+      <Field label={t("admin.exception.saisieAdmin.libelle")} required>
+        <input
+          value={libelle}
+          onChange={(e) => setLibelle(e.target.value)}
+          className={inputClass}
+        />
+      </Field>
+      <Field label={t("admin.exception.saisieAdmin.montant")}>
+        <input
+          dir="ltr"
+          type="number"
+          value={montant}
+          onChange={(e) => setMontant(e.target.value)}
+          className={inputClass}
+        />
+      </Field>
+      <Field label={t("admin.exception.saisieAdmin.motif")} required>
+        <textarea
+          rows={3}
+          value={motif}
+          onChange={(e) => setMotif(e.target.value)}
+          className={inputClass + " resize-none"}
+        />
+      </Field>
+    </ExceptionModalShell>
+  );
+}
+
+function BlacklistModal({
+  matricule,
+  name,
+  gestionnaireId,
+  onCancel,
+  onDone,
+}: {
+  matricule: string;
+  name: string;
+  gestionnaireId: string;
+  onCancel: () => void;
+  onDone: (s: BlacklistState) => void;
+}) {
+  const { t } = useTranslation();
+  const [motif, setMotif] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const canSubmit = !submitting && motif.trim().length > 0;
+
+  const submit = async () => {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      const s = await exceptionsService.blacklist({
+        matricule,
+        motif: motif.trim(),
+        gestionnaireId,
+      });
+      onDone(s);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ExceptionModalShell
+      title={t("admin.exception.blacklist.title")}
+      description={t("admin.exception.blacklist.desc", { name, matricule })}
+      onCancel={onCancel}
+      submitting={submitting}
+      canSubmit={canSubmit}
+      onSubmit={submit}
+      submitLabel={t("admin.exception.blacklist.submit")}
+      submitClassName="bg-destructive hover:opacity-90"
+    >
+      <Field label={t("admin.exception.blacklist.motif")} required>
+        <textarea
+          rows={3}
+          value={motif}
+          onChange={(e) => setMotif(e.target.value)}
+          placeholder={t("admin.exception.blacklist.motifPlaceholder") ?? ""}
+          className={inputClass + " resize-none"}
+        />
+      </Field>
+    </ExceptionModalShell>
+  );
+}
+
+function LeverBlacklistModal({
+  matricule,
+  name,
+  onCancel,
+  onDone,
+}: {
+  matricule: string;
+  name: string;
+  onCancel: () => void;
+  onDone: (s: BlacklistState) => void;
+}) {
+  const { t } = useTranslation();
+  const [motif, setMotif] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const canSubmit = !submitting && motif.trim().length > 0;
+
+  const submit = async () => {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      const s = await exceptionsService.leverBlacklist(matricule);
+      onDone(s);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ExceptionModalShell
+      title={t("admin.exception.blacklist.liftTitle")}
+      description={t("admin.exception.blacklist.liftDesc", { name, matricule })}
+      onCancel={onCancel}
+      submitting={submitting}
+      canSubmit={canSubmit}
+      onSubmit={submit}
+      submitLabel={t("admin.exception.blacklist.liftSubmit")}
+    >
+      <Field label={t("admin.exception.blacklist.liftMotif")} required>
+        <textarea
+          rows={3}
+          value={motif}
+          onChange={(e) => setMotif(e.target.value)}
+          className={inputClass + " resize-none"}
+        />
+      </Field>
+    </ExceptionModalShell>
+  );
+}
+
+function CorrectionModal({
+  dossierId,
+  gestionnaireId,
+  onCancel,
+  onDone,
+}: {
+  dossierId: number;
+  gestionnaireId: string;
+  onCancel: () => void;
+  onDone: (id: number) => void;
+}) {
+  const { t } = useTranslation();
+  const [pieceNom, setPieceNom] = useState<string | undefined>();
+  const [motif, setMotif] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const canSubmit = !submitting && motif.trim().length > 0;
+
+  const submit = async () => {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      const res = await exceptionsService.corrigerApresRefus({
+        dossierId,
+        motifCorrection: motif.trim(),
+        pieceJointeNom: pieceNom,
+        gestionnaireId,
+      });
+      onDone(res.id);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ExceptionModalShell
+      title={t("admin.exception.correction.title")}
+      description={t("admin.exception.correction.lead")}
+      onCancel={onCancel}
+      submitting={submitting}
+      canSubmit={canSubmit}
+      onSubmit={submit}
+      submitLabel={t("admin.exception.correction.submit")}
+      submitClassName="bg-emerald-700 hover:bg-emerald-800"
+    >
+      <Field label={t("admin.exception.correction.piece")}>
+        <label className="flex items-center gap-2 rounded-xl border border-dashed border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-secondary">
+          <Upload className="h-4 w-4 text-muted-foreground" aria-hidden />
+          <span className="min-w-0 truncate text-muted-foreground" dir="ltr">
+            {pieceNom ?? t("admin.exception.correction.pieceHint")}
+          </span>
+          <input
+            type="file"
+            className="hidden"
+            onChange={(e) => setPieceNom(e.target.files?.[0]?.name)}
+          />
+        </label>
+      </Field>
+      <Field label={t("admin.exception.correction.motif")} required>
+        <textarea
+          rows={3}
+          value={motif}
+          onChange={(e) => setMotif(e.target.value)}
+          placeholder={t("admin.exception.correction.motifPlaceholder") ?? ""}
+          className={inputClass + " resize-none"}
+        />
+      </Field>
+    </ExceptionModalShell>
+  );
+}
