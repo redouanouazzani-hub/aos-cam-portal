@@ -66,6 +66,11 @@ function DemandesLayout() {
     from: "/espace/demandes/nouvelle/credit",
     shouldThrow: false,
   });
+  const scolariteMatch = useMatch({
+    from: "/espace/demandes/nouvelle/scolarite",
+    shouldThrow: false,
+  });
+
   const selectedId = detailMatch?.params.id ?? null;
 
   const [items, setItems] = useState<DemandeListItem[] | null>(null);
