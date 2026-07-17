@@ -33,6 +33,7 @@ import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
 import { Route as AdminCampagnesRouteImport } from './routes/admin.campagnes'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
+import { Route as EspaceDemandesNouvelleCreditRouteImport } from './routes/espace.demandes.nouvelle.credit'
 
 const MissionsRoute = MissionsRouteImport.update({
   id: '/missions',
@@ -154,6 +155,12 @@ const EspaceDemandesIdRoute = EspaceDemandesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => EspaceDemandesRoute,
 } as any)
+const EspaceDemandesNouvelleCreditRoute =
+  EspaceDemandesNouvelleCreditRouteImport.update({
+    id: '/nouvelle/credit',
+    path: '/nouvelle/credit',
+    getParentRoute: () => EspaceDemandesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/espace/': typeof EspaceIndexRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
+  '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -204,6 +212,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/espace': typeof EspaceIndexRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
+  '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -231,6 +240,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/espace/': typeof EspaceIndexRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
+  '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/espace/'
     | '/espace/demandes/$id'
+    | '/espace/demandes/nouvelle/credit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/espace'
     | '/espace/demandes/$id'
+    | '/espace/demandes/nouvelle/credit'
   id:
     | '__root__'
     | '/'
@@ -309,6 +321,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/espace/'
     | '/espace/demandes/$id'
+    | '/espace/demandes/nouvelle/credit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -493,6 +506,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EspaceDemandesIdRouteImport
       parentRoute: typeof EspaceDemandesRoute
     }
+    '/espace/demandes/nouvelle/credit': {
+      id: '/espace/demandes/nouvelle/credit'
+      path: '/nouvelle/credit'
+      fullPath: '/espace/demandes/nouvelle/credit'
+      preLoaderRoute: typeof EspaceDemandesNouvelleCreditRouteImport
+      parentRoute: typeof EspaceDemandesRoute
+    }
   }
 }
 
@@ -520,10 +540,12 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface EspaceDemandesRouteChildren {
   EspaceDemandesIdRoute: typeof EspaceDemandesIdRoute
+  EspaceDemandesNouvelleCreditRoute: typeof EspaceDemandesNouvelleCreditRoute
 }
 
 const EspaceDemandesRouteChildren: EspaceDemandesRouteChildren = {
   EspaceDemandesIdRoute: EspaceDemandesIdRoute,
+  EspaceDemandesNouvelleCreditRoute: EspaceDemandesNouvelleCreditRoute,
 }
 
 const EspaceDemandesRouteWithChildren = EspaceDemandesRoute._addFileChildren(
