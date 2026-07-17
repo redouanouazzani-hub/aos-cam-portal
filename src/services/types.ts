@@ -48,6 +48,74 @@ export interface PassationResponse {
   statut: "active";
 }
 
+// -------- Dispatching / instruction (§4.6) --------
+
+export type DispatchAction = "valider" | "refuser" | "complement";
+
+export interface DispatchLock {
+  userId: string;
+  fullName: string;
+  since: string; // ISO
+}
+
+export interface DispatchPieceJointe {
+  id: number;
+  nom: string;
+  nom_ar?: string;
+  filigraneServeur: boolean;
+}
+
+export interface DispatchEcheance {
+  numero: number;
+  date: string;
+  montant: number;
+}
+
+export interface DispatchEnfantSynthese {
+  prenom: string;
+  age: number;
+  niveau: string;
+  niveau_ar?: string;
+}
+
+export interface DispatchDossier {
+  id: number;
+  module: ModuleActivite;
+  prestation: string;
+  prestation_ar?: string;
+  adherentNom: string;
+  adherentMatricule: string;
+  dateSoumission: string; // ISO
+  statut: DemandeStatut;
+  montant?: number;
+  devise?: string;
+  description?: string;
+  description_ar?: string;
+  piecesJointes: DispatchPieceJointe[];
+  echeancier?: DispatchEcheance[];
+  enfants?: DispatchEnfantSynthese[];
+  lockedBy?: DispatchLock | null;
+}
+
+export interface FileAttenteResponse {
+  dossiers: DispatchDossier[];
+  parModule: Partial<Record<ModuleActivite, number>>;
+}
+
+export interface TransitionResponse {
+  id: number;
+  statut: DemandeStatut;
+  auditEntry: {
+    id: number;
+    date: string;
+    userId: string;
+    userFullName: string;
+    dossierId: number;
+    action: DispatchAction;
+    motif?: string;
+  };
+}
+
 export interface AuthUser {
   id: string;
   matricule: string;
