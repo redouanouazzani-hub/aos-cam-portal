@@ -200,7 +200,11 @@
       "scolarite": "Subvention de scolarité",
       "scolariteDesc": "Certificat de scolarité par enfant éligible.",
       "estivage": "Estivage",
-      "estivageDesc": "Vœux de séjour d'été (campagne à délai)."
+      "estivageDesc": "Vœux de séjour d'été (campagne à délai).",
+      "prime": "Prime (mariage / naissance)",
+      "primeDesc": "Flux continu, avec justificatif obligatoire.",
+      "inwi": "Convention Inwi",
+      "inwiDesc": "Choix d'un forfait, nouvelle ligne ou portabilité."
     },
 
     "emptyFiltered": {
