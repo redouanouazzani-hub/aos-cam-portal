@@ -444,3 +444,48 @@ export interface EstivageResponse {
 
 
 
+// -------- Primes (flux continu) --------
+
+export type PrimeType = "mariage" | "naissance";
+
+export interface PrimePayload {
+  type: PrimeType;
+  justificatifNom: string;
+}
+
+export interface PrimeResponse {
+  id: number;
+  statut: "soumis";
+  reference: string;
+}
+
+// -------- Convention Inwi (flux continu, §6.9) --------
+
+export interface InwiForfait {
+  id: string;
+  libelle: string;
+  libelle_ar?: string;
+  prix: number;
+  devise: string;
+  description?: string;
+  description_ar?: string;
+}
+
+export interface InwiForfaitsResponse {
+  forfaits: InwiForfait[];
+}
+
+export type InwiMode = "nouvelle_ligne" | "portabilite";
+
+export interface InwiPayload {
+  forfaitId: string;
+  mode: InwiMode;
+  numeroPortabilite?: string;
+}
+
+export interface InwiResponse {
+  id: number;
+  statut: "soumis";
+  reference: string;
+}
+

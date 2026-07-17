@@ -35,6 +35,8 @@ import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
 import { Route as AdminDossiersIdRouteImport } from './routes/admin.dossiers.$id'
 import { Route as EspaceDemandesNouvelleScolariteRouteImport } from './routes/espace.demandes.nouvelle.scolarite'
+import { Route as EspaceDemandesNouvellePrimeRouteImport } from './routes/espace.demandes.nouvelle.prime'
+import { Route as EspaceDemandesNouvelleInwiRouteImport } from './routes/espace.demandes.nouvelle.inwi'
 import { Route as EspaceDemandesNouvelleEstivageRouteImport } from './routes/espace.demandes.nouvelle.estivage'
 import { Route as EspaceDemandesNouvelleCreditRouteImport } from './routes/espace.demandes.nouvelle.credit'
 
@@ -169,6 +171,18 @@ const EspaceDemandesNouvelleScolariteRoute =
     path: '/nouvelle/scolarite',
     getParentRoute: () => EspaceDemandesRoute,
   } as any)
+const EspaceDemandesNouvellePrimeRoute =
+  EspaceDemandesNouvellePrimeRouteImport.update({
+    id: '/nouvelle/prime',
+    path: '/nouvelle/prime',
+    getParentRoute: () => EspaceDemandesRoute,
+  } as any)
+const EspaceDemandesNouvelleInwiRoute =
+  EspaceDemandesNouvelleInwiRouteImport.update({
+    id: '/nouvelle/inwi',
+    path: '/nouvelle/inwi',
+    getParentRoute: () => EspaceDemandesRoute,
+  } as any)
 const EspaceDemandesNouvelleEstivageRoute =
   EspaceDemandesNouvelleEstivageRouteImport.update({
     id: '/nouvelle/estivage',
@@ -210,6 +224,8 @@ export interface FileRoutesByFullPath {
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
   '/espace/demandes/nouvelle/estivage': typeof EspaceDemandesNouvelleEstivageRoute
+  '/espace/demandes/nouvelle/inwi': typeof EspaceDemandesNouvelleInwiRoute
+  '/espace/demandes/nouvelle/prime': typeof EspaceDemandesNouvellePrimeRoute
   '/espace/demandes/nouvelle/scolarite': typeof EspaceDemandesNouvelleScolariteRoute
 }
 export interface FileRoutesByTo {
@@ -238,6 +254,8 @@ export interface FileRoutesByTo {
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
   '/espace/demandes/nouvelle/estivage': typeof EspaceDemandesNouvelleEstivageRoute
+  '/espace/demandes/nouvelle/inwi': typeof EspaceDemandesNouvelleInwiRoute
+  '/espace/demandes/nouvelle/prime': typeof EspaceDemandesNouvellePrimeRoute
   '/espace/demandes/nouvelle/scolarite': typeof EspaceDemandesNouvelleScolariteRoute
 }
 export interface FileRoutesById {
@@ -269,6 +287,8 @@ export interface FileRoutesById {
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
   '/espace/demandes/nouvelle/estivage': typeof EspaceDemandesNouvelleEstivageRoute
+  '/espace/demandes/nouvelle/inwi': typeof EspaceDemandesNouvelleInwiRoute
+  '/espace/demandes/nouvelle/prime': typeof EspaceDemandesNouvellePrimeRoute
   '/espace/demandes/nouvelle/scolarite': typeof EspaceDemandesNouvelleScolariteRoute
 }
 export interface FileRouteTypes {
@@ -301,6 +321,8 @@ export interface FileRouteTypes {
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
     | '/espace/demandes/nouvelle/estivage'
+    | '/espace/demandes/nouvelle/inwi'
+    | '/espace/demandes/nouvelle/prime'
     | '/espace/demandes/nouvelle/scolarite'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -329,6 +351,8 @@ export interface FileRouteTypes {
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
     | '/espace/demandes/nouvelle/estivage'
+    | '/espace/demandes/nouvelle/inwi'
+    | '/espace/demandes/nouvelle/prime'
     | '/espace/demandes/nouvelle/scolarite'
   id:
     | '__root__'
@@ -359,6 +383,8 @@ export interface FileRouteTypes {
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
     | '/espace/demandes/nouvelle/estivage'
+    | '/espace/demandes/nouvelle/inwi'
+    | '/espace/demandes/nouvelle/prime'
     | '/espace/demandes/nouvelle/scolarite'
   fileRoutesById: FileRoutesById
 }
@@ -558,6 +584,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EspaceDemandesNouvelleScolariteRouteImport
       parentRoute: typeof EspaceDemandesRoute
     }
+    '/espace/demandes/nouvelle/prime': {
+      id: '/espace/demandes/nouvelle/prime'
+      path: '/nouvelle/prime'
+      fullPath: '/espace/demandes/nouvelle/prime'
+      preLoaderRoute: typeof EspaceDemandesNouvellePrimeRouteImport
+      parentRoute: typeof EspaceDemandesRoute
+    }
+    '/espace/demandes/nouvelle/inwi': {
+      id: '/espace/demandes/nouvelle/inwi'
+      path: '/nouvelle/inwi'
+      fullPath: '/espace/demandes/nouvelle/inwi'
+      preLoaderRoute: typeof EspaceDemandesNouvelleInwiRouteImport
+      parentRoute: typeof EspaceDemandesRoute
+    }
     '/espace/demandes/nouvelle/estivage': {
       id: '/espace/demandes/nouvelle/estivage'
       path: '/nouvelle/estivage'
@@ -613,6 +653,8 @@ interface EspaceDemandesRouteChildren {
   EspaceDemandesIdRoute: typeof EspaceDemandesIdRoute
   EspaceDemandesNouvelleCreditRoute: typeof EspaceDemandesNouvelleCreditRoute
   EspaceDemandesNouvelleEstivageRoute: typeof EspaceDemandesNouvelleEstivageRoute
+  EspaceDemandesNouvelleInwiRoute: typeof EspaceDemandesNouvelleInwiRoute
+  EspaceDemandesNouvellePrimeRoute: typeof EspaceDemandesNouvellePrimeRoute
   EspaceDemandesNouvelleScolariteRoute: typeof EspaceDemandesNouvelleScolariteRoute
 }
 
@@ -620,6 +662,8 @@ const EspaceDemandesRouteChildren: EspaceDemandesRouteChildren = {
   EspaceDemandesIdRoute: EspaceDemandesIdRoute,
   EspaceDemandesNouvelleCreditRoute: EspaceDemandesNouvelleCreditRoute,
   EspaceDemandesNouvelleEstivageRoute: EspaceDemandesNouvelleEstivageRoute,
+  EspaceDemandesNouvelleInwiRoute: EspaceDemandesNouvelleInwiRoute,
+  EspaceDemandesNouvellePrimeRoute: EspaceDemandesNouvellePrimeRoute,
   EspaceDemandesNouvelleScolariteRoute: EspaceDemandesNouvelleScolariteRoute,
 }
 

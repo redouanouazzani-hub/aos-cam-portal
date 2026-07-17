@@ -200,7 +200,11 @@
       "scolarite": "Subvention de scolarité",
       "scolariteDesc": "Certificat de scolarité par enfant éligible.",
       "estivage": "Estivage",
-      "estivageDesc": "Vœux de séjour d'été (campagne à délai)."
+      "estivageDesc": "Vœux de séjour d'été (campagne à délai).",
+      "prime": "Prime (mariage / naissance)",
+      "primeDesc": "Flux continu, avec justificatif obligatoire.",
+      "inwi": "Convention Inwi",
+      "inwiDesc": "Choix d'un forfait, nouvelle ligne ou portabilité."
     },
 
     "emptyFiltered": {
@@ -719,7 +723,89 @@
       "lead": "Vous serez notifié lors de l'affectation de votre centre et de votre période.",
       "backList": "Retour à mes demandes"
     }
+  },
+  "prime": {
+    "title": "Nouvelle demande de prime",
+    "subtitle": "Prime de mariage ou de naissance — flux continu, ouvert toute l'année.",
+    "step": {
+      "type": "Type de prime",
+      "justificatif": "Justificatif"
+    },
+    "type": {
+      "mariage": "Prime de mariage",
+      "mariageDesc": "À la suite d'un mariage.",
+      "naissance": "Prime de naissance",
+      "naissanceDesc": "À la suite d'une naissance."
+    },
+    "justificatif": {
+      "hint": "Ajoutez le justificatif correspondant.",
+      "mariageHint": "Joignez une copie de l'acte de mariage.",
+      "naissanceHint": "Joignez l'extrait d'acte de naissance.",
+      "televerser": "Téléverser le justificatif",
+      "retirer": "Retirer le fichier"
+    },
+    "recap": {
+      "title": "Récapitulatif",
+      "type": "Type",
+      "typeVide": "Non sélectionné",
+      "justificatif": "Pièce jointe",
+      "warnMissing": "Le justificatif est obligatoire pour soumettre la demande."
+    },
+    "submit": {
+      "cta": "Soumettre la demande",
+      "pending": "Envoi…",
+      "success": "Demande transmise — référence {{ref}}.",
+      "error": "L'envoi a échoué. Veuillez réessayer."
+    },
+    "done": {
+      "title": "Demande transmise",
+      "ref": "Référence : {{ref}}",
+      "lead": {
+        "mariage": "Votre demande de prime de mariage sera instruite par un gestionnaire.",
+        "naissance": "Votre demande de prime de naissance sera instruite par un gestionnaire."
+      },
+      "backList": "Retour à mes demandes"
+    }
+  },
+  "inwi": {
+    "title": "Convention Inwi",
+    "subtitle": "Commande d'une ligne dans le cadre de la convention — flux continu.",
+    "noDocs": "Aucun document à téléverser. Le gestionnaire préparera la carte SIM pour une remise physique.",
+    "step": {
+      "forfait": "Forfait",
+      "mode": "Type de ligne"
+    },
+    "mode": {
+      "nouvelle_ligne": "Nouvelle ligne",
+      "nouvelle_ligneDesc": "Attribution d'un nouveau numéro Inwi.",
+      "portabilite": "Portabilité",
+      "portabiliteDesc": "Conserver votre numéro actuel."
+    },
+    "portabilite": {
+      "label": "Numéro à porter",
+      "hint": "Numéro marocain à 10 chiffres commençant par 06 ou 07.",
+      "invalide": "Numéro invalide. Format attendu : 06XXXXXXXX ou 07XXXXXXXX."
+    },
+    "recap": {
+      "title": "Récapitulatif",
+      "forfait": "Forfait choisi",
+      "mode": "Type de ligne",
+      "numero": "Numéro à porter"
+    },
+    "submit": {
+      "cta": "Soumettre la commande",
+      "pending": "Envoi…",
+      "success": "Commande transmise — référence {{ref}}.",
+      "error": "L'envoi a échoué. Veuillez réessayer."
+    },
+    "done": {
+      "title": "Commande transmise",
+      "ref": "Référence : {{ref}}",
+      "lead": "Le gestionnaire préparera votre carte SIM et vous contactera pour la remise physique.",
+      "backList": "Retour à mes demandes"
+    }
   }
 }
+
 
 

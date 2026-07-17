@@ -13,9 +13,11 @@ import {
   ChevronDown,
   FileText,
   GraduationCap,
+  Heart,
   Plus,
   Search,
   SearchX,
+  Smartphone,
   Sun,
   Wallet,
 } from "lucide-react";
@@ -73,6 +75,14 @@ function DemandesLayout() {
   });
   const estivageMatch = useMatch({
     from: "/espace/demandes/nouvelle/estivage",
+    shouldThrow: false,
+  });
+  const primeMatch = useMatch({
+    from: "/espace/demandes/nouvelle/prime",
+    shouldThrow: false,
+  });
+  const inwiMatch = useMatch({
+    from: "/espace/demandes/nouvelle/inwi",
     shouldThrow: false,
   });
 
@@ -133,7 +143,7 @@ function DemandesLayout() {
 
   // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
   // Must run after all hooks to keep hook order stable across renders.
-  if (creditMatch || scolariteMatch || estivageMatch) {
+  if (creditMatch || scolariteMatch || estivageMatch || primeMatch || inwiMatch) {
     return <Outlet />;
   }
 
@@ -209,6 +219,38 @@ function DemandesLayout() {
                   </div>
                   <div className="text-xs text-muted-foreground">
                     {t("demandes.nouvelle.estivageDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/prime"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <Heart className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.prime")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.primeDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/inwi"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <Smartphone className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.inwi")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.inwiDesc")}
                   </div>
                 </div>
               </Link>
