@@ -128,3 +128,53 @@ export interface DashboardSummary {
   notificationsRecentes: NotificationRecente[];
   echeances: Echeance[];
 }
+
+// -------- Demandes (liste + détail) --------
+
+export interface DemandeListItem extends DemandeRecente {
+  libelle?: string;
+}
+
+export interface DemandeTimelineStep {
+  statut: DemandeStatut;
+  date: string | null; // null = étape non encore franchie
+  current?: boolean;
+}
+
+export interface DemandePieceJointe {
+  id: number;
+  nom: string;
+  nom_ar?: string;
+  date: string;
+  filigraneServeur: boolean;
+}
+
+export interface DemandeHistoriqueEntry {
+  id: number;
+  date: string;
+  action: string;
+  action_ar?: string;
+  auteur: string;
+}
+
+export interface DemandeDetail {
+  id: number;
+  prestation: string;
+  prestation_ar?: string;
+  description?: string;
+  description_ar?: string;
+  date: string;
+  statut: DemandeStatut;
+  timeline: DemandeTimelineStep[];
+  piecesJointes: DemandePieceJointe[];
+  historique: DemandeHistoriqueEntry[];
+}
+
+export type DemandeSort = "recent" | "ancien";
+
+export interface DemandesFilters {
+  statut?: DemandeStatut | "tous";
+  sort?: DemandeSort;
+  q?: string;
+}
+
