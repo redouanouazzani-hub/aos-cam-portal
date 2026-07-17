@@ -197,14 +197,23 @@ function InstructionPage() {
               {fmtDate(dossier.dateSoumission)}
             </p>
           </div>
-          <span
-            className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
-            style={{ background: statutStyle.bg, color: statutStyle.fg }}
-          >
-            {t(`dashboard.statut.${dossier.statut}`)}
-          </span>
+          <div className="flex flex-col items-end gap-2">
+            <span
+              className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ background: statutStyle.bg, color: statutStyle.fg }}
+            >
+              {t(`dashboard.statut.${dossier.statut}`)}
+            </span>
+            {blacklist?.actif && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 text-destructive px-3 py-1 text-xs font-semibold">
+                <Ban className="h-3.5 w-3.5" aria-hidden />
+                {t("admin.exception.blacklist.statusSuspended")}
+              </span>
+            )}
+          </div>
         </div>
       </div>
+
 
       {/* Synthèse */}
       <section
