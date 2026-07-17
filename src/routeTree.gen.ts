@@ -15,6 +15,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EspaceRouteImport } from './routes/espace'
 import { Route as ConventionsRouteImport } from './routes/conventions'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
@@ -64,6 +65,11 @@ const ConventionsRoute = ConventionsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin-login',
+  path: '/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admin-login': typeof AdminLoginRoute
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
   '/espace': typeof EspaceRouteWithChildren
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
+  '/admin-login': typeof AdminLoginRoute
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
   '/faq': typeof FaqRoute
@@ -227,6 +235,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admin-login': typeof AdminLoginRoute
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
   '/espace': typeof EspaceRouteWithChildren
@@ -257,6 +266,7 @@ export interface FileRouteTypes {
     | '/'
     | '/actualites'
     | '/admin'
+    | '/admin-login'
     | '/contact'
     | '/conventions'
     | '/espace'
@@ -284,6 +294,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/actualites'
+    | '/admin-login'
     | '/contact'
     | '/conventions'
     | '/faq'
@@ -311,6 +322,7 @@ export interface FileRouteTypes {
     | '/'
     | '/actualites'
     | '/admin'
+    | '/admin-login'
     | '/contact'
     | '/conventions'
     | '/espace'
@@ -340,6 +352,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActualitesRoute: typeof ActualitesRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
   ContactRoute: typeof ContactRoute
   ConventionsRoute: typeof ConventionsRoute
   EspaceRoute: typeof EspaceRouteWithChildren
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-login': {
+      id: '/admin-login'
+      path: '/admin-login'
+      fullPath: '/admin-login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -610,6 +630,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActualitesRoute: ActualitesRoute,
   AdminRoute: AdminRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
   ContactRoute: ContactRoute,
   ConventionsRoute: ConventionsRoute,
   EspaceRoute: EspaceRouteWithChildren,
