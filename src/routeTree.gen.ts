@@ -26,7 +26,7 @@ import { Route as EspaceDocumentsRouteImport } from './routes/espace.documents'
 import { Route as EspaceDemandesRouteImport } from './routes/espace.demandes'
 import { Route as EspaceDashboardRouteImport } from './routes/espace.dashboard'
 import { Route as EspaceAyantsDroitRouteImport } from './routes/espace.ayants-droit'
-import { Route as AdminReportingRouteImport } from './routes/admin.reporting'
+import { Route as AdminExtractionRouteImport } from './routes/admin.extraction'
 import { Route as AdminDossiersRouteImport } from './routes/admin.dossiers'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
@@ -120,9 +120,9 @@ const EspaceAyantsDroitRoute = EspaceAyantsDroitRouteImport.update({
   path: '/ayants-droit',
   getParentRoute: () => EspaceRoute,
 } as any)
-const AdminReportingRoute = AdminReportingRouteImport.update({
-  id: '/reporting',
-  path: '/reporting',
+const AdminExtractionRoute = AdminExtractionRouteImport.update({
+  id: '/extraction',
+  path: '/extraction',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminDossiersRoute = AdminDossiersRouteImport.update({
@@ -177,7 +177,7 @@ export interface FileRoutesByFullPath {
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dossiers': typeof AdminDossiersRoute
-  '/admin/reporting': typeof AdminReportingRoute
+  '/admin/extraction': typeof AdminExtractionRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
   '/espace/demandes': typeof EspaceDemandesRouteWithChildren
@@ -202,7 +202,7 @@ export interface FileRoutesByTo {
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dossiers': typeof AdminDossiersRoute
-  '/admin/reporting': typeof AdminReportingRoute
+  '/admin/extraction': typeof AdminExtractionRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
   '/espace/demandes': typeof EspaceDemandesRouteWithChildren
@@ -230,7 +230,7 @@ export interface FileRoutesById {
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dossiers': typeof AdminDossiersRoute
-  '/admin/reporting': typeof AdminReportingRoute
+  '/admin/extraction': typeof AdminExtractionRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
   '/espace/demandes': typeof EspaceDemandesRouteWithChildren
@@ -259,7 +259,7 @@ export interface FileRouteTypes {
     | '/admin/comptes'
     | '/admin/dashboard'
     | '/admin/dossiers'
-    | '/admin/reporting'
+    | '/admin/extraction'
     | '/espace/ayants-droit'
     | '/espace/dashboard'
     | '/espace/demandes'
@@ -284,7 +284,7 @@ export interface FileRouteTypes {
     | '/admin/comptes'
     | '/admin/dashboard'
     | '/admin/dossiers'
-    | '/admin/reporting'
+    | '/admin/extraction'
     | '/espace/ayants-droit'
     | '/espace/dashboard'
     | '/espace/demandes'
@@ -311,7 +311,7 @@ export interface FileRouteTypes {
     | '/admin/comptes'
     | '/admin/dashboard'
     | '/admin/dossiers'
-    | '/admin/reporting'
+    | '/admin/extraction'
     | '/espace/ayants-droit'
     | '/espace/dashboard'
     | '/espace/demandes'
@@ -457,11 +457,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EspaceAyantsDroitRouteImport
       parentRoute: typeof EspaceRoute
     }
-    '/admin/reporting': {
-      id: '/admin/reporting'
-      path: '/reporting'
-      fullPath: '/admin/reporting'
-      preLoaderRoute: typeof AdminReportingRouteImport
+    '/admin/extraction': {
+      id: '/admin/extraction'
+      path: '/extraction'
+      fullPath: '/admin/extraction'
+      preLoaderRoute: typeof AdminExtractionRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/dossiers': {
@@ -522,7 +522,7 @@ interface AdminRouteChildren {
   AdminComptesRoute: typeof AdminComptesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminDossiersRoute: typeof AdminDossiersRoute
-  AdminReportingRoute: typeof AdminReportingRoute
+  AdminExtractionRoute: typeof AdminExtractionRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -532,7 +532,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminComptesRoute: AdminComptesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminDossiersRoute: AdminDossiersRoute,
-  AdminReportingRoute: AdminReportingRoute,
+  AdminExtractionRoute: AdminExtractionRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
