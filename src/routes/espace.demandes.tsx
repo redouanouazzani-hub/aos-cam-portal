@@ -128,9 +128,10 @@ function DemandesLayout() {
 
   // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
   // Must run after all hooks to keep hook order stable across renders.
-  if (creditMatch) {
+  if (creditMatch || scolariteMatch) {
     return <Outlet />;
   }
+
 
 
 
