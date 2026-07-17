@@ -57,6 +57,7 @@ function InstructionPage() {
       .then((d) => {
         if (!alive) return;
         setDossier(d);
+        if (d) setBlacklist(exceptionsService.getBlacklistState(d.adherentMatricule));
       })
       .finally(() => {
         if (alive) setLoading(false);
@@ -65,6 +66,7 @@ function InstructionPage() {
       alive = false;
     };
   }, [dossierId]);
+
 
   if (loading || rbacLoading) {
     return (
