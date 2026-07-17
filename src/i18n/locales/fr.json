@@ -532,6 +532,77 @@
         "cancel": "Annuler",
         "confirm": "Confirmer"
       }
+    },
+    "exception": {
+      "title": "Pouvoirs d'exception",
+      "lead": "Leviers réservés au gestionnaire attribué sur ce module. Toute action est irrévocablement journalisée.",
+      "auditBanner": "Cette action sera inscrite au journal d'audit : login, date/heure, matricule concerné, motif.",
+      "serverEnforced": "L'autorisation et la traçabilité sont vérifiées et écrites côté serveur (Laravel). Le front n'est qu'une interface.",
+      "delegation": {
+        "button": "Soumettre à la place de l'adhérent",
+        "title": "Délégation de saisie",
+        "desc": "Vous vous apprêtez à déposer une demande AU NOM de {{name}} ({{matricule}}). Le formulaire sera pré-rempli avec ses données officielles.",
+        "warning": "Action effectuée au nom de {{name}} — sera tracée.",
+        "contenu": "Contenu de la demande",
+        "placeholder": "Détaillez la demande déposée pour le compte de l'adhérent…",
+        "submit": "Soumettre pour l'adhérent",
+        "success": "Demande soumise au nom de {{name}}."
+      },
+      "reouverture": {
+        "button": "Autoriser une soumission tardive",
+        "title": "Réouverture hors délai",
+        "desc": "Ouvrir une fenêtre exceptionnelle pour un adhérent sur une campagne clôturée.",
+        "matricule": "Matricule de l'adhérent",
+        "activite": "Activité / campagne",
+        "duree": "Durée de la fenêtre (heures)",
+        "motif": "Motif d'octroi",
+        "submit": "Ouvrir la fenêtre",
+        "success": "Fenêtre exceptionnelle ouverte pour {{matricule}} jusqu'au {{date}}."
+      },
+      "saisieAdmin": {
+        "button": "Enregistrer un dossier papier",
+        "title": "Saisie administrative directe",
+        "desc": "Créer et valider directement un dossier reçu au format papier, sans passage par l'adhérent.",
+        "module": "Module",
+        "matricule": "Matricule de l'adhérent",
+        "libelle": "Libellé de la prestation",
+        "montant": "Montant (optionnel)",
+        "motif": "Motif / référence du dossier papier",
+        "submit": "Enregistrer et valider",
+        "success": "Dossier papier n°{{id}} enregistré et validé."
+      },
+      "blacklist": {
+        "sectionTitle": "Accès aux prestations de l'adhérent",
+        "statusActive": "Accès normal",
+        "statusSuspended": "Accès suspendu",
+        "statusSuspendedSince": "Suspendu depuis le {{date}}",
+        "reasonLabel": "Motif :",
+        "button": "Bloquer l'accès aux prestations",
+        "buttonLift": "Lever le blocage",
+        "title": "Blacklist temporaire",
+        "desc": "Suspendre l'accès de {{name}} ({{matricule}}) aux prestations. Réservé aux cas encadrés (impayé, autorisation de précompte non signée, etc.).",
+        "motif": "Motif du blocage",
+        "motifPlaceholder": "Ex. impayé, autorisation de précompte non signée…",
+        "submit": "Bloquer",
+        "successBlock": "Accès aux prestations suspendu pour {{name}}.",
+        "successLift": "Blocage levé pour {{name}}.",
+        "liftTitle": "Lever le blocage",
+        "liftDesc": "Restaurer l'accès aux prestations pour {{name}} ({{matricule}}).",
+        "liftMotif": "Motif de la levée",
+        "liftSubmit": "Lever le blocage"
+      },
+      "correction": {
+        "title": "Correction après refus",
+        "lead": "Ce dossier est REFUSÉ. En tant que gestionnaire attribué, vous conservez un accès en écriture pour corriger la donnée ou la pièce et repasser le dossier en Validé, sans que l'adhérent ait à recréer sa demande.",
+        "piece": "Nouvelle pièce justificative",
+        "pieceHint": "Téléversez la pièce corrigée (mock).",
+        "motif": "Motif de la correction",
+        "motifPlaceholder": "Précisez la donnée / la pièce corrigée et la raison…",
+        "submit": "Repasser en Validé",
+        "success": "Dossier n°{{id}} corrigé et repassé en Validé."
+      },
+      "cancel": "Annuler"
     }
   }
 }
+
