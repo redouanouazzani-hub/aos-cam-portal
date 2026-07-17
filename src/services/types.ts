@@ -71,3 +71,56 @@ export interface DataClaimResponse {
   id: number;
   statut: "soumis";
 }
+
+// -------- Dashboard --------
+
+export type DemandeStatut =
+  | "brouillon"
+  | "soumis"
+  | "en_cours_instruction"
+  | "complement_demande"
+  | "valide"
+  | "refuse"
+  | "cloture";
+
+export interface DemandeRecente {
+  id: number;
+  prestation: string;
+  date: string;
+  statut: DemandeStatut;
+}
+
+export interface NotificationRecente {
+  id: number;
+  titre: string;
+  texte: string;
+  date: string;
+  lu: boolean;
+}
+
+export interface Echeance {
+  id: number;
+  libelle: string;
+  date: string;
+  montant: number;
+  devise: string;
+}
+
+export interface DashboardKpis {
+  demandesEnCours: number;
+  demandesValidees: number;
+  notificationsNonLues: number;
+  prochaineEcheance: {
+    libelle: string;
+    date: string;
+    montant: number;
+    devise: string;
+  } | null;
+}
+
+export interface DashboardSummary {
+  kpis: DashboardKpis;
+  demandesRecentes: DemandeRecente[];
+  notificationsRecentes: NotificationRecente[];
+  echeances: Echeance[];
+}

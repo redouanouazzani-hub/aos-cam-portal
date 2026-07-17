@@ -21,34 +21,25 @@ function HomePage() {
     {
       icon: HeartHandshake,
       title: t("nav.missions"),
-      desc: t("home.card.missionsDesc", {
-        defaultValue:
-          "Logement, estivage, crédits, scolarité, voyages : découvrez le périmètre de nos actions.",
-      }),
+      desc: t("home.card.missionsDesc"),
       to: "/missions",
     },
     {
       icon: Sparkles,
       title: t("nav.conventions"),
-      desc: t("home.card.conventionsDesc", {
-        defaultValue: "Les avantages négociés avec nos partenaires.",
-      }),
+      desc: t("home.card.conventionsDesc"),
       to: "/conventions",
     },
     {
       icon: Newspaper,
       title: t("nav.news"),
-      desc: t("home.card.newsDesc", {
-        defaultValue: "Communications et annonces de l'AOS-CMR.",
-      }),
+      desc: t("home.card.newsDesc"),
       to: "/actualites",
     },
     {
       icon: FileText,
       title: t("nav.faq"),
-      desc: t("home.card.faqDesc", {
-        defaultValue: "Questions fréquentes et coordonnées de contact.",
-      }),
+      desc: t("home.card.faqDesc"),
       to: "/faq",
     },
   ];
@@ -130,13 +121,10 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16">
         <div className="max-w-2xl">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-            {t("home.sectionTitle", { defaultValue: "Vos avantages, à portée de main" })}
+            {t("home.sectionTitle")}
           </h2>
           <p className="mt-2 text-muted-foreground">
-            {t("home.sectionLead", {
-              defaultValue:
-                "Découvrez nos prestations et suivez vos demandes en toute simplicité.",
-            })}
+            {t("home.sectionLead")}
           </p>
         </div>
 
@@ -179,18 +167,18 @@ function HomePage() {
             {[
               {
                 icon: Users,
-                title: "Un service pour tous les adhérents",
-                desc: "Logement, estivage, crédits, scolarité, voyages : vos prestations sociales réunies en un seul endroit.",
+                title: t("home.trust.service.title"),
+                desc: t("home.trust.service.desc"),
               },
               {
                 icon: ShieldCheck,
-                title: "Vos données protégées",
-                desc: "Portail interne réservé au personnel actif de la CMR. Vos informations ne quittent jamais le réseau de l'institution.",
+                title: t("home.trust.security.title"),
+                desc: t("home.trust.security.desc"),
               },
               {
                 icon: HeartHandshake,
-                title: "Une association à votre écoute",
-                desc: "Déposez vos demandes en ligne et suivez leur instruction en temps réel.",
+                title: t("home.trust.listening.title"),
+                desc: t("home.trust.listening.desc"),
               },
             ].map((f) => (
               <div key={f.title} className="flex items-start gap-4">
