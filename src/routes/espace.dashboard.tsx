@@ -21,6 +21,7 @@ import type {
 } from "@/services/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { STATUT_STYLES } from "@/lib/statut-styles";
 
 export const Route = createFileRoute("/espace/dashboard")({
   component: Dashboard,
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/espace/dashboard")({
 
 function Dashboard() {
   const { t, i18n } = useTranslation();
+  const isAr = i18n.language.startsWith("ar");
   const { user } = useAuth();
   const [data, setData] = useState<DashboardSummary | null>(null);
   const [loading, setLoading] = useState(true);
@@ -44,12 +46,17 @@ function Dashboard() {
     };
   }, []);
 
-  const dateLocale = i18n.language.startsWith("ar") ? "ar-MA" : "fr-FR";
+  const dateLocale = isAr ? "ar-MA" : "fr-FR";
   const fmtDate = (iso: string) =>
     new Date(iso).toLocaleDateString(dateLocale, {
       year: "numeric",
       month: "short",
       day: "numeric",
+    });
+  const fmtDateShort = (iso: string) =>
+    new Date(iso).toLocaleDateString(dateLocale, {
+      day: "numeric",
+      month: "long",
     });
   const fmtMoney = (v: number, devise: string) =>
     `${new Intl.NumberFormat(dateLocale).format(v)} ${devise}`;
@@ -100,7 +107,7 @@ function Dashboard() {
               label={t("dashboard.kpi.echeance")}
               value={
                 data.kpis.prochaineEcheance
-                  ? fmtDate(data.kpis.prochaineEcheance.date)
+                  ? fmtDateShort(data.kpis.prochaineEcheance.date)
                   : t("dashboard.kpi.aucuneEcheance")
               }
               hint={
@@ -112,12 +119,13 @@ function Dashboard() {
                   : undefined
               }
               tone="warm"
+              wrapValue
             />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
-            <RecentRequests items={data.demandesRecentes} fmtDate={fmtDate} />
-            <RecentNotifications items={data.notificationsRecentes} fmtDate={fmtDate} />
+            <RecentRequests items={data.demandesRecentes} fmtDate={fmtDate} isAr={isAr} />
+            <RecentNotifications items={data.notificationsRecentes} fmtDate={fmtDate} isAr={isAr} />
           </div>
 
           <UpcomingDeadlines items={data.echeances} fmtDate={fmtDate} fmtMoney={fmtMoney} />
@@ -135,12 +143,14 @@ function KpiCard({
   value,
   hint,
   tone,
+  wrapValue,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   value: string;
   hint?: string;
   tone: Tone;
+  wrapValue?: boolean;
 }) {
   const bg: Record<Tone, string> = {
     primary: "color-mix(in oklab, var(--primary) 12%, transparent)",
@@ -162,7 +172,11 @@ function KpiCard({
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="text-xs font-medium text-muted-foreground">{label}</div>
-          <div className="mt-1 text-2xl font-bold tracking-tight text-foreground truncate">
+          <div
+            className={`mt-1 text-2xl font-bold tracking-tight text-foreground ${
+              wrapValue ? "break-words" : "truncate"
+            }`}
+          >
             {value}
           </div>
           {hint && (
@@ -182,16 +196,6 @@ function KpiCard({
   );
 }
 
-const STATUT_STYLES: Record<DemandeStatut, { bg: string; fg: string }> = {
-  brouillon: { bg: "oklch(0.92 0.02 260)", fg: "oklch(0.35 0.03 260)" },
-  soumis: { bg: "oklch(0.90 0.06 240)", fg: "oklch(0.32 0.10 240)" },
-  en_cours_instruction: { bg: "oklch(0.90 0.09 75)", fg: "oklch(0.35 0.12 60)" },
-  complement_demande: { bg: "oklch(0.90 0.10 45)", fg: "oklch(0.38 0.13 40)" },
-  valide: { bg: "oklch(0.90 0.10 150)", fg: "oklch(0.32 0.12 150)" },
-  refuse: { bg: "oklch(0.90 0.08 25)", fg: "oklch(0.40 0.15 25)" },
-  cloture: { bg: "oklch(0.90 0.01 260)", fg: "oklch(0.35 0.02 260)" },
-};
-
 function StatutBadge({ statut }: { statut: DemandeStatut }) {
   const { t } = useTranslation();
   const s = STATUT_STYLES[statut];
@@ -208,9 +212,11 @@ function StatutBadge({ statut }: { statut: DemandeStatut }) {
 function RecentRequests({
   items,
   fmtDate,
+  isAr,
 }: {
   items: DemandeRecente[];
   fmtDate: (s: string) => string;
+  isAr: boolean;
 }) {
   const { t } = useTranslation();
   return (
@@ -237,10 +243,10 @@ function RecentRequests({
               <li key={d.id} className="flex flex-wrap items-center justify-between gap-2 py-3 first:pt-0 last:pb-0">
                 <div className="min-w-0">
                   <div className="text-sm font-medium text-foreground truncate">
-                    {d.prestation}
+                    {isAr && d.prestation_ar ? d.prestation_ar : d.prestation}
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    <span>#{d.id}</span> · <span>{fmtDate(d.date)}</span>
+                    <span dir="ltr">#{d.id}</span> · <span>{fmtDate(d.date)}</span>
                   </div>
                 </div>
                 <StatutBadge statut={d.statut} />
@@ -256,9 +262,11 @@ function RecentRequests({
 function RecentNotifications({
   items,
   fmtDate,
+  isAr,
 }: {
   items: NotificationRecente[];
   fmtDate: (s: string) => string;
+  isAr: boolean;
 }) {
   const { t } = useTranslation();
   return (
@@ -283,32 +291,36 @@ function RecentNotifications({
           </p>
         ) : (
           <ul className="space-y-3">
-            {items.map((n) => (
-              <li
-                key={n.id}
-                className={`rounded-xl border p-3 ${
-                  n.lu
-                    ? "border-border/60 bg-transparent"
-                    : "border-primary/30 bg-primary/5"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="text-sm font-medium text-foreground flex items-center gap-2">
-                    {!n.lu && (
-                      <span
-                        aria-hidden
-                        className="inline-block h-2 w-2 rounded-full bg-primary"
-                      />
-                    )}
-                    {n.titre}
+            {items.map((n) => {
+              const titre = isAr && n.titre_ar ? n.titre_ar : n.titre;
+              const texte = isAr && n.texte_ar ? n.texte_ar : n.texte;
+              return (
+                <li
+                  key={n.id}
+                  className={`rounded-xl border p-3 ${
+                    n.lu
+                      ? "border-border/60 bg-transparent"
+                      : "border-primary/30 bg-primary/5"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="text-sm font-medium text-foreground flex items-center gap-2">
+                      {!n.lu && (
+                        <span
+                          aria-hidden
+                          className="inline-block h-2 w-2 rounded-full bg-primary"
+                        />
+                      )}
+                      {titre}
+                    </div>
+                    <div className="text-xs text-muted-foreground whitespace-nowrap">
+                      {fmtDate(n.date)}
+                    </div>
                   </div>
-                  <div className="text-xs text-muted-foreground whitespace-nowrap">
-                    {fmtDate(n.date)}
-                  </div>
-                </div>
-                <p className="mt-1 text-xs text-muted-foreground">{n.texte}</p>
-              </li>
-            ))}
+                  <p className="mt-1 text-xs text-muted-foreground">{texte}</p>
+                </li>
+              );
+            })}
           </ul>
         )}
       </CardContent>
