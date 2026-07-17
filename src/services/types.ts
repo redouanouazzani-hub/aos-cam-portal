@@ -392,5 +392,55 @@ export interface ScolariteResponse {
   reference: string;
 }
 
+// -------- Campagne à délai (§4.4) — logique générique --------
+
+/**
+ * Statut CALCULÉ (non stocké) d'une campagne à délai.
+ * "a_venir" : now < dateOuverture
+ * "ouverte" : dateOuverture ≤ now ≤ dateLimite (bornes incluses)
+ * "fermee"  : now > dateLimite
+ */
+export type CampagneStatutAuto = "a_venir" | "ouverte" | "fermee";
+
+export interface Campagne {
+  activite: ModuleActivite;
+  dateOuverture: string; // ISO
+  dateLimite: string; // ISO
+  statut: CampagneStatutAuto;
+}
+
+// -------- Estivage --------
+
+export interface EstivageCentre {
+  id: string;
+  nom: string;
+  nom_ar?: string;
+  ville: string;
+}
+
+export interface EstivagePeriode {
+  id: string;
+  debut: string; // ISO date
+  fin: string; // ISO date
+}
+
+export interface EstivageOptions {
+  centres: EstivageCentre[];
+  periodes: EstivagePeriode[];
+}
+
+export interface EstivagePayload {
+  centreId: string;
+  periodeId: string;
+  participants: number[]; // ids : -1 adhérent, -2 conjoint, >0 enfants
+}
+
+export interface EstivageResponse {
+  id: number;
+  statut: "soumis";
+  reference: string;
+}
+
+
 
 

@@ -35,6 +35,7 @@ import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
 import { Route as AdminDossiersIdRouteImport } from './routes/admin.dossiers.$id'
 import { Route as EspaceDemandesNouvelleScolariteRouteImport } from './routes/espace.demandes.nouvelle.scolarite'
+import { Route as EspaceDemandesNouvelleEstivageRouteImport } from './routes/espace.demandes.nouvelle.estivage'
 import { Route as EspaceDemandesNouvelleCreditRouteImport } from './routes/espace.demandes.nouvelle.credit'
 
 const MissionsRoute = MissionsRouteImport.update({
@@ -168,6 +169,12 @@ const EspaceDemandesNouvelleScolariteRoute =
     path: '/nouvelle/scolarite',
     getParentRoute: () => EspaceDemandesRoute,
   } as any)
+const EspaceDemandesNouvelleEstivageRoute =
+  EspaceDemandesNouvelleEstivageRouteImport.update({
+    id: '/nouvelle/estivage',
+    path: '/nouvelle/estivage',
+    getParentRoute: () => EspaceDemandesRoute,
+  } as any)
 const EspaceDemandesNouvelleCreditRoute =
   EspaceDemandesNouvelleCreditRouteImport.update({
     id: '/nouvelle/credit',
@@ -202,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/admin/dossiers/$id': typeof AdminDossiersIdRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
+  '/espace/demandes/nouvelle/estivage': typeof EspaceDemandesNouvelleEstivageRoute
   '/espace/demandes/nouvelle/scolarite': typeof EspaceDemandesNouvelleScolariteRoute
 }
 export interface FileRoutesByTo {
@@ -229,6 +237,7 @@ export interface FileRoutesByTo {
   '/admin/dossiers/$id': typeof AdminDossiersIdRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
+  '/espace/demandes/nouvelle/estivage': typeof EspaceDemandesNouvelleEstivageRoute
   '/espace/demandes/nouvelle/scolarite': typeof EspaceDemandesNouvelleScolariteRoute
 }
 export interface FileRoutesById {
@@ -259,6 +268,7 @@ export interface FileRoutesById {
   '/admin/dossiers/$id': typeof AdminDossiersIdRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
+  '/espace/demandes/nouvelle/estivage': typeof EspaceDemandesNouvelleEstivageRoute
   '/espace/demandes/nouvelle/scolarite': typeof EspaceDemandesNouvelleScolariteRoute
 }
 export interface FileRouteTypes {
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/admin/dossiers/$id'
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
+    | '/espace/demandes/nouvelle/estivage'
     | '/espace/demandes/nouvelle/scolarite'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/admin/dossiers/$id'
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
+    | '/espace/demandes/nouvelle/estivage'
     | '/espace/demandes/nouvelle/scolarite'
   id:
     | '__root__'
@@ -346,6 +358,7 @@ export interface FileRouteTypes {
     | '/admin/dossiers/$id'
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
+    | '/espace/demandes/nouvelle/estivage'
     | '/espace/demandes/nouvelle/scolarite'
   fileRoutesById: FileRoutesById
 }
@@ -545,6 +558,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EspaceDemandesNouvelleScolariteRouteImport
       parentRoute: typeof EspaceDemandesRoute
     }
+    '/espace/demandes/nouvelle/estivage': {
+      id: '/espace/demandes/nouvelle/estivage'
+      path: '/nouvelle/estivage'
+      fullPath: '/espace/demandes/nouvelle/estivage'
+      preLoaderRoute: typeof EspaceDemandesNouvelleEstivageRouteImport
+      parentRoute: typeof EspaceDemandesRoute
+    }
     '/espace/demandes/nouvelle/credit': {
       id: '/espace/demandes/nouvelle/credit'
       path: '/nouvelle/credit'
@@ -592,12 +612,14 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 interface EspaceDemandesRouteChildren {
   EspaceDemandesIdRoute: typeof EspaceDemandesIdRoute
   EspaceDemandesNouvelleCreditRoute: typeof EspaceDemandesNouvelleCreditRoute
+  EspaceDemandesNouvelleEstivageRoute: typeof EspaceDemandesNouvelleEstivageRoute
   EspaceDemandesNouvelleScolariteRoute: typeof EspaceDemandesNouvelleScolariteRoute
 }
 
 const EspaceDemandesRouteChildren: EspaceDemandesRouteChildren = {
   EspaceDemandesIdRoute: EspaceDemandesIdRoute,
   EspaceDemandesNouvelleCreditRoute: EspaceDemandesNouvelleCreditRoute,
+  EspaceDemandesNouvelleEstivageRoute: EspaceDemandesNouvelleEstivageRoute,
   EspaceDemandesNouvelleScolariteRoute: EspaceDemandesNouvelleScolariteRoute,
 }
 
