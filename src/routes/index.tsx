@@ -121,13 +121,10 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16">
         <div className="max-w-2xl">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-            {t("home.sectionTitle", { defaultValue: "Vos avantages, à portée de main" })}
+            {t("home.sectionTitle")}
           </h2>
           <p className="mt-2 text-muted-foreground">
-            {t("home.sectionLead", {
-              defaultValue:
-                "Découvrez nos prestations et suivez vos demandes en toute simplicité.",
-            })}
+            {t("home.sectionLead")}
           </p>
         </div>
 
