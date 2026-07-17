@@ -7,9 +7,11 @@ import { useTranslation } from "react-i18next";
 export function RequireRole({
   roles,
   children,
+  redirectTo = "/login",
 }: {
   roles: Role[];
   children: ReactNode;
+  redirectTo?: string;
 }) {
   const { user, loading } = useAuth();
   const { t } = useTranslation();
@@ -22,8 +24,8 @@ export function RequireRole({
     );
   }
 
-  if (!user) return <Navigate to="/login" />;
-  if (!roles.includes(user.role)) return <Navigate to="/" />;
+  if (!user) return <Navigate to={redirectTo} />;
+  if (!roles.includes(user.role)) return <Navigate to={redirectTo} />;
 
   return <>{children}</>;
 }
