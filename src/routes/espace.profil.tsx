@@ -210,15 +210,24 @@ function ContactSection({
   const { t } = useTranslation();
   const [form, setForm] = useState<Contact>(contact);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const updateField = (patch: Partial<Contact>) => {
+    setError(null);
+    setForm((prev) => ({ ...prev, ...patch }));
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+    setError(null);
     try {
       const updated = await profileService.updateContact(form);
       onUpdated(updated);
       toast.success(t("profile.contact.saved"));
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : t("profile.contact.error");
+      setError(message);
       toast.error(t("profile.contact.error"));
     } finally {
       setSaving(false);
@@ -239,7 +248,7 @@ function ContactSection({
               id="tel"
               type="tel"
               value={form.telephone}
-              onChange={(e) => setForm({ ...form, telephone: e.target.value })}
+              onChange={(e) => updateField({ telephone: e.target.value })}
               dir="ltr"
             />
           </div>
@@ -249,7 +258,7 @@ function ContactSection({
               id="email"
               type="email"
               value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              onChange={(e) => updateField({ email: e.target.value })}
               dir="ltr"
             />
           </div>
@@ -258,10 +267,18 @@ function ContactSection({
             <Textarea
               id="adr"
               value={form.adresse}
-              onChange={(e) => setForm({ ...form, adresse: e.target.value })}
+              onChange={(e) => updateField({ adresse: e.target.value })}
               rows={2}
             />
           </div>
+          {error && (
+            <div className="sm:col-span-2">
+              <Alert variant="destructive">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            </div>
+          )}
           <div className="sm:col-span-2 flex justify-end">
             <Button type="submit" disabled={saving}>
               {saving ? (

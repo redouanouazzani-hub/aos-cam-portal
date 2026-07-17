@@ -46,7 +46,10 @@ export async function mockLogin(payload: LoginPayload): Promise<LoginResponse> {
 export async function mockMe(token: string | null): Promise<AuthUser> {
   await delay(150);
   if (!token) throw new Error("No token");
-  const id = token.split("-")[2];
+  const prefix = "mock-token-";
+  const rest = token.startsWith(prefix) ? token.slice(prefix.length) : token;
+  const lastDash = rest.lastIndexOf("-");
+  const id = lastDash > 0 ? rest.slice(0, lastDash) : rest;
   const found = USERS.find((u) => u.id === id);
   if (!found) throw new Error("Invalid token");
   const { password: _pw, ...user } = found;
