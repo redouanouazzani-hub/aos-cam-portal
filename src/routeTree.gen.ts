@@ -27,6 +27,7 @@ import { Route as EspaceDemandesRouteImport } from './routes/espace.demandes'
 import { Route as EspaceDashboardRouteImport } from './routes/espace.dashboard'
 import { Route as EspaceAyantsDroitRouteImport } from './routes/espace.ayants-droit'
 import { Route as AdminReportingRouteImport } from './routes/admin.reporting'
+import { Route as AdminExtractionRouteImport } from './routes/admin.extraction'
 import { Route as AdminDossiersRouteImport } from './routes/admin.dossiers'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
@@ -125,6 +126,11 @@ const AdminReportingRoute = AdminReportingRouteImport.update({
   path: '/reporting',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminExtractionRoute = AdminExtractionRouteImport.update({
+  id: '/extraction',
+  path: '/extraction',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDossiersRoute = AdminDossiersRouteImport.update({
   id: '/dossiers',
   path: '/dossiers',
@@ -177,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/extraction': typeof AdminExtractionRoute
   '/admin/reporting': typeof AdminReportingRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/extraction': typeof AdminExtractionRoute
   '/admin/reporting': typeof AdminReportingRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
@@ -230,6 +238,7 @@ export interface FileRoutesById {
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/extraction': typeof AdminExtractionRoute
   '/admin/reporting': typeof AdminReportingRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/admin/comptes'
     | '/admin/dashboard'
     | '/admin/dossiers'
+    | '/admin/extraction'
     | '/admin/reporting'
     | '/espace/ayants-droit'
     | '/espace/dashboard'
@@ -284,6 +294,7 @@ export interface FileRouteTypes {
     | '/admin/comptes'
     | '/admin/dashboard'
     | '/admin/dossiers'
+    | '/admin/extraction'
     | '/admin/reporting'
     | '/espace/ayants-droit'
     | '/espace/dashboard'
@@ -311,6 +322,7 @@ export interface FileRouteTypes {
     | '/admin/comptes'
     | '/admin/dashboard'
     | '/admin/dossiers'
+    | '/admin/extraction'
     | '/admin/reporting'
     | '/espace/ayants-droit'
     | '/espace/dashboard'
@@ -464,6 +476,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminReportingRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/extraction': {
+      id: '/admin/extraction'
+      path: '/extraction'
+      fullPath: '/admin/extraction'
+      preLoaderRoute: typeof AdminExtractionRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/dossiers': {
       id: '/admin/dossiers'
       path: '/dossiers'
@@ -522,6 +541,7 @@ interface AdminRouteChildren {
   AdminComptesRoute: typeof AdminComptesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminDossiersRoute: typeof AdminDossiersRoute
+  AdminExtractionRoute: typeof AdminExtractionRoute
   AdminReportingRoute: typeof AdminReportingRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -532,6 +552,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminComptesRoute: AdminComptesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminDossiersRoute: AdminDossiersRoute,
+  AdminExtractionRoute: AdminExtractionRoute,
   AdminReportingRoute: AdminReportingRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
