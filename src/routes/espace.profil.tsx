@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Lock, Info, AlertTriangle, CheckCircle2, Paperclip } from "lucide-react";
+import { Lock, Info, AlertTriangle, CheckCircle2, Paperclip, Loader2 } from "lucide-react";
 import { profileService } from "@/services/profile.service";
 import type {
   ProfileResponse,
@@ -264,7 +264,14 @@ function ContactSection({
           </div>
           <div className="sm:col-span-2 flex justify-end">
             <Button type="submit" disabled={saving}>
-              {saving ? t("profile.contact.saving") : t("profile.contact.save")}
+              {saving ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  {t("profile.contact.saving")}
+                </>
+              ) : (
+                t("profile.contact.save")
+              )}
             </Button>
           </div>
         </form>
