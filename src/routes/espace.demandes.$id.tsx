@@ -61,10 +61,6 @@ function DemandeDetailPage() {
   if (data === null) {
     return (
       <div className="space-y-4">
-        <Link to="/espace/demandes" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-4 w-4 rtl:rotate-180" aria-hidden />
-          {t("demandes.detail.back")}
-        </Link>
         <Card className="rounded-2xl">
           <CardContent className="p-8 text-center text-sm text-muted-foreground">
             {t("demandes.detail.notFound")}
@@ -79,15 +75,7 @@ function DemandeDetailPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <Link
-          to="/espace/demandes"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4 rtl:rotate-180" aria-hidden />
-          {t("demandes.detail.back")}
-        </Link>
-      </div>
+
 
       <Card style={{ boxShadow: "var(--shadow-soft)" }} className="rounded-2xl">
         <CardContent className="p-5">
