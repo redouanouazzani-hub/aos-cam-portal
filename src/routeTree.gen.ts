@@ -9,38 +9,366 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MissionsRouteImport } from './routes/missions'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EspaceRouteImport } from './routes/espace'
+import { Route as ConventionsRouteImport } from './routes/conventions'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EspaceIndexRouteImport } from './routes/espace.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as EspaceProfilRouteImport } from './routes/espace.profil'
+import { Route as EspaceNotificationsRouteImport } from './routes/espace.notifications'
+import { Route as EspaceDocumentsRouteImport } from './routes/espace.documents'
+import { Route as EspaceDemandesRouteImport } from './routes/espace.demandes'
+import { Route as EspaceDashboardRouteImport } from './routes/espace.dashboard'
+import { Route as EspaceAyantsDroitRouteImport } from './routes/espace.ayants-droit'
+import { Route as AdminReportingRouteImport } from './routes/admin.reporting'
+import { Route as AdminDossiersRouteImport } from './routes/admin.dossiers'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
+import { Route as AdminCampagnesRouteImport } from './routes/admin.campagnes'
+import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 
+const MissionsRoute = MissionsRouteImport.update({
+  id: '/missions',
+  path: '/missions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EspaceRoute = EspaceRouteImport.update({
+  id: '/espace',
+  path: '/espace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConventionsRoute = ConventionsRouteImport.update({
+  id: '/conventions',
+  path: '/conventions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActualitesRoute = ActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EspaceIndexRoute = EspaceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const EspaceProfilRoute = EspaceProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const EspaceNotificationsRoute = EspaceNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const EspaceDocumentsRoute = EspaceDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const EspaceDemandesRoute = EspaceDemandesRouteImport.update({
+  id: '/demandes',
+  path: '/demandes',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const EspaceDashboardRoute = EspaceDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const EspaceAyantsDroitRoute = EspaceAyantsDroitRouteImport.update({
+  id: '/ayants-droit',
+  path: '/ayants-droit',
+  getParentRoute: () => EspaceRoute,
+} as any)
+const AdminReportingRoute = AdminReportingRouteImport.update({
+  id: '/reporting',
+  path: '/reporting',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDossiersRoute = AdminDossiersRouteImport.update({
+  id: '/dossiers',
+  path: '/dossiers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComptesRoute = AdminComptesRouteImport.update({
+  id: '/comptes',
+  path: '/comptes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCampagnesRoute = AdminCampagnesRouteImport.update({
+  id: '/campagnes',
+  path: '/campagnes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/conventions': typeof ConventionsRoute
+  '/espace': typeof EspaceRouteWithChildren
+  '/faq': typeof FaqRoute
+  '/login': typeof LoginRoute
+  '/missions': typeof MissionsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/campagnes': typeof AdminCampagnesRoute
+  '/admin/comptes': typeof AdminComptesRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/reporting': typeof AdminReportingRoute
+  '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
+  '/espace/dashboard': typeof EspaceDashboardRoute
+  '/espace/demandes': typeof EspaceDemandesRoute
+  '/espace/documents': typeof EspaceDocumentsRoute
+  '/espace/notifications': typeof EspaceNotificationsRoute
+  '/espace/profil': typeof EspaceProfilRoute
+  '/admin/': typeof AdminIndexRoute
+  '/espace/': typeof EspaceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
+  '/contact': typeof ContactRoute
+  '/conventions': typeof ConventionsRoute
+  '/faq': typeof FaqRoute
+  '/login': typeof LoginRoute
+  '/missions': typeof MissionsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/campagnes': typeof AdminCampagnesRoute
+  '/admin/comptes': typeof AdminComptesRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/reporting': typeof AdminReportingRoute
+  '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
+  '/espace/dashboard': typeof EspaceDashboardRoute
+  '/espace/demandes': typeof EspaceDemandesRoute
+  '/espace/documents': typeof EspaceDocumentsRoute
+  '/espace/notifications': typeof EspaceNotificationsRoute
+  '/espace/profil': typeof EspaceProfilRoute
+  '/admin': typeof AdminIndexRoute
+  '/espace': typeof EspaceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/conventions': typeof ConventionsRoute
+  '/espace': typeof EspaceRouteWithChildren
+  '/faq': typeof FaqRoute
+  '/login': typeof LoginRoute
+  '/missions': typeof MissionsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/campagnes': typeof AdminCampagnesRoute
+  '/admin/comptes': typeof AdminComptesRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/reporting': typeof AdminReportingRoute
+  '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
+  '/espace/dashboard': typeof EspaceDashboardRoute
+  '/espace/demandes': typeof EspaceDemandesRoute
+  '/espace/documents': typeof EspaceDocumentsRoute
+  '/espace/notifications': typeof EspaceNotificationsRoute
+  '/espace/profil': typeof EspaceProfilRoute
+  '/admin/': typeof AdminIndexRoute
+  '/espace/': typeof EspaceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/actualites'
+    | '/admin'
+    | '/contact'
+    | '/conventions'
+    | '/espace'
+    | '/faq'
+    | '/login'
+    | '/missions'
+    | '/admin/audit'
+    | '/admin/campagnes'
+    | '/admin/comptes'
+    | '/admin/dashboard'
+    | '/admin/dossiers'
+    | '/admin/reporting'
+    | '/espace/ayants-droit'
+    | '/espace/dashboard'
+    | '/espace/demandes'
+    | '/espace/documents'
+    | '/espace/notifications'
+    | '/espace/profil'
+    | '/admin/'
+    | '/espace/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/actualites'
+    | '/contact'
+    | '/conventions'
+    | '/faq'
+    | '/login'
+    | '/missions'
+    | '/admin/audit'
+    | '/admin/campagnes'
+    | '/admin/comptes'
+    | '/admin/dashboard'
+    | '/admin/dossiers'
+    | '/admin/reporting'
+    | '/espace/ayants-droit'
+    | '/espace/dashboard'
+    | '/espace/demandes'
+    | '/espace/documents'
+    | '/espace/notifications'
+    | '/espace/profil'
+    | '/admin'
+    | '/espace'
+  id:
+    | '__root__'
+    | '/'
+    | '/actualites'
+    | '/admin'
+    | '/contact'
+    | '/conventions'
+    | '/espace'
+    | '/faq'
+    | '/login'
+    | '/missions'
+    | '/admin/audit'
+    | '/admin/campagnes'
+    | '/admin/comptes'
+    | '/admin/dashboard'
+    | '/admin/dossiers'
+    | '/admin/reporting'
+    | '/espace/ayants-droit'
+    | '/espace/dashboard'
+    | '/espace/demandes'
+    | '/espace/documents'
+    | '/espace/notifications'
+    | '/espace/profil'
+    | '/admin/'
+    | '/espace/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActualitesRoute: typeof ActualitesRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  ConventionsRoute: typeof ConventionsRoute
+  EspaceRoute: typeof EspaceRouteWithChildren
+  FaqRoute: typeof FaqRoute
+  LoginRoute: typeof LoginRoute
+  MissionsRoute: typeof MissionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/missions': {
+      id: '/missions'
+      path: '/missions'
+      fullPath: '/missions'
+      preLoaderRoute: typeof MissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/espace': {
+      id: '/espace'
+      path: '/espace'
+      fullPath: '/espace'
+      preLoaderRoute: typeof EspaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conventions': {
+      id: '/conventions'
+      path: '/conventions'
+      fullPath: '/conventions'
+      preLoaderRoute: typeof ConventionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/actualites': {
+      id: '/actualites'
+      path: '/actualites'
+      fullPath: '/actualites'
+      preLoaderRoute: typeof ActualitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +376,163 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/espace/': {
+      id: '/espace/'
+      path: '/'
+      fullPath: '/espace/'
+      preLoaderRoute: typeof EspaceIndexRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/espace/profil': {
+      id: '/espace/profil'
+      path: '/profil'
+      fullPath: '/espace/profil'
+      preLoaderRoute: typeof EspaceProfilRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/espace/notifications': {
+      id: '/espace/notifications'
+      path: '/notifications'
+      fullPath: '/espace/notifications'
+      preLoaderRoute: typeof EspaceNotificationsRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/espace/documents': {
+      id: '/espace/documents'
+      path: '/documents'
+      fullPath: '/espace/documents'
+      preLoaderRoute: typeof EspaceDocumentsRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/espace/demandes': {
+      id: '/espace/demandes'
+      path: '/demandes'
+      fullPath: '/espace/demandes'
+      preLoaderRoute: typeof EspaceDemandesRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/espace/dashboard': {
+      id: '/espace/dashboard'
+      path: '/dashboard'
+      fullPath: '/espace/dashboard'
+      preLoaderRoute: typeof EspaceDashboardRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/espace/ayants-droit': {
+      id: '/espace/ayants-droit'
+      path: '/ayants-droit'
+      fullPath: '/espace/ayants-droit'
+      preLoaderRoute: typeof EspaceAyantsDroitRouteImport
+      parentRoute: typeof EspaceRoute
+    }
+    '/admin/reporting': {
+      id: '/admin/reporting'
+      path: '/reporting'
+      fullPath: '/admin/reporting'
+      preLoaderRoute: typeof AdminReportingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dossiers': {
+      id: '/admin/dossiers'
+      path: '/dossiers'
+      fullPath: '/admin/dossiers'
+      preLoaderRoute: typeof AdminDossiersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/comptes': {
+      id: '/admin/comptes'
+      path: '/comptes'
+      fullPath: '/admin/comptes'
+      preLoaderRoute: typeof AdminComptesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/campagnes': {
+      id: '/admin/campagnes'
+      path: '/campagnes'
+      fullPath: '/admin/campagnes'
+      preLoaderRoute: typeof AdminCampagnesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAuditRoute: typeof AdminAuditRoute
+  AdminCampagnesRoute: typeof AdminCampagnesRoute
+  AdminComptesRoute: typeof AdminComptesRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminDossiersRoute: typeof AdminDossiersRoute
+  AdminReportingRoute: typeof AdminReportingRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAuditRoute: AdminAuditRoute,
+  AdminCampagnesRoute: AdminCampagnesRoute,
+  AdminComptesRoute: AdminComptesRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminDossiersRoute: AdminDossiersRoute,
+  AdminReportingRoute: AdminReportingRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface EspaceRouteChildren {
+  EspaceAyantsDroitRoute: typeof EspaceAyantsDroitRoute
+  EspaceDashboardRoute: typeof EspaceDashboardRoute
+  EspaceDemandesRoute: typeof EspaceDemandesRoute
+  EspaceDocumentsRoute: typeof EspaceDocumentsRoute
+  EspaceNotificationsRoute: typeof EspaceNotificationsRoute
+  EspaceProfilRoute: typeof EspaceProfilRoute
+  EspaceIndexRoute: typeof EspaceIndexRoute
+}
+
+const EspaceRouteChildren: EspaceRouteChildren = {
+  EspaceAyantsDroitRoute: EspaceAyantsDroitRoute,
+  EspaceDashboardRoute: EspaceDashboardRoute,
+  EspaceDemandesRoute: EspaceDemandesRoute,
+  EspaceDocumentsRoute: EspaceDocumentsRoute,
+  EspaceNotificationsRoute: EspaceNotificationsRoute,
+  EspaceProfilRoute: EspaceProfilRoute,
+  EspaceIndexRoute: EspaceIndexRoute,
+}
+
+const EspaceRouteWithChildren =
+  EspaceRoute._addFileChildren(EspaceRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActualitesRoute: ActualitesRoute,
+  AdminRoute: AdminRouteWithChildren,
+  ContactRoute: ContactRoute,
+  ConventionsRoute: ConventionsRoute,
+  EspaceRoute: EspaceRouteWithChildren,
+  FaqRoute: FaqRoute,
+  LoginRoute: LoginRoute,
+  MissionsRoute: MissionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
