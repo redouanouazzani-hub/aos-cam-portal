@@ -1,0 +1,60 @@
+{
+  "app": {
+    "name": "AOS-CMR",
+    "fullName": "Association des Œuvres Sociales — CMR",
+    "tagline": "Portail des œuvres sociales du personnel actif de la CMR"
+  },
+  "nav": {
+    "home": "Accueil",
+    "missions": "Nos missions",
+    "news": "Actualités",
+    "conventions": "Conventions partenaires",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Espace adhérent",
+    "logout": "Se déconnecter",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil (Vue 360°)",
+    "beneficiaries": "Ayants droit",
+    "requests": "Mes demandes",
+    "notifications": "Notifications",
+    "documents": "Bibliothèque documentaire",
+    "admin": "Administration",
+    "adminAccounts": "Comptes & rôles",
+    "adminCampaigns": "Campagnes",
+    "adminFiles": "Instruction des dossiers",
+    "adminReports": "Reporting",
+    "adminAudit": "Audit"
+  },
+  "common": {
+    "language": "Langue",
+    "french": "Français",
+    "arabic": "العربية",
+    "backHome": "Retour à l'accueil",
+    "loading": "Chargement…",
+    "comingSoon": "Bientôt disponible",
+    "member": "Adhérent",
+    "manager": "Gestionnaire",
+    "superAdmin": "Super administrateur"
+  },
+  "home": {
+    "heroTitle": "Un portail unique pour vos œuvres sociales",
+    "heroLead": "Retrouvez vos avantages, déposez vos demandes et suivez leur instruction en toute transparence.",
+    "ctaMember": "Accéder à mon espace",
+    "ctaLearn": "Découvrir nos missions"
+  },
+  "login": {
+    "title": "Connexion à l'espace adhérent",
+    "subtitle": "Saisissez votre matricule et votre code secret",
+    "matricule": "Matricule",
+    "matriculePlaceholder": "Ex. 123456",
+    "password": "Code secret",
+    "submit": "Se connecter",
+    "submitting": "Connexion…",
+    "error": "Identifiants invalides",
+    "hint": "En mode démonstration : matricule 123456, code 0000 (adhérent) — matricule 999999, code 0000 (admin)."
+  },
+  "footer": {
+    "rights": "Tous droits réservés."
+  }
+}
