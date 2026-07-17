@@ -35,9 +35,22 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-background">
-      <div className="hidden md:flex flex-col justify-between bg-primary text-primary-foreground p-10">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-md bg-primary-foreground/15 font-bold">
+      <div
+        className="relative hidden md:flex flex-col justify-between overflow-hidden p-10 text-white"
+        style={{ background: "var(--gradient-hero)" }}
+      >
+        <div
+          aria-hidden
+          className="absolute -top-24 -end-16 h-80 w-80 rounded-full opacity-25 blur-3xl"
+          style={{ background: "var(--accent)" }}
+        />
+        <div
+          aria-hidden
+          className="absolute -bottom-24 -start-16 h-72 w-72 rounded-full opacity-20 blur-3xl"
+          style={{ background: "oklch(0.85 0.12 150)" }}
+        />
+        <Link to="/" className="relative flex items-center gap-3">
+          <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/15 font-bold backdrop-blur">
             A
           </div>
           <div>
@@ -45,11 +58,11 @@ function LoginPage() {
             <div className="text-xs opacity-80">{t("app.fullName")}</div>
           </div>
         </Link>
-        <div>
-          <h2 className="text-2xl font-bold">{t("home.heroTitle")}</h2>
-          <p className="mt-2 opacity-90 max-w-md">{t("home.heroLead")}</p>
+        <div className="relative">
+          <h2 className="text-3xl font-bold leading-tight">{t("home.heroTitle")}</h2>
+          <p className="mt-3 opacity-90 max-w-md">{t("home.heroLead")}</p>
         </div>
-        <div className="text-xs opacity-70">© {new Date().getFullYear()} {t("app.name")}</div>
+        <div className="relative text-xs opacity-70">© {new Date().getFullYear()} {t("app.name")}</div>
       </div>
 
       <div className="flex flex-col p-6 md:p-10">
