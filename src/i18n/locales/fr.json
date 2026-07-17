@@ -56,5 +56,66 @@
   },
   "footer": {
     "rights": "Tous droits réservés."
+  },
+  "profile": {
+    "title": "Vue 360° de mon profil",
+    "subtitle": "Vos données officielles (RH) et vos informations déclaratives.",
+    "official": {
+      "title": "Informations officielles",
+      "badge": "Donnée RH — non modifiable",
+      "tooltip": "Ces informations proviennent de la base RH de la CMR.",
+      "matricule": "Matricule",
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "cin": "CIN",
+      "dateNaissance": "Date de naissance",
+      "grade": "Grade",
+      "direction": "Direction d'affectation",
+      "reportError": "Signaler une erreur sur mes données"
+    },
+    "children": {
+      "title": "Enfants (officiels)",
+      "empty": "Aucun enfant déclaré au niveau RH.",
+      "sexe": { "M": "Masculin", "F": "Féminin" }
+    },
+    "contact": {
+      "title": "Coordonnées",
+      "subtitle": "Informations que vous pouvez mettre à jour à tout moment.",
+      "telephone": "Téléphone",
+      "email": "Email personnel",
+      "adresse": "Adresse de résidence",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "saved": "Coordonnées mises à jour.",
+      "error": "Impossible d'enregistrer. Réessayez."
+    },
+    "conjoint": {
+      "title": "Conjoint",
+      "none": "Aucun conjoint déclaré.",
+      "declare": "Déclarer mon conjoint",
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "cin": "CIN",
+      "submit": "Soumettre la déclaration",
+      "submitting": "Envoi…",
+      "created": "Déclaration enregistrée. En attente de validation.",
+      "statut": {
+        "en_attente_validation": "En attente de validation",
+        "valide": "Validé"
+      }
+    },
+    "claim": {
+      "title": "Signaler une erreur sur mes données",
+      "description": "Décrivez l'erreur constatée. Une pièce justificative est obligatoire (copie CIN, extrait d'acte de naissance, etc.).",
+      "message": "Description de l'erreur",
+      "messagePlaceholder": "Précisez le champ concerné et la correction demandée…",
+      "file": "Pièce justificative",
+      "fileHint": "PDF ou image. Un filigrane sera appliqué automatiquement côté serveur.",
+      "fileRequired": "Une pièce justificative est requise pour envoyer votre signalement.",
+      "cancel": "Annuler",
+      "submit": "Envoyer le signalement",
+      "submitting": "Envoi…",
+      "success": "Signalement transmis. Référence n°{{id}}."
+    }
   }
 }
