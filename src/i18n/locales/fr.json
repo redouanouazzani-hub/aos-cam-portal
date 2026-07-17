@@ -41,7 +41,63 @@
     "heroTitle": "Un portail unique pour vos œuvres sociales",
     "heroLead": "Retrouvez vos avantages, déposez vos demandes et suivez leur instruction en toute transparence.",
     "ctaMember": "Accéder à mon espace",
-    "ctaLearn": "Découvrir nos missions"
+    "ctaLearn": "Découvrir nos missions",
+    "sectionTitle": "Vos avantages, à portée de main",
+    "sectionLead": "Découvrez nos prestations et suivez vos demandes en toute simplicité.",
+    "card": {
+      "missionsDesc": "Logement, estivage, crédits, scolarité, voyages : découvrez le périmètre de nos actions.",
+      "conventionsDesc": "Les avantages négociés avec nos partenaires.",
+      "newsDesc": "Communications et annonces de l'AOS-CMR.",
+      "faqDesc": "Questions fréquentes et coordonnées de contact."
+    },
+    "trust": {
+      "service": {
+        "title": "Un service pour tous les adhérents",
+        "desc": "Logement, estivage, crédits, scolarité, voyages : vos prestations sociales réunies en un seul endroit."
+      },
+      "security": {
+        "title": "Vos données protégées",
+        "desc": "Portail interne réservé au personnel actif de la CMR. Vos informations ne quittent jamais le réseau de l'institution."
+      },
+      "listening": {
+        "title": "Une association à votre écoute",
+        "desc": "Déposez vos demandes en ligne et suivez leur instruction en temps réel."
+      }
+    }
+  },
+  "dashboard": {
+    "greeting": "Bonjour {{name}}",
+    "subtitle": "Voici un aperçu de votre espace adhérent.",
+    "kpi": {
+      "enCours": "Demandes en cours",
+      "validees": "Demandes validées",
+      "notifications": "Notifications non lues",
+      "echeance": "Prochaine échéance",
+      "aucuneEcheance": "Aucune échéance"
+    },
+    "recent": {
+      "title": "Mes demandes récentes",
+      "empty": "Aucune demande pour l'instant.",
+      "viewAll": "Voir tout"
+    },
+    "notifications": {
+      "title": "Notifications récentes",
+      "empty": "Aucune notification.",
+      "viewAll": "Voir tout"
+    },
+    "echeances": {
+      "title": "Échéances à venir",
+      "empty": "Aucune échéance à venir."
+    },
+    "statut": {
+      "brouillon": "Brouillon",
+      "soumis": "Soumis",
+      "en_cours_instruction": "En cours d'instruction",
+      "complement_demande": "Complément demandé",
+      "valide": "Validé",
+      "refuse": "Refusé",
+      "cloture": "Clôturé"
+    }
   },
   "login": {
     "title": "Connexion à l'espace adhérent",
