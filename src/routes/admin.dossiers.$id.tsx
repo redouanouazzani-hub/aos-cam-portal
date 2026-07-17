@@ -366,6 +366,18 @@ function InstructionPage() {
         </div>
       </section>
 
+      {/* Pouvoirs d'exception (§4.7) */}
+      <ExceptionsSection
+        dossier={dossier}
+        blacklist={blacklist}
+        onBlacklistChange={setBlacklist}
+        onRefuseCorrected={(id) => {
+          // Le dossier repasse en Validé côté serveur ; on rafraîchit ici.
+          setDossier((d) => (d ? { ...d, statut: "valide" } : d));
+          toast.success(t("admin.exception.correction.success", { id }));
+        }}
+      />
+
       {action && (
         <ActionModal
           action={action}
@@ -377,6 +389,7 @@ function InstructionPage() {
     </div>
   );
 }
+
 
 function ActionModal({
   action,
