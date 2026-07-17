@@ -29,7 +29,7 @@ const NAV_ITEMS: AdminNavItem[] = [
 
 function AdminLayout() {
   return (
-    <RequireRole roles={["gestionnaire", "super-admin"]} redirectTo="/admin-login">
+    <RequireRole roles={["gestionnaire", "super-admin"]} redirectTo="/login">
       <RbacProvider>
         <AdminShell />
       </RbacProvider>
