@@ -21,34 +21,25 @@ function HomePage() {
     {
       icon: HeartHandshake,
       title: t("nav.missions"),
-      desc: t("home.card.missionsDesc", {
-        defaultValue:
-          "Logement, estivage, crédits, scolarité, voyages : découvrez le périmètre de nos actions.",
-      }),
+      desc: t("home.card.missionsDesc"),
       to: "/missions",
     },
     {
       icon: Sparkles,
       title: t("nav.conventions"),
-      desc: t("home.card.conventionsDesc", {
-        defaultValue: "Les avantages négociés avec nos partenaires.",
-      }),
+      desc: t("home.card.conventionsDesc"),
       to: "/conventions",
     },
     {
       icon: Newspaper,
       title: t("nav.news"),
-      desc: t("home.card.newsDesc", {
-        defaultValue: "Communications et annonces de l'AOS-CMR.",
-      }),
+      desc: t("home.card.newsDesc"),
       to: "/actualites",
     },
     {
       icon: FileText,
       title: t("nav.faq"),
-      desc: t("home.card.faqDesc", {
-        defaultValue: "Questions fréquentes et coordonnées de contact.",
-      }),
+      desc: t("home.card.faqDesc"),
       to: "/faq",
     },
   ];
