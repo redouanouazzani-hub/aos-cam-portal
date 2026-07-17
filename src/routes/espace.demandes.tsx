@@ -267,9 +267,10 @@ function DemandesLayout() {
           side={isAr ? "left" : "right"}
           className="w-full overflow-y-auto p-4 sm:max-w-lg lg:hidden"
         >
-          <VisuallyHidden.Root>
-            <SheetTitle>{t("demandes.detail.title")}</SheetTitle>
-          </VisuallyHidden.Root>
+          <SheetTitle className="sr-only">
+            {t("demandes.detail.title")}
+          </SheetTitle>
+
           {selectedId && <Outlet />}
         </SheetContent>
       </Sheet>
