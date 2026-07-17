@@ -177,37 +177,35 @@ function HomePage() {
         >
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { icon: Users, title: "home.trust.membersTitle", desc: "home.trust.membersDesc" },
-              { icon: ShieldCheck, title: "home.trust.secureTitle", desc: "home.trust.secureDesc" },
-              { icon: HeartHandshake, title: "home.trust.humanTitle", desc: "home.trust.humanDesc" },
+              {
+                icon: Users,
+                title: "Un service pour tous les adhérents",
+                desc: "Logement, estivage, crédits, scolarité, voyages : vos prestations sociales réunies en un seul endroit.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Vos données protégées",
+                desc: "Portail interne réservé au personnel actif de la CMR. Vos informations ne quittent jamais le réseau de l'institution.",
+              },
+              {
+                icon: HeartHandshake,
+                title: "Une association à votre écoute",
+                desc: "Déposez vos demandes en ligne et suivez leur instruction en temps réel.",
+              },
             ].map((f) => (
               <div key={f.title} className="flex items-start gap-4">
                 <div
                   className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                   style={{
                     background: "color-mix(in oklab, var(--accent) 25%, transparent)",
-                    color: "var(--accent-foreground)",
+                    color: "var(--foreground)",
                   }}
                 >
                   <f.icon className="h-5 w-5" aria-hidden />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">
-                    {t(f.title, {
-                      defaultValue:
-                        f.title === "home.trust.membersTitle"
-                          ? "Un service pour tous les adhérents"
-                          : f.title === "home.trust.secureTitle"
-                          ? "Vos données protégées"
-                          : "Une association à votre écoute",
-                    })}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {t(f.desc, {
-                      defaultValue:
-                        "Un accompagnement quotidien pensé pour le personnel actif.",
-                    })}
-                  </p>
+                  <h3 className="font-semibold text-foreground">{f.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{f.desc}</p>
                 </div>
               </div>
             ))}
