@@ -167,18 +167,18 @@ function HomePage() {
             {[
               {
                 icon: Users,
-                title: "Un service pour tous les adhérents",
-                desc: "Logement, estivage, crédits, scolarité, voyages : vos prestations sociales réunies en un seul endroit.",
+                title: t("home.trust.service.title"),
+                desc: t("home.trust.service.desc"),
               },
               {
                 icon: ShieldCheck,
-                title: "Vos données protégées",
-                desc: "Portail interne réservé au personnel actif de la CMR. Vos informations ne quittent jamais le réseau de l'institution.",
+                title: t("home.trust.security.title"),
+                desc: t("home.trust.security.desc"),
               },
               {
                 icon: HeartHandshake,
-                title: "Une association à votre écoute",
-                desc: "Déposez vos demandes en ligne et suivez leur instruction en temps réel.",
+                title: t("home.trust.listening.title"),
+                desc: t("home.trust.listening.desc"),
               },
             ].map((f) => (
               <div key={f.title} className="flex items-start gap-4">
