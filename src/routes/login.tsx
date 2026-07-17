@@ -74,58 +74,63 @@ function LoginPage() {
         </div>
 
         <div className="mt-10 mx-auto w-full max-w-sm">
-          <h1 className="text-2xl font-bold text-foreground">{t("login.title")}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{t("login.subtitle")}</p>
+          <div
+            className="rounded-3xl bg-card p-8"
+            style={{ boxShadow: "var(--shadow-lift)" }}
+          >
+            <h1 className="text-2xl font-bold text-foreground">{t("login.title")}</h1>
+            <p className="mt-2 text-sm text-muted-foreground">{t("login.subtitle")}</p>
 
-          <form onSubmit={onSubmit} className="mt-8 space-y-4" noValidate>
-            <div>
-              <label htmlFor="matricule" className="block text-sm font-medium">
-                {t("login.matricule")}
-              </label>
-              <input
-                id="matricule"
-                type="text"
-                inputMode="numeric"
-                autoComplete="username"
-                required
-                value={matricule}
-                onChange={(e) => setMatricule(e.target.value)}
-                placeholder={t("login.matriculePlaceholder")}
-                className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium">
-                {t("login.password")}
-              </label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            {error && (
-              <div
-                role="alert"
-                className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive"
-              >
-                {error}
+            <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
+              <div>
+                <label htmlFor="matricule" className="block text-sm font-medium">
+                  {t("login.matricule")}
+                </label>
+                <input
+                  id="matricule"
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="username"
+                  required
+                  value={matricule}
+                  onChange={(e) => setMatricule(e.target.value)}
+                  placeholder={t("login.matriculePlaceholder")}
+                  className="mt-1.5 block w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-shadow focus:ring-2 focus:ring-ring"
+                />
               </div>
-            )}
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium">
+                  {t("login.password")}
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1.5 block w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-shadow focus:ring-2 focus:ring-ring"
+                />
+              </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
-            >
-              {loading ? t("login.submitting") : t("login.submit")}
-            </button>
-          </form>
+              {error && (
+                <div
+                  role="alert"
+                  className="rounded-xl border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+                >
+                  {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary-dark transition-colors disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+              >
+                {loading ? t("login.submitting") : t("login.submit")}
+              </button>
+            </form>
+          </div>
 
           <p className="mt-6 text-xs text-muted-foreground">{t("login.hint")}</p>
         </div>
