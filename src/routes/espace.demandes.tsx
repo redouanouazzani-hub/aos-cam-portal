@@ -111,12 +111,23 @@ function DemandesLayout() {
 
   const listPanel = (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {t("demandes.title")}
-        </h1>
-        <p className="text-sm text-muted-foreground">{t("demandes.subtitle")}</p>
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            {t("demandes.title")}
+          </h1>
+          <p className="text-sm text-muted-foreground">{t("demandes.subtitle")}</p>
+        </div>
+        <Link
+          to="/espace/demandes/nouvelle/credit"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90"
+          style={{ boxShadow: "var(--shadow-soft)" }}
+        >
+          <Plus className="h-4 w-4" aria-hidden />
+          {t("demandes.nouvelle.cta")}
+        </Link>
       </header>
+
 
       <Card style={{ boxShadow: "var(--shadow-soft)" }} className="rounded-2xl">
         <CardContent className="flex flex-col gap-3 p-4 lg:gap-4">
