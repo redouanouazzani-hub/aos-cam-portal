@@ -210,15 +210,24 @@ function ContactSection({
   const { t } = useTranslation();
   const [form, setForm] = useState<Contact>(contact);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const updateField = (patch: Partial<Contact>) => {
+    setError(null);
+    setForm((prev) => ({ ...prev, ...patch }));
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+    setError(null);
     try {
       const updated = await profileService.updateContact(form);
       onUpdated(updated);
       toast.success(t("profile.contact.saved"));
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : t("profile.contact.error");
+      setError(message);
       toast.error(t("profile.contact.error"));
     } finally {
       setSaving(false);
