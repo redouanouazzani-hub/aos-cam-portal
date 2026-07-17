@@ -27,15 +27,35 @@ const CAMPAGNE_STATUT: "ouverte" | "fermee" = "ouverte";
 function ageAt(dobIso: string, atIso: string): number {
   const dob = new Date(dobIso);
   const at = new Date(atIso);
-  let years = at.getFullYear() - dob.getFullYear();
-  let months = at.getMonth() - dob.getMonth();
-  const days = at.getDate() - dob.getDate();
-  if (days < 0) months -= 1;
-  if (months < 0) {
-    years -= 1;
-    months += 12;
-  }
-  return years + months / 12;
+  const ms = at.getTime() - dob.getTime();
+  return ms / (365.25 * 24 * 3600 * 1000);
+}
+
+// Éligibilité par comparaison de dates (précision au jour) — évite les erreurs
+// dues à la conversion en fraction d'années (ex. 26 ans + 1 jour tronqué à 26.0).
+export function eligibiliteAt(
+  dobIso: string,
+  atIso: string,
+): { eligible: boolean; raison?: "trop_jeune" | "trop_age" } {
+  const dob = new Date(dobIso);
+  const at = new Date(atIso);
+  // Borne basse : 5 ans et 6 mois (inclus).
+  const minDate = new Date(
+    dob.getFullYear() + 5,
+    dob.getMonth() + 6,
+    dob.getDate(),
+  );
+  // Borne haute : 26 ans (inclus).
+  const maxDate = new Date(
+    dob.getFullYear() + 26,
+    dob.getMonth(),
+    dob.getDate(),
+  );
+  if (at.getTime() < minDate.getTime())
+    return { eligible: false, raison: "trop_jeune" };
+  if (at.getTime() > maxDate.getTime())
+    return { eligible: false, raison: "trop_age" };
+  return { eligible: true };
 }
 
 export function currentDateRentree(): string {
@@ -50,15 +70,7 @@ export async function mockGetEnfantsEligibles(
   await delay();
   const enfants: ScolariteEnfantEligible[] = ENFANTS.map((e) => {
     const age = ageAt(e.date_naissance, dateRentree);
-    let eligible = true;
-    let raison: ScolariteEnfantEligible["raison"];
-    if (age < 5.5) {
-      eligible = false;
-      raison = "trop_jeune";
-    } else if (age > 26) {
-      eligible = false;
-      raison = "trop_age";
-    }
+    const { eligible, raison } = eligibiliteAt(e.date_naissance, dateRentree);
     return { ...e, ageAnnees: age, eligible, raison };
   });
 
