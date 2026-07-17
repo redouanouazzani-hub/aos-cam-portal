@@ -12,11 +12,45 @@ function HomePage() {
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  const cards = [
-    { icon: HeartHandshake, title: "nav.missions", desc: "home.card.missionsDesc" },
-    { icon: Sparkles, title: "nav.conventions", desc: "home.card.conventionsDesc" },
-    { icon: Newspaper, title: "nav.news", desc: "home.card.newsDesc" },
-    { icon: FileText, title: "nav.faq", desc: "home.card.faqDesc" },
+  const cards: Array<{
+    icon: typeof HeartHandshake;
+    title: string;
+    desc: string;
+    to: "/missions" | "/conventions" | "/actualites" | "/faq";
+  }> = [
+    {
+      icon: HeartHandshake,
+      title: t("nav.missions"),
+      desc: t("home.card.missionsDesc", {
+        defaultValue:
+          "Logement, estivage, crédits, scolarité, voyages : découvrez le périmètre de nos actions.",
+      }),
+      to: "/missions",
+    },
+    {
+      icon: Sparkles,
+      title: t("nav.conventions"),
+      desc: t("home.card.conventionsDesc", {
+        defaultValue: "Les avantages négociés avec nos partenaires.",
+      }),
+      to: "/conventions",
+    },
+    {
+      icon: Newspaper,
+      title: t("nav.news"),
+      desc: t("home.card.newsDesc", {
+        defaultValue: "Communications et annonces de l'AOS-CMR.",
+      }),
+      to: "/actualites",
+    },
+    {
+      icon: FileText,
+      title: t("nav.faq"),
+      desc: t("home.card.faqDesc", {
+        defaultValue: "Questions fréquentes et coordonnées de contact.",
+      }),
+      to: "/faq",
+    },
   ];
 
   return (
@@ -107,10 +141,10 @@ function HomePage() {
         </div>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((c, i) => (
+          {cards.map((c) => (
             <Link
               key={c.title}
-              to={i === 0 ? "/missions" : i === 1 ? "/conventions" : i === 2 ? "/actualites" : "/faq"}
+              to={c.to}
               className="group relative overflow-hidden rounded-2xl bg-card p-6 transition-all hover:-translate-y-0.5"
               style={{ boxShadow: "var(--shadow-soft)" }}
             >
@@ -125,14 +159,8 @@ function HomePage() {
               >
                 <c.icon className="h-5 w-5" aria-hidden />
               </div>
-              <h3 className="mt-4 text-base font-semibold text-foreground">
-                {t(c.title)}
-              </h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">
-                {t(c.desc, {
-                  defaultValue: "En savoir plus sur cet espace.",
-                })}
-              </p>
+              <h3 className="mt-4 text-base font-semibold text-foreground">{c.title}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{c.desc}</p>
             </Link>
           ))}
         </div>
@@ -149,37 +177,35 @@ function HomePage() {
         >
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { icon: Users, title: "home.trust.membersTitle", desc: "home.trust.membersDesc" },
-              { icon: ShieldCheck, title: "home.trust.secureTitle", desc: "home.trust.secureDesc" },
-              { icon: HeartHandshake, title: "home.trust.humanTitle", desc: "home.trust.humanDesc" },
+              {
+                icon: Users,
+                title: "Un service pour tous les adhérents",
+                desc: "Logement, estivage, crédits, scolarité, voyages : vos prestations sociales réunies en un seul endroit.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Vos données protégées",
+                desc: "Portail interne réservé au personnel actif de la CMR. Vos informations ne quittent jamais le réseau de l'institution.",
+              },
+              {
+                icon: HeartHandshake,
+                title: "Une association à votre écoute",
+                desc: "Déposez vos demandes en ligne et suivez leur instruction en temps réel.",
+              },
             ].map((f) => (
               <div key={f.title} className="flex items-start gap-4">
                 <div
                   className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                   style={{
                     background: "color-mix(in oklab, var(--accent) 25%, transparent)",
-                    color: "var(--accent-foreground)",
+                    color: "var(--foreground)",
                   }}
                 >
                   <f.icon className="h-5 w-5" aria-hidden />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">
-                    {t(f.title, {
-                      defaultValue:
-                        f.title === "home.trust.membersTitle"
-                          ? "Un service pour tous les adhérents"
-                          : f.title === "home.trust.secureTitle"
-                          ? "Vos données protégées"
-                          : "Une association à votre écoute",
-                    })}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {t(f.desc, {
-                      defaultValue:
-                        "Un accompagnement quotidien pensé pour le personnel actif.",
-                    })}
-                  </p>
+                  <h3 className="font-semibold text-foreground">{f.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{f.desc}</p>
                 </div>
               </div>
             ))}

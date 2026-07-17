@@ -7,9 +7,9 @@ const USERS: Array<AuthUser & { password: string }> = [
     id: "u-1",
     matricule: "123456",
     password: "0000",
-    fullName: "Amina El Fassi",
+    fullName: "Karim Alaoui",
     role: "adherent",
-    email: "amina.elfassi@example.ma",
+    email: "karim@example.com",
   },
   {
     id: "u-2",
