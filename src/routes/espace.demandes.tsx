@@ -45,7 +45,17 @@ function DemandesLayout() {
     from: "/espace/demandes/$id",
     shouldThrow: false,
   });
+  const creditMatch = useMatch({
+    from: "/espace/demandes/nouvelle/credit",
+    shouldThrow: false,
+  });
   const selectedId = detailMatch?.params.id ?? null;
+
+  // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
+  if (creditMatch) {
+    return <Outlet />;
+  }
+
 
   const [items, setItems] = useState<DemandeListItem[] | null>(null);
   const [filters, setFilters] = useState<DemandesFilters>({
