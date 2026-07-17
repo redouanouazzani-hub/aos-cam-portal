@@ -7,7 +7,17 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, ArrowRight, FileText, Plus, Search, SearchX } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  FileText,
+  GraduationCap,
+  Plus,
+  Search,
+  SearchX,
+  Wallet,
+} from "lucide-react";
 import { demandesService } from "@/services/demandes.service";
 import type {
   DemandeListItem,
@@ -30,12 +40,19 @@ import {
   SheetContent,
   SheetTitle,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { STATUT_ORDER, STATUT_STYLES } from "@/lib/statut-styles";
 
 export const Route = createFileRoute("/espace/demandes")({
   component: DemandesLayout,
 });
+
 
 function DemandesLayout() {
   const { t, i18n } = useTranslation();
