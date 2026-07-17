@@ -198,7 +198,9 @@
       "credit": "Demande de crédit",
       "creditDesc": "Classique, anglais, auto, logement.",
       "scolarite": "Subvention de scolarité",
-      "scolariteDesc": "Certificat de scolarité par enfant éligible."
+      "scolariteDesc": "Certificat de scolarité par enfant éligible.",
+      "estivage": "Estivage",
+      "estivageDesc": "Vœux de séjour d'été (campagne à délai)."
     },
 
     "emptyFiltered": {
@@ -651,6 +653,54 @@
       "title": "Demande transmise",
       "ref": "Référence : {{ref}}",
       "lead": "Vous serez notifié à chaque étape de l'instruction de votre dossier.",
+      "backList": "Retour à mes demandes"
+    }
+  },
+  "estivage": {
+    "title": "Dépôt de vœux — Estivage",
+    "subtitle": "Choisissez un centre, une période et les bénéficiaires du séjour.",
+    "campagne": {
+      "aVenirTitle": "Campagne à venir",
+      "aVenirDesc": "Ouverture prévue le {{date}}",
+      "aVenirLead": "Le dépôt des vœux ouvrira à la date d'ouverture indiquée. Le formulaire sera activé automatiquement.",
+      "ouverteTitle": "Campagne ouverte",
+      "ouverteDesc": "Clôture le {{date}}",
+      "fermeeTitle": "Campagne clôturée",
+      "fermeeDesc": "Clôturée le {{date}}",
+      "fermeeLead": "La campagne d'estivage est clôturée. Aucun nouveau vœu ne peut être déposé."
+    },
+    "countdown": {
+      "aria": "Temps restant avant clôture",
+      "value": "{{d}}j {{h}}:{{m}}:{{s}}"
+    },
+    "demo": {
+      "title": "Panneau démo — bascule d'horloge",
+      "hint": "Simulez la date/heure courante pour démontrer la bascule automatique ouverte / fermée. Visible uniquement en mode mock ; côté serveur Laravel, l'horloge de référence sera celle du serveur.",
+      "inputLabel": "Date/heure simulée",
+      "jumpOpening": "Se placer à l'ouverture",
+      "jumpAfterLimit": "Se placer après la limite",
+      "reset": "Horloge réelle",
+      "now": "Maintenant simulé : {{value}}"
+    },
+    "form": {
+      "centreTitle": "Centre",
+      "periodeTitle": "Période",
+      "participantsTitle": "Participants",
+      "participantsHint": "Les bénéficiaires possibles sont issus de votre dossier RH : adhérent, conjoint validé et enfants.",
+      "roleAdherent": "Adhérent",
+      "roleConjoint": "Conjoint validé",
+      "roleEnfant": "Enfant"
+    },
+    "submit": {
+      "cta": "Soumettre les vœux",
+      "pending": "Envoi en cours…",
+      "success": "Vœux d'estivage transmis (réf. {{ref}}).",
+      "error": "L'envoi a échoué. Veuillez réessayer."
+    },
+    "done": {
+      "title": "Vœux transmis",
+      "ref": "Référence : {{ref}}",
+      "lead": "Vous serez notifié lors de l'affectation de votre centre et de votre période.",
       "backList": "Retour à mes demandes"
     }
   }
