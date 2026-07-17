@@ -358,7 +358,8 @@
       "title": "Accès non autorisé à ce module",
       "desc": "Vous ne disposez pas des droits nécessaires. Contactez le Super-Administrateur si vous pensez qu'il s'agit d'une erreur.",
       "superAdminOnly": "Module réservé au Super-Administrateur.",
-      "back": "Retour au tableau de bord"
+      "back": "Retour au tableau de bord",
+      "moduleNonAttribue": "Ce module ne fait pas partie de vos attributions."
     },
     "dashboard": {
       "title": "Tableau de bord",
@@ -457,6 +458,66 @@
       "title": "Journal d'audit",
       "subtitle": "Historique des actions sensibles (RBAC, validations, extractions).",
       "col": { "date": "Date", "user": "Utilisateur", "action": "Action", "ref": "Référence" }
+    },
+    "dispatch": {
+      "title": "Dossiers à traiter",
+      "subtitle": "File de dispatching — le dossier le plus ancien de vos modules attribués vous est proposé automatiquement.",
+      "next": "Traiter le dossier suivant",
+      "opening": "Ouverture…",
+      "opened": "Dossier n°{{id}} ouvert en instruction.",
+      "nextError": "Impossible d'attribuer un dossier. Réessayez.",
+      "emptyToast": "Aucun dossier en attente sur vos modules.",
+      "compteurs": "Dossiers en attente par module",
+      "compteursSA": "Vue globale (tous modules).",
+      "compteursGest": "Uniquement les modules qui vous sont attribués.",
+      "enAttente": "en attente",
+      "fileTitle": "File d'attente",
+      "count": "{{count}} dossier(s)",
+      "empty": "File vide",
+      "emptyHint": "Aucun dossier en attente pour vos modules attribués.",
+      "open": "Ouvrir",
+      "lockedBy": "En cours par {{name}}",
+      "lockedTip": "Anti-collision : ce dossier est déjà pris en charge par un autre gestionnaire.",
+      "antiCollisionHint": "L'attribution et l'anti-collision sont vérifiées côté serveur : deux gestionnaires ne peuvent jamais recevoir le même dossier."
+    },
+    "instruction": {
+      "back": "Retour à la file",
+      "notFound": "Dossier introuvable.",
+      "lockedTitle": "Dossier verrouillé",
+      "lockedBy": "En cours de traitement par {{name}}.",
+      "synthese": "Synthèse de la demande",
+      "montant": "Montant demandé",
+      "echeancier": "Échéancier prévisionnel",
+      "ech": { "n": "N°", "date": "Date", "montant": "Montant" },
+      "enfants": "Enfants concernés",
+      "age": "{{age}} ans",
+      "pieces": "Pièces jointes",
+      "filigrane": "Filigrane serveur",
+      "actions": "Actions",
+      "valider": "Valider",
+      "refuser": "Refuser",
+      "complement": "Demander un complément",
+      "auditHint": "Cette action sera tracée dans l'audit : {{user}} · dossier n°{{id}} · date et heure.",
+      "toast": {
+        "validated": "Dossier n°{{id}} validé.",
+        "refused": "Dossier n°{{id}} refusé.",
+        "complement": "Complément demandé pour le dossier n°{{id}}.",
+        "error": "L'action a échoué. Réessayez."
+      },
+      "modal": {
+        "validerTitle": "Valider ce dossier ?",
+        "validerDesc": "L'adhérent recevra une notification de validation. L'action est journalisée dans l'audit.",
+        "refuserTitle": "Refuser ce dossier",
+        "refuserDesc": "Précisez le motif du refus. L'adhérent recevra une notification comportant ce motif.",
+        "complementTitle": "Demander un complément",
+        "complementDesc": "Indiquez précisément la pièce ou l'information manquante.",
+        "motifRefus": "Motif du refus",
+        "motifComplement": "Message à l'adhérent",
+        "motifRequis": "Le motif est obligatoire.",
+        "motifPlaceholder": "Rédigez un message clair et précis…",
+        "cancel": "Annuler",
+        "confirm": "Confirmer"
+      }
     }
   }
 }
