@@ -10,12 +10,15 @@ import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
   ArrowRight,
+  Baby,
   ChevronDown,
   FileText,
   GraduationCap,
+  Heart,
   Plus,
   Search,
   SearchX,
+  Smartphone,
   Sun,
   Wallet,
 } from "lucide-react";
@@ -73,6 +76,14 @@ function DemandesLayout() {
   });
   const estivageMatch = useMatch({
     from: "/espace/demandes/nouvelle/estivage",
+    shouldThrow: false,
+  });
+  const primeMatch = useMatch({
+    from: "/espace/demandes/nouvelle/prime",
+    shouldThrow: false,
+  });
+  const inwiMatch = useMatch({
+    from: "/espace/demandes/nouvelle/inwi",
     shouldThrow: false,
   });
 
