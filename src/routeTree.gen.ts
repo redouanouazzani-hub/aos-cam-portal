@@ -33,6 +33,7 @@ import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
 import { Route as AdminCampagnesRouteImport } from './routes/admin.campagnes'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
+import { Route as AdminDossiersIdRouteImport } from './routes/admin.dossiers.$id'
 import { Route as EspaceDemandesNouvelleCreditRouteImport } from './routes/espace.demandes.nouvelle.credit'
 
 const MissionsRoute = MissionsRouteImport.update({
@@ -155,6 +156,11 @@ const EspaceDemandesIdRoute = EspaceDemandesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => EspaceDemandesRoute,
 } as any)
+const AdminDossiersIdRoute = AdminDossiersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminDossiersRoute,
+} as any)
 const EspaceDemandesNouvelleCreditRoute =
   EspaceDemandesNouvelleCreditRouteImport.update({
     id: '/nouvelle/credit',
@@ -176,7 +182,7 @@ export interface FileRoutesByFullPath {
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
-  '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/dossiers': typeof AdminDossiersRouteWithChildren
   '/admin/extraction': typeof AdminExtractionRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/espace/profil': typeof EspaceProfilRoute
   '/admin/': typeof AdminIndexRoute
   '/espace/': typeof EspaceIndexRoute
+  '/admin/dossiers/$id': typeof AdminDossiersIdRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
 }
@@ -201,7 +208,7 @@ export interface FileRoutesByTo {
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
-  '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/dossiers': typeof AdminDossiersRouteWithChildren
   '/admin/extraction': typeof AdminExtractionRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByTo {
   '/espace/profil': typeof EspaceProfilRoute
   '/admin': typeof AdminIndexRoute
   '/espace': typeof EspaceIndexRoute
+  '/admin/dossiers/$id': typeof AdminDossiersIdRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
 }
@@ -229,7 +237,7 @@ export interface FileRoutesById {
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
-  '/admin/dossiers': typeof AdminDossiersRoute
+  '/admin/dossiers': typeof AdminDossiersRouteWithChildren
   '/admin/extraction': typeof AdminExtractionRoute
   '/espace/ayants-droit': typeof EspaceAyantsDroitRoute
   '/espace/dashboard': typeof EspaceDashboardRoute
@@ -239,6 +247,7 @@ export interface FileRoutesById {
   '/espace/profil': typeof EspaceProfilRoute
   '/admin/': typeof AdminIndexRoute
   '/espace/': typeof EspaceIndexRoute
+  '/admin/dossiers/$id': typeof AdminDossiersIdRoute
   '/espace/demandes/$id': typeof EspaceDemandesIdRoute
   '/espace/demandes/nouvelle/credit': typeof EspaceDemandesNouvelleCreditRoute
 }
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
     | '/espace/profil'
     | '/admin/'
     | '/espace/'
+    | '/admin/dossiers/$id'
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
   fileRoutesByTo: FileRoutesByTo
@@ -293,6 +303,7 @@ export interface FileRouteTypes {
     | '/espace/profil'
     | '/admin'
     | '/espace'
+    | '/admin/dossiers/$id'
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
   id:
@@ -320,6 +331,7 @@ export interface FileRouteTypes {
     | '/espace/profil'
     | '/admin/'
     | '/espace/'
+    | '/admin/dossiers/$id'
     | '/espace/demandes/$id'
     | '/espace/demandes/nouvelle/credit'
   fileRoutesById: FileRoutesById
@@ -506,6 +518,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EspaceDemandesIdRouteImport
       parentRoute: typeof EspaceDemandesRoute
     }
+    '/admin/dossiers/$id': {
+      id: '/admin/dossiers/$id'
+      path: '/$id'
+      fullPath: '/admin/dossiers/$id'
+      preLoaderRoute: typeof AdminDossiersIdRouteImport
+      parentRoute: typeof AdminDossiersRoute
+    }
     '/espace/demandes/nouvelle/credit': {
       id: '/espace/demandes/nouvelle/credit'
       path: '/nouvelle/credit'
@@ -516,12 +535,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminDossiersRouteChildren {
+  AdminDossiersIdRoute: typeof AdminDossiersIdRoute
+}
+
+const AdminDossiersRouteChildren: AdminDossiersRouteChildren = {
+  AdminDossiersIdRoute: AdminDossiersIdRoute,
+}
+
+const AdminDossiersRouteWithChildren = AdminDossiersRoute._addFileChildren(
+  AdminDossiersRouteChildren,
+)
+
 interface AdminRouteChildren {
   AdminAuditRoute: typeof AdminAuditRoute
   AdminCampagnesRoute: typeof AdminCampagnesRoute
   AdminComptesRoute: typeof AdminComptesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
-  AdminDossiersRoute: typeof AdminDossiersRoute
+  AdminDossiersRoute: typeof AdminDossiersRouteWithChildren
   AdminExtractionRoute: typeof AdminExtractionRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -531,7 +562,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCampagnesRoute: AdminCampagnesRoute,
   AdminComptesRoute: AdminComptesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
-  AdminDossiersRoute: AdminDossiersRoute,
+  AdminDossiersRoute: AdminDossiersRouteWithChildren,
   AdminExtractionRoute: AdminExtractionRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
