@@ -269,6 +269,7 @@ function ContactSection({
               value={form.adresse}
               onChange={(e) => updateField({ adresse: e.target.value })}
               rows={2}
+              dir="ltr"
             />
           </div>
           {error && (
