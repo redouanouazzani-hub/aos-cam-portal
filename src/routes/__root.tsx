@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/lib/auth-context";
 import { I18nBoot } from "@/components/I18nBoot";
+import { Toaster } from "@/components/ui/sonner";
 import "@/i18n";
 
 function NotFoundComponent() {
@@ -123,6 +124,7 @@ function RootComponent() {
       <I18nBoot>
         <AuthProvider>
           <Outlet />
+          <Toaster position="top-center" richColors closeButton />
         </AuthProvider>
       </I18nBoot>
     </QueryClientProvider>
