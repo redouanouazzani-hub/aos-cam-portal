@@ -96,7 +96,8 @@
       "complement_demande": "طلب استكمال",
       "valide": "مُصادق عليه",
       "refuse": "مرفوض",
-      "cloture": "مُغلق"
+      "cloture": "مُغلق",
+      "archive": "مؤرشف"
     }
   },
   "login": {
