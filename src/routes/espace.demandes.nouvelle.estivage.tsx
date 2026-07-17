@@ -70,7 +70,7 @@ function NouvelleEstivagePage() {
     Promise.all([
       campagneService.getCampagne("estivage", new Date()),
       estivageService.getOptions(),
-      profileService.getProfile(),
+      profileService.get(),
     ]).then(([c, o, p]) => {
       if (!alive) return;
       setCampagne(c);
