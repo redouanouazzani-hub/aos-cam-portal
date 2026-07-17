@@ -10,18 +10,28 @@ import {
   Paperclip,
   Loader2,
   ShieldCheck,
+  ShieldAlert,
+  UserCog,
+  CalendarClock,
+  FileText,
+  Ban,
+  Wrench,
+  Upload,
+  AlertTriangle,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth-context";
 import { useRbac } from "@/lib/rbac-context";
 import { AccessDenied } from "@/components/AccessDenied";
 import { dispatchService } from "@/services/dispatch.service";
+import { exceptionsService, type BlacklistState } from "@/services/exceptions.service";
 import { STATUT_STYLES } from "@/lib/statut-styles";
-import type { DispatchAction, DispatchDossier } from "@/services/types";
+import type { DispatchAction, DispatchDossier, ModuleActivite } from "@/services/types";
 
 export const Route = createFileRoute("/admin/dossiers/$id")({
   component: InstructionPage,
 });
+
 
 function InstructionPage() {
   const { id } = Route.useParams();
