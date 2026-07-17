@@ -1,5 +1,53 @@
 export type Role = "adherent" | "gestionnaire" | "super-admin";
 
+export type ModuleActivite =
+  | "logement"
+  | "primes"
+  | "credits"
+  | "estivage"
+  | "scolarite"
+  | "voyages"
+  | "medical"
+  | "loisirs"
+  | "inwi";
+
+export interface Gestionnaire {
+  id: string;
+  matricule: string;
+  fullName: string;
+  modules: ModuleActivite[];
+}
+
+export interface PrerogativeRow {
+  key: string;
+  superAdmin: boolean;
+  gestionnaire: boolean | "attribues";
+}
+
+export interface MatricePrerogatives {
+  roles: Role[];
+  prerogatives: PrerogativeRow[];
+}
+
+export type PassationDuree = "7j" | "15j" | "30j" | "90j";
+
+export interface PassationPayload {
+  fromId: string;
+  toId: string;
+  modules: ModuleActivite[];
+  duree: PassationDuree;
+}
+
+export interface PassationResponse {
+  id: number;
+  fromId: string;
+  toId: string;
+  modules: ModuleActivite[];
+  duree: PassationDuree;
+  dateDebut: string;
+  statut: "active";
+}
+
 export interface AuthUser {
   id: string;
   matricule: string;
