@@ -179,6 +179,9 @@
     "title": "Mes demandes",
     "subtitle": "Retrouvez toutes vos demandes et suivez leur instruction.",
     "empty": "Vous n'avez encore aucune demande.",
+    "nouvelle": {
+      "cta": "Nouvelle demande"
+    },
     "emptyFiltered": {
       "title": "Aucune demande ne correspond à votre recherche.",
       "hint": "Essayez d'élargir vos filtres ou de modifier votre recherche.",
@@ -229,6 +232,101 @@
         "submitting": "Envoi…",
         "success": "Complément transmis pour la demande n°{{id}}."
       }
+    }
+  },
+  "credit": {
+    "title": "Nouvelle demande de crédit",
+    "subtitle": "Complétez les étapes pour déposer votre demande.",
+    "stepperLabel": "Étapes de la demande",
+    "steps": {
+      "type": "Type",
+      "pieces": "Justificatifs",
+      "echeancier": "Échéancier",
+      "recap": "Récapitulatif"
+    },
+    "types": {
+      "classique": {
+        "label": "Crédit classique",
+        "desc": "Prêt personnel remboursable par précompte."
+      },
+      "anglais": {
+        "label": "Crédit Centre d'anglais",
+        "desc": "Financement d'une formation en langue anglaise."
+      },
+      "auto": {
+        "label": "Crédit assurance auto",
+        "desc": "Prise en charge de la prime d'assurance automobile."
+      },
+      "logement": {
+        "label": "Crédit logement",
+        "desc": "Prêt pour un projet immobilier."
+      }
+    },
+    "step1": {
+      "title": "Choisissez le type de crédit",
+      "subtitle": "Sélectionnez la prestation correspondant à votre projet."
+    },
+    "step2": {
+      "title": "Justificatifs requis",
+      "classique": {
+        "encoursActif": "Encours actif détecté (réf. {{ref}}). Une pièce de dérogation est requise.",
+        "aucunEncours": "Aucun encours actif détecté. Vous pouvez continuer.",
+        "derogation": "Pièces de dérogation",
+        "derogationHint": "PDF ou image. Filigrane serveur appliqué automatiquement."
+      },
+      "anglais": {
+        "inscription": "Document d'inscription au centre",
+        "inscriptionHint": "Attestation ou facture d'inscription (PDF/image)."
+      },
+      "auto": {
+        "subtitle": "Le montant de la prime est fourni par l'assureur partenaire.",
+        "prime": "Prime d'assurance"
+      },
+      "logement": {
+        "projet": "Justificatif du projet immobilier",
+        "projetHint": "Compromis, promesse de vente, devis constructeur…"
+      }
+    },
+    "step3": {
+      "title": "Simulateur d'échéancier",
+      "montant": "Montant du crédit (MAD)",
+      "methode": "Méthode de précompte",
+      "mensuelle": "Mensuelle",
+      "semestrielle": "Semestrielle",
+      "nbEcheances": "Nombre d'échéances",
+      "moisDebut": "Mois de début",
+      "tableau": "Tableau prévisionnel des prélèvements",
+      "tableauEmpty": "Renseignez les champs pour afficher l'échéancier.",
+      "total": "Total prélevé",
+      "col": {
+        "n": "N°",
+        "date": "Date",
+        "montant": "Montant"
+      }
+    },
+    "step4": {
+      "title": "Récapitulatif",
+      "type": "Type de crédit",
+      "piece": "Pièce jointe",
+      "autorisationHint": "Après soumission, une autorisation de précompte au format PDF sera générée automatiquement."
+    },
+    "upload": {
+      "choose": "Cliquez pour joindre un fichier"
+    },
+    "nav": {
+      "prev": "Précédent",
+      "next": "Suivant",
+      "submit": "Soumettre la demande",
+      "submitting": "Traitement en cours…"
+    },
+    "submit": {
+      "success": "Demande de crédit soumise (n°{{id}}).",
+      "error": "L'envoi a échoué. Veuillez réessayer."
+    },
+    "done": {
+      "title": "Demande transmise",
+      "ref": "Référence n°{{id}}",
+      "backList": "Retour à mes demandes"
     }
   }
 }

@@ -178,3 +178,59 @@ export interface DemandesFilters {
   q?: string;
 }
 
+// -------- Crédit (dépôt d'une demande) --------
+
+export type CreditType = "classique" | "anglais" | "auto" | "logement";
+export type PrecompteMethode = "mensuelle" | "semestrielle";
+
+export interface EncoursInfo {
+  actif: boolean;
+  reference?: string;
+  soldeRestant?: number;
+  devise?: string;
+}
+
+export interface PrimeAssurance {
+  matricule: string;
+  montant: number;
+  devise: string;
+  source: string;
+}
+
+export interface EcheancierParams {
+  montant: number;
+  methode: PrecompteMethode;
+  nbEcheances: number;
+  moisDebut: string; // YYYY-MM
+}
+
+export interface EcheancierRow {
+  numero: number;
+  date: string; // ISO
+  montant: number;
+}
+
+export interface Echeancier {
+  devise: string;
+  lignes: EcheancierRow[];
+  totalPrelevements: number;
+}
+
+export interface SoumettreCreditPayload {
+  type: CreditType;
+  echeancier: EcheancierParams;
+  primeAssurance?: number;
+  pieceJointeNom?: string;
+}
+
+export interface SoumettreCreditResponse {
+  id: number;
+  statut: "soumis";
+  autorisationPrecompte: {
+    genere: boolean;
+    message: string;
+    message_ar: string;
+  };
+}
+
+
