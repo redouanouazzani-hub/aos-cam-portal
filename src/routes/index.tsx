@@ -141,10 +141,10 @@ function HomePage() {
         </div>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((c, i) => (
+          {cards.map((c) => (
             <Link
               key={c.title}
-              to={i === 0 ? "/missions" : i === 1 ? "/conventions" : i === 2 ? "/actualites" : "/faq"}
+              to={c.to}
               className="group relative overflow-hidden rounded-2xl bg-card p-6 transition-all hover:-translate-y-0.5"
               style={{ boxShadow: "var(--shadow-soft)" }}
             >
@@ -159,14 +159,8 @@ function HomePage() {
               >
                 <c.icon className="h-5 w-5" aria-hidden />
               </div>
-              <h3 className="mt-4 text-base font-semibold text-foreground">
-                {t(c.title)}
-              </h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">
-                {t(c.desc, {
-                  defaultValue: "En savoir plus sur cet espace.",
-                })}
-              </p>
+              <h3 className="mt-4 text-base font-semibold text-foreground">{c.title}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{c.desc}</p>
             </Link>
           ))}
         </div>
