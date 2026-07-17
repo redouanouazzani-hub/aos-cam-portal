@@ -16,6 +16,7 @@ import {
   Plus,
   Search,
   SearchX,
+  Sun,
   Wallet,
 } from "lucide-react";
 import { demandesService } from "@/services/demandes.service";
@@ -68,6 +69,10 @@ function DemandesLayout() {
   });
   const scolariteMatch = useMatch({
     from: "/espace/demandes/nouvelle/scolarite",
+    shouldThrow: false,
+  });
+  const estivageMatch = useMatch({
+    from: "/espace/demandes/nouvelle/estivage",
     shouldThrow: false,
   });
 
@@ -128,7 +133,7 @@ function DemandesLayout() {
 
   // The "nouvelle demande" wizard is a full-page flow: bypass the split view.
   // Must run after all hooks to keep hook order stable across renders.
-  if (creditMatch || scolariteMatch) {
+  if (creditMatch || scolariteMatch || estivageMatch) {
     return <Outlet />;
   }
 
@@ -188,6 +193,22 @@ function DemandesLayout() {
                   </div>
                   <div className="text-xs text-muted-foreground">
                     {t("demandes.nouvelle.scolariteDesc")}
+                  </div>
+                </div>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link
+                to="/espace/demandes/nouvelle/estivage"
+                className="flex cursor-pointer items-start gap-3 py-2"
+              >
+                <Sun className="mt-0.5 h-4 w-4 text-primary" aria-hidden />
+                <div className="min-w-0">
+                  <div className="text-sm font-medium">
+                    {t("demandes.nouvelle.estivage")}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("demandes.nouvelle.estivageDesc")}
                   </div>
                 </div>
               </Link>
