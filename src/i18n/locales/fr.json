@@ -194,8 +194,13 @@
     "subtitle": "Retrouvez toutes vos demandes et suivez leur instruction.",
     "empty": "Vous n'avez encore aucune demande.",
     "nouvelle": {
-      "cta": "Nouvelle demande"
+      "cta": "Nouvelle demande",
+      "credit": "Demande de crédit",
+      "creditDesc": "Classique, anglais, auto, logement.",
+      "scolarite": "Subvention de scolarité",
+      "scolariteDesc": "Certificat de scolarité par enfant éligible."
     },
+
     "emptyFiltered": {
       "title": "Aucune demande ne correspond à votre recherche.",
       "hint": "Essayez d'élargir vos filtres ou de modifier votre recherche.",
