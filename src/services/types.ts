@@ -81,11 +81,13 @@ export type DemandeStatut =
   | "complement_demande"
   | "valide"
   | "refuse"
-  | "cloture";
+  | "cloture"
+  | "archive";
 
 export interface DemandeRecente {
   id: number;
   prestation: string;
+  prestation_ar?: string;
   date: string;
   statut: DemandeStatut;
 }
@@ -93,7 +95,9 @@ export interface DemandeRecente {
 export interface NotificationRecente {
   id: number;
   titre: string;
+  titre_ar?: string;
   texte: string;
+  texte_ar?: string;
   date: string;
   lu: boolean;
 }
