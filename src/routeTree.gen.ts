@@ -17,6 +17,7 @@ import { Route as ConventionsRouteImport } from './routes/conventions'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ActualitesRouteImport } from './routes/actualites'
+import { Route as ActivationRouteImport } from './routes/activation'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EspaceIndexRouteImport } from './routes/espace.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
@@ -32,6 +33,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
 import { Route as AdminCampagnesRouteImport } from './routes/admin.campagnes'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as ActualitesIdRouteImport } from './routes/actualites.$id'
 import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
 import { Route as AdminDossiersIdRouteImport } from './routes/admin.dossiers.$id'
 import { Route as EspaceDemandesNouvelleScolariteRouteImport } from './routes/espace.demandes.nouvelle.scolarite'
@@ -78,6 +80,11 @@ const AdminRoute = AdminRouteImport.update({
 const ActualitesRoute = ActualitesRouteImport.update({
   id: '/actualites',
   path: '/actualites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivationRoute = ActivationRouteImport.update({
+  id: '/activation',
+  path: '/activation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -155,6 +162,11 @@ const AdminAuditRoute = AdminAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => AdminRoute,
 } as any)
+const ActualitesIdRoute = ActualitesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ActualitesRoute,
+} as any)
 const EspaceDemandesIdRoute = EspaceDemandesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -198,7 +210,8 @@ const EspaceDemandesNouvelleCreditRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/activation': typeof ActivationRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
@@ -206,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/missions': typeof MissionsRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
@@ -230,12 +244,14 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/activation': typeof ActivationRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/missions': typeof MissionsRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
@@ -261,7 +277,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/activation': typeof ActivationRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
@@ -269,6 +286,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/missions': typeof MissionsRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
@@ -295,6 +313,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activation'
     | '/actualites'
     | '/admin'
     | '/contact'
@@ -303,6 +322,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/missions'
+    | '/actualites/$id'
     | '/admin/audit'
     | '/admin/campagnes'
     | '/admin/comptes'
@@ -327,12 +347,14 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activation'
     | '/actualites'
     | '/contact'
     | '/conventions'
     | '/faq'
     | '/login'
     | '/missions'
+    | '/actualites/$id'
     | '/admin/audit'
     | '/admin/campagnes'
     | '/admin/comptes'
@@ -357,6 +379,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/activation'
     | '/actualites'
     | '/admin'
     | '/contact'
@@ -365,6 +388,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/missions'
+    | '/actualites/$id'
     | '/admin/audit'
     | '/admin/campagnes'
     | '/admin/comptes'
@@ -390,7 +414,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ActualitesRoute: typeof ActualitesRoute
+  ActivationRoute: typeof ActivationRoute
+  ActualitesRoute: typeof ActualitesRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
   ConventionsRoute: typeof ConventionsRoute
@@ -456,6 +481,13 @@ declare module '@tanstack/react-router' {
       path: '/actualites'
       fullPath: '/actualites'
       preLoaderRoute: typeof ActualitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activation': {
+      id: '/activation'
+      path: '/activation'
+      fullPath: '/activation'
+      preLoaderRoute: typeof ActivationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -563,6 +595,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAuditRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/actualites/$id': {
+      id: '/actualites/$id'
+      path: '/$id'
+      fullPath: '/actualites/$id'
+      preLoaderRoute: typeof ActualitesIdRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
     '/espace/demandes/$id': {
       id: '/espace/demandes/$id'
       path: '/$id'
@@ -614,6 +653,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface ActualitesRouteChildren {
+  ActualitesIdRoute: typeof ActualitesIdRoute
+}
+
+const ActualitesRouteChildren: ActualitesRouteChildren = {
+  ActualitesIdRoute: ActualitesIdRoute,
+}
+
+const ActualitesRouteWithChildren = ActualitesRoute._addFileChildren(
+  ActualitesRouteChildren,
+)
 
 interface AdminDossiersRouteChildren {
   AdminDossiersIdRoute: typeof AdminDossiersIdRoute
@@ -696,7 +747,8 @@ const EspaceRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ActualitesRoute: ActualitesRoute,
+  ActivationRoute: ActivationRoute,
+  ActualitesRoute: ActualitesRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,
   ConventionsRoute: ConventionsRoute,
