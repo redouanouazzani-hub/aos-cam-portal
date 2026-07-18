@@ -32,6 +32,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminComptesRouteImport } from './routes/admin.comptes'
 import { Route as AdminCampagnesRouteImport } from './routes/admin.campagnes'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as ActualitesIdRouteImport } from './routes/actualites.$id'
 import { Route as EspaceDemandesIdRouteImport } from './routes/espace.demandes.$id'
 import { Route as AdminDossiersIdRouteImport } from './routes/admin.dossiers.$id'
 import { Route as EspaceDemandesNouvelleScolariteRouteImport } from './routes/espace.demandes.nouvelle.scolarite'
@@ -155,6 +156,11 @@ const AdminAuditRoute = AdminAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => AdminRoute,
 } as any)
+const ActualitesIdRoute = ActualitesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ActualitesRoute,
+} as any)
 const EspaceDemandesIdRoute = EspaceDemandesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -198,7 +204,7 @@ const EspaceDemandesNouvelleCreditRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
@@ -206,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/missions': typeof MissionsRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
@@ -230,12 +237,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/missions': typeof MissionsRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
@@ -261,7 +269,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
@@ -269,6 +277,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/missions': typeof MissionsRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/campagnes': typeof AdminCampagnesRoute
   '/admin/comptes': typeof AdminComptesRoute
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/missions'
+    | '/actualites/$id'
     | '/admin/audit'
     | '/admin/campagnes'
     | '/admin/comptes'
@@ -333,6 +343,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/missions'
+    | '/actualites/$id'
     | '/admin/audit'
     | '/admin/campagnes'
     | '/admin/comptes'
@@ -365,6 +376,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/missions'
+    | '/actualites/$id'
     | '/admin/audit'
     | '/admin/campagnes'
     | '/admin/comptes'
@@ -390,7 +402,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ActualitesRoute: typeof ActualitesRoute
+  ActualitesRoute: typeof ActualitesRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
   ConventionsRoute: typeof ConventionsRoute
@@ -563,6 +575,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAuditRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/actualites/$id': {
+      id: '/actualites/$id'
+      path: '/$id'
+      fullPath: '/actualites/$id'
+      preLoaderRoute: typeof ActualitesIdRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
     '/espace/demandes/$id': {
       id: '/espace/demandes/$id'
       path: '/$id'
@@ -614,6 +633,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface ActualitesRouteChildren {
+  ActualitesIdRoute: typeof ActualitesIdRoute
+}
+
+const ActualitesRouteChildren: ActualitesRouteChildren = {
+  ActualitesIdRoute: ActualitesIdRoute,
+}
+
+const ActualitesRouteWithChildren = ActualitesRoute._addFileChildren(
+  ActualitesRouteChildren,
+)
 
 interface AdminDossiersRouteChildren {
   AdminDossiersIdRoute: typeof AdminDossiersIdRoute
@@ -696,7 +727,7 @@ const EspaceRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ActualitesRoute: ActualitesRoute,
+  ActualitesRoute: ActualitesRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,
   ConventionsRoute: ConventionsRoute,
@@ -708,13 +739,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
