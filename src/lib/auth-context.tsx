@@ -8,6 +8,7 @@ interface AuthContextValue {
   loading: boolean;
   login: (payload: LoginPayload) => Promise<AuthUser>;
   logout: () => Promise<void>;
+  activate: (password: string) => Promise<AuthUser>;
   hasRole: (roles: Role | Role[]) => boolean;
 }
 
@@ -43,12 +44,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     login: async (payload) => {
       const res = await authService.login(payload);
-      setUser(res.user);
-      return res.user;
+      const u: AuthUser = { ...res.user, doit_activer: res.doit_activer ?? res.user.doit_activer };
+      setUser(u);
+      return u;
     },
     logout: async () => {
       await authService.logout();
       setUser(null);
+    },
+    activate: async (password) => {
+      const u = await authService.activate(password);
+      setUser(u);
+      return u;
     },
     hasRole: (roles) => {
       if (!user) return false;
