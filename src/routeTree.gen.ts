@@ -17,6 +17,7 @@ import { Route as ConventionsRouteImport } from './routes/conventions'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ActualitesRouteImport } from './routes/actualites'
+import { Route as ActivationRouteImport } from './routes/activation'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EspaceIndexRouteImport } from './routes/espace.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
@@ -79,6 +80,11 @@ const AdminRoute = AdminRouteImport.update({
 const ActualitesRoute = ActualitesRouteImport.update({
   id: '/actualites',
   path: '/actualites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivationRoute = ActivationRouteImport.update({
+  id: '/activation',
+  path: '/activation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -204,6 +210,7 @@ const EspaceDemandesNouvelleCreditRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activation': typeof ActivationRoute
   '/actualites': typeof ActualitesRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activation': typeof ActivationRoute
   '/actualites': typeof ActualitesRouteWithChildren
   '/contact': typeof ContactRoute
   '/conventions': typeof ConventionsRoute
@@ -269,6 +277,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activation': typeof ActivationRoute
   '/actualites': typeof ActualitesRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
@@ -304,6 +313,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activation'
     | '/actualites'
     | '/admin'
     | '/contact'
@@ -337,6 +347,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activation'
     | '/actualites'
     | '/contact'
     | '/conventions'
@@ -368,6 +379,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/activation'
     | '/actualites'
     | '/admin'
     | '/contact'
@@ -402,6 +414,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivationRoute: typeof ActivationRoute
   ActualitesRoute: typeof ActualitesRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
@@ -468,6 +481,13 @@ declare module '@tanstack/react-router' {
       path: '/actualites'
       fullPath: '/actualites'
       preLoaderRoute: typeof ActualitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activation': {
+      id: '/activation'
+      path: '/activation'
+      fullPath: '/activation'
+      preLoaderRoute: typeof ActivationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -727,6 +747,7 @@ const EspaceRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivationRoute: ActivationRoute,
   ActualitesRoute: ActualitesRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,

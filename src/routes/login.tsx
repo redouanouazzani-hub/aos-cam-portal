@@ -23,6 +23,10 @@ function LoginPage() {
     setLoading(true);
     try {
       const user = await login({ matricule, password });
+      if (user.doit_activer) {
+        await navigate({ to: "/activation" });
+        return;
+      }
       const target =
         user.role === "adherent" ? "/espace/dashboard" : "/admin/dashboard";
       await navigate({ to: target });
@@ -32,6 +36,7 @@ function LoginPage() {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-background">
