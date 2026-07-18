@@ -804,8 +804,197 @@
       "lead": "Le gestionnaire préparera votre carte SIM et vous contactera pour la remise physique.",
       "backList": "Retour à mes demandes"
     }
+  },
+  "nav.openMenu": "Ouvrir le menu",
+  "documents": {
+    "title": "Bibliothèque documentaire",
+    "subtitle": "Retrouvez tous les documents générés par l'association pour votre compte.",
+    "filters": "Filtres",
+    "searchPh": "Rechercher par nom ou n° de dossier…",
+    "types": {
+      "tous": "Tous les types",
+      "recu_pre_reservation": "Reçu de pré-réservation",
+      "autorisation_precompte": "Autorisation de précompte",
+      "attestation": "Attestation",
+      "notification_validation": "Notification de validation"
+    },
+    "dossierRef": "N° de dossier",
+    "download": "Télécharger",
+    "downloadOk": "Téléchargement démarré : {{name}}",
+    "downloadErr": "Impossible de télécharger ce document.",
+    "watermark": "Filigrane appliqué le {{date}} — matricule {{matricule}}",
+    "empty": "Aucun document pour ces critères."
+  },
+  "beneficiaries": {
+    "title": "Mes ayants droit",
+    "subtitle": "Conjoint et enfants rattachés à votre dossier.",
+    "childrenDesc": "Les enfants sont issus des données RH et ne sont pas modifiables depuis le portail."
+  },
+  "missions": {
+    "title": "Nos missions",
+    "intro": "L'Association des Œuvres Sociales du personnel actif de la Caisse Marocaine des Retraites (AOS-CMR) accompagne les collaborateurs actifs de l'institution dans leur quotidien, à travers un ensemble de prestations sociales, culturelles, éducatives et solidaires négociées et gérées collectivement.",
+    "axesTitle": "Nos axes d'intervention",
+    "axes": {
+      "logement": {
+        "title": "Logement & estivage",
+        "desc": "Accompagnement à l'accession au logement, réservations en centres d'estivage partenaires, tarifs préférentiels."
+      },
+      "prestations": {
+        "title": "Primes & aides sociales",
+        "desc": "Prime de mariage, prime de naissance, appuis exceptionnels dans les moments importants de la vie."
+      },
+      "education": {
+        "title": "Éducation & scolarité",
+        "desc": "Subventions annuelles pour les enfants scolarisés, du préscolaire au supérieur (5,5 à 26 ans)."
+      },
+      "loisirs": {
+        "title": "Voyages, loisirs & culture",
+        "desc": "Séjours organisés, activités culturelles et sportives, sorties familiales à tarifs négociés."
+      },
+      "solidarite": {
+        "title": "Solidarité",
+        "desc": "Actions de solidarité collective en faveur de familles dans le besoin, actions ponctuelles saisonnières."
+      },
+      "culture": {
+        "title": "Conventions partenaires",
+        "desc": "Un réseau de partenaires (télécom, optique, assurance, voyages) offrant des avantages exclusifs."
+      }
+    },
+    "governanceTitle": "Gouvernance",
+    "governance": "L'association est administrée par un bureau élu parmi le personnel actif de la CMR, appuyé par une équipe de gestionnaires dédiés. Ses décisions sont prises collégialement et son fonctionnement est encadré par des règles de transparence, de traçabilité et d'équité entre les adhérents.",
+    "eligibility": "L'adhésion est exclusivement réservée au personnel actif de la Caisse Marocaine des Retraites. Les retraités et anciens agents ne relèvent pas du périmètre de l'AOS-CMR."
+  },
+  "news": {
+    "title": "Actualités",
+    "subtitle": "Communications, annonces et temps forts de l'association.",
+    "readMore": "Lire l'article",
+    "backList": "Retour aux actualités"
+  },
+  "conventions": {
+    "title": "Conventions partenaires",
+    "intro": "L'AOS-CMR négocie pour ses adhérents des tarifs préférentiels et des avantages exclusifs auprès d'un réseau de partenaires sélectionnés.",
+    "publicNotice": "Consultation libre — aucune connexion requise.",
+    "advantage": "Avantage négocié",
+    "cat": {
+      "telecom": {
+        "title": "Télécommunications",
+        "partner": "Inwi — forfaits mobile & internet",
+        "avantage": "Remises jusqu'à 30 % sur les forfaits mobiles, portabilité incluse, remise physique de la carte SIM par le gestionnaire."
+      },
+      "optique": {
+        "title": "Optique",
+        "partner": "Réseau d'opticiens agréés",
+        "avantage": "Jusqu'à 25 % de remise sur les montures et verres, prise en charge coordonnée avec la mutuelle."
+      },
+      "assurance": {
+        "title": "Assurance",
+        "partner": "Compagnies partenaires (automobile, habitation)",
+        "avantage": "Tarifs groupe négociés et facilités de paiement en plusieurs mensualités."
+      },
+      "loisirs": {
+        "title": "Loisirs & culture",
+        "partner": "Parcs, cinémas, spectacles",
+        "avantage": "Billetterie à tarif réduit pour l'adhérent et ses ayants droit."
+      },
+      "voyages": {
+        "title": "Voyages",
+        "partner": "Agences de voyages agréées",
+        "avantage": "Séjours organisés à tarif AOS-CMR, formules famille et facilités de paiement échelonné."
+      },
+      "auto": {
+        "title": "Automobile",
+        "partner": "Concessions et centres d'entretien",
+        "avantage": "Remises sur l'achat de véhicules neufs et sur les prestations d'entretien courant."
+      }
+    }
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "subtitle": "Les réponses aux questions les plus courantes des adhérents.",
+    "q1": {
+      "q": "Qui peut adhérer à l'AOS-CMR ?",
+      "a": "L'adhésion est réservée exclusivement au personnel actif de la Caisse Marocaine des Retraites. Les retraités et anciens agents ne sont pas concernés par le périmètre de l'association."
+    },
+    "q2": {
+      "q": "Comment déposer une demande de prestation ?",
+      "a": "Toutes les demandes se font en ligne depuis votre espace personnel, rubrique « Mes demandes » > « Nouvelle demande ». Un formulaire guidé vous accompagne étape par étape, avec la liste des pièces justificatives à téléverser."
+    },
+    "q3": {
+      "q": "Quels sont les délais de traitement moyens ?",
+      "a": "Les dossiers complets sont traités sous 5 à 10 jours ouvrés. En cas de complément demandé par le gestionnaire, le délai repart à la réception des pièces manquantes."
+    },
+    "q4": {
+      "q": "Quelles pièces justificatives sont demandées ?",
+      "a": "Les pièces varient selon la prestation : acte de mariage pour la prime de mariage, extrait d'acte de naissance pour la prime de naissance, certificat de scolarité pour la subvention scolaire, etc. Chaque formulaire précise la liste attendue."
+    },
+    "q5": {
+      "q": "À quel moment se déroulent les campagnes saisonnières ?",
+      "a": "La campagne d'estivage est ouverte au printemps (dates précises publiées chaque année), la campagne de scolarité à partir de la rentrée. Les autres prestations (primes, crédits, Inwi) sont en flux continu toute l'année."
+    },
+    "q6": {
+      "q": "Mes informations RH sont incorrectes, que faire ?",
+      "a": "Les données officielles (état civil, enfants, grade) sont issues du SIRH et ne sont pas modifiables directement. Utilisez le bouton « Signaler une erreur » sur votre profil ; un justificatif est obligatoire et la correction est traitée par la DRH."
+    },
+    "q7": {
+      "q": "Puis-je modifier mes coordonnées ?",
+      "a": "Oui. Les coordonnées déclaratives (téléphone, e-mail, adresse postale) sont modifiables librement depuis votre profil, dans la section « Contact »."
+    },
+    "q8": {
+      "q": "Comment est calculé le montant d'un crédit ou d'une subvention ?",
+      "a": "Chaque prestation dispose d'un barème approuvé par le bureau de l'association. Le simulateur intégré au formulaire de demande vous donne une estimation en temps réel avant validation."
+    },
+    "q9": {
+      "q": "Où retrouver mes reçus et attestations ?",
+      "a": "Tous les documents générés (reçus, autorisations, attestations, notifications) sont centralisés dans la « Bibliothèque documentaire » de votre espace, avec filigrane et horodatage."
+    },
+    "q10": {
+      "q": "Que faire si je perds mon code secret ?",
+      "a": "Contactez l'association depuis la page « Contact ». Une procédure de réinitialisation sécurisée sera enclenchée après vérification de votre identité."
+    }
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "subtitle": "Une question, une remarque ? Notre équipe est à votre écoute.",
+    "addressLabel": "Adresse",
+    "address": "Siège CMR — Avenue Al Araar, Hay Riad, Rabat",
+    "phoneLabel": "Téléphone",
+    "phone": "+212 5 37 00 00 00",
+    "emailLabel": "E-mail",
+    "email": "aos@cmr.gov.ma",
+    "hoursLabel": "Horaires",
+    "hours": "Du lundi au vendredi, de 9h00 à 16h30",
+    "sent": "Message envoyé. Nous vous répondrons rapidement.",
+    "form": {
+      "name": "Nom complet",
+      "email": "E-mail",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer",
+      "sending": "Envoi…"
+    }
+  },
+  "activation": {
+    "title": "Activation de votre compte",
+    "subtitle": "Bonjour {{name}}. Pour sécuriser votre premier accès, définissez votre code secret personnel.",
+    "hero": "Bienvenue à l'AOS-CMR",
+    "heroLead": "Votre compte est prêt. Une dernière étape : définir votre code secret personnel.",
+    "newPassword": "Nouveau code secret",
+    "confirmPassword": "Confirmez le code secret",
+    "rules": {
+      "len": "Au moins 8 caractères",
+      "upper": "Une lettre majuscule",
+      "lower": "Une lettre minuscule",
+      "digit": "Un chiffre",
+      "symbol": "Un caractère spécial"
+    },
+    "mismatch": "Les deux saisies ne correspondent pas.",
+    "submit": "Activer mon compte",
+    "submitting": "Activation…",
+    "success": "Votre compte est activé.",
+    "error": "L'activation a échoué. Réessayez."
   }
 }
+
 
 
 
