@@ -805,7 +805,7 @@
       "backList": "Retour à mes demandes"
     }
   },
-  "nav.openMenu": "Ouvrir le menu",
+  "menu": {"open": "Ouvrir le menu"},
   "documents": {
     "title": "Bibliothèque documentaire",
     "subtitle": "Retrouvez tous les documents générés par l'association pour votre compte.",

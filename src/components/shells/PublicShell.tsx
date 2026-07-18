@@ -71,7 +71,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
               <SheetTrigger asChild>
                 <button
                   type="button"
-                  aria-label={t("nav.openMenu")}
+                  aria-label={t("menu.open")}
                   className="inline-flex md:hidden h-10 w-10 items-center justify-center rounded-xl border border-border bg-background text-foreground hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <Menu className="h-5 w-5" aria-hidden />
