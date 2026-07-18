@@ -51,7 +51,7 @@ function NewsDetailPage() {
           {isAr ? item.title_ar : item.title}
         </h1>
         <div className="prose prose-neutral mt-6 max-w-none text-foreground">
-          {(isAr ? item.body_ar : item.body).split("\n\n").map((p, i) => (
+          {(isAr ? item.body_ar : item.body).split("\n\n").map((p: string, i: number) => (
             <p key={i} className="leading-relaxed text-[15px] text-foreground/90 mb-4">
               {p}
             </p>

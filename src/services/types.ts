@@ -122,6 +122,7 @@ export interface AuthUser {
   fullName: string;
   role: Role;
   email?: string;
+  doit_activer?: boolean;
 }
 
 export interface LoginPayload {
@@ -132,7 +133,9 @@ export interface LoginPayload {
 export interface LoginResponse {
   token: string;
   user: AuthUser;
+  doit_activer?: boolean;
 }
+
 
 // -------- Profil (Vue 360°) --------
 
@@ -488,4 +491,35 @@ export interface InwiResponse {
   statut: "soumis";
   reference: string;
 }
+
+// -------- Documents générés (§7) --------
+
+export type DocumentType =
+  | "recu_pre_reservation"
+  | "autorisation_precompte"
+  | "attestation"
+  | "notification_validation";
+
+export interface DocumentGenere {
+  id: number;
+  nom: string;
+  nom_ar?: string;
+  type: DocumentType;
+  date: string; // ISO
+  dossierRef: string;
+  filigraneDate: string; // ISO
+  matricule: string;
+}
+
+export interface DocumentFilters {
+  q?: string;
+  type?: DocumentType;
+}
+
+// -------- Activation compte (§4.1 première connexion) --------
+
+export interface ActivationPayload {
+  password: string;
+}
+
 
