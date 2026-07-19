@@ -25,26 +25,29 @@ export function AppShell({
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
-      <aside className="hidden md:flex md:w-64 flex-col border-e border-border bg-card">
-        <div className="px-4 py-4 border-b border-border">
-          <div className="text-sm font-semibold">{title}</div>
+      <aside className="hidden md:flex md:w-64 flex-col border-e border-border bg-primary-dark text-primary-foreground">
+        <div className="px-5 py-5 border-b border-white/10">
+          <div className="text-sm font-bold tracking-wide">{title}</div>
           {user && (
-            <div className="mt-1 text-xs text-muted-foreground truncate">
-              {user.fullName} · {t(`common.${user.role === "adherent" ? "member" : user.role === "gestionnaire" ? "manager" : "superAdmin"}`)}
+            <div className="mt-1 text-xs text-white/65 truncate">
+              {user.fullName} ·{" "}
+              {t(
+                `common.${user.role === "adherent" ? "member" : user.role === "gestionnaire" ? "manager" : "superAdmin"}`,
+              )}
             </div>
           )}
         </div>
-        <nav className="flex-1 overflow-y-auto p-2">
+        <nav className="flex-1 overflow-y-auto p-3">
           {items.map((it) => {
             const active = pathname === it.to || pathname.startsWith(it.to + "/");
             return (
               <Link
                 key={it.to}
                 to={it.to}
-                className={`block rounded-md px-3 py-2 text-sm transition-colors ${
+                className={`mb-1 block rounded-md px-3 py-2.5 text-sm transition-colors ${
                   active
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    ? "bg-white text-primary-dark shadow-sm"
+                    : "text-white/70 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {t(it.key)}
@@ -55,7 +58,7 @@ export function AppShell({
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="border-b border-border bg-card">
+        <header className="border-b border-border bg-card/95 backdrop-blur">
           <div className="flex items-center justify-between gap-3 px-4 py-3">
             <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
               ← {t("common.backHome")}

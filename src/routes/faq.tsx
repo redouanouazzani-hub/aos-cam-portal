@@ -18,13 +18,17 @@ function FaqPage() {
   const { t } = useTranslation();
   return (
     <PublicShell>
-      <section className="mx-auto max-w-3xl px-4 py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-          {t("faq.title")}
-        </h1>
-        <p className="mt-3 text-muted-foreground">{t("faq.subtitle")}</p>
+      <div className="public-page-header">
+        <div className="mx-auto max-w-3xl px-4 py-10 md:py-12">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            {t("faq.title")}
+          </h1>
+          <p className="mt-3 text-muted-foreground">{t("faq.subtitle")}</p>
+        </div>
+      </div>
 
-        <Accordion type="single" collapsible className="mt-10">
+      <section className="mx-auto max-w-3xl px-4 py-12 md:py-16">
+        <Accordion type="single" collapsible className="public-card rounded-lg px-5">
           {KEYS.map((k) => (
             <AccordionItem key={k} value={k}>
               <AccordionTrigger className="text-start text-base font-medium">

@@ -13,23 +13,31 @@ function NewsListPage() {
   const isAr = i18n.language.startsWith("ar");
   const dateLocale = isAr ? "ar-MA" : "fr-FR";
   const fmtDate = (iso: string) =>
-    new Date(iso).toLocaleDateString(dateLocale, { year: "numeric", month: "long", day: "numeric" });
+    new Date(iso).toLocaleDateString(dateLocale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   return (
     <PublicShell>
-      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-          {t("news.title")}
-        </h1>
-        <p className="mt-3 text-muted-foreground">{t("news.subtitle")}</p>
+      <div className="public-page-header">
+        <div className="mx-auto max-w-6xl px-4 py-10 md:py-12">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            {t("news.title")}
+          </h1>
+          <p className="mt-3 text-muted-foreground">{t("news.subtitle")}</p>
+        </div>
+      </div>
 
+      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {NEWS.map((n) => (
             <Link
               key={n.id}
               to="/actualites/$id"
               params={{ id: String(n.id) }}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-card transition-all hover:-translate-y-0.5"
+              className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-primary/35"
               style={{ boxShadow: "var(--shadow-soft)" }}
             >
               <div
