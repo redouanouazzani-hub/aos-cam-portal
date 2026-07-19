@@ -30,12 +30,16 @@ function ContactPage() {
 
   return (
     <PublicShell>
-      <section className="mx-auto max-w-5xl px-4 py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-          {t("contact.title")}
-        </h1>
-        <p className="mt-3 text-muted-foreground">{t("contact.subtitle")}</p>
+      <div className="public-page-header">
+        <div className="mx-auto max-w-5xl px-4 py-10 md:py-12">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            {t("contact.title")}
+          </h1>
+          <p className="mt-3 text-muted-foreground">{t("contact.subtitle")}</p>
+        </div>
+      </div>
 
+      <section className="mx-auto max-w-5xl px-4 py-12 md:py-16">
         <div className="mt-10 grid gap-8 md:grid-cols-[1fr_1.2fr]">
           <div className="space-y-4">
             <InfoRow icon={MapPin} label={t("contact.addressLabel")} value={t("contact.address")} />
@@ -46,7 +50,7 @@ function ContactPage() {
 
           <form
             onSubmit={submit}
-            className="rounded-2xl bg-card p-6 space-y-4"
+            className="public-card rounded-lg p-6 space-y-4"
             style={{ boxShadow: "var(--shadow-soft)" }}
           >
             <div className="grid gap-4 sm:grid-cols-2">
@@ -114,15 +118,17 @@ function InfoRow({
   ltr?: boolean;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl bg-card p-4" style={{ boxShadow: "var(--shadow-soft)" }}>
+    <div className="public-card flex items-start gap-3 rounded-lg p-4">
       <div
-        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-primary"
+        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-primary/15 text-primary"
         style={{ background: "color-mix(in oklab, var(--primary) 12%, transparent)" }}
       >
         <Icon className="h-5 w-5" aria-hidden />
       </div>
       <div className="min-w-0">
-        <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{label}</div>
+        <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {label}
+        </div>
         <div className="mt-1 text-sm text-foreground break-words" dir={ltr ? "ltr" : undefined}>
           {value}
         </div>
